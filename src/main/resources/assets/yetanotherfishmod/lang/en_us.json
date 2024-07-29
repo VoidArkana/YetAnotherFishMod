@@ -1,0 +1,10 @@
+{
+  "item.yetanotherfishmod.featherback_spawn_egg" : "Featherback Spawn Egg",
+  "item.yetanotherfishmod.featherback_bucket" : "Featherback Bucket",
+  "entity.yetanotherfishmod.featherback" : "Featherback",
+
+  "item.yetanotherfishmod.barb_spawn_egg" : "Barbfish Spawn Egg",
+  "entity.yetanotherfishmod.barb" : "Barbfish",
+
+  "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
+}
