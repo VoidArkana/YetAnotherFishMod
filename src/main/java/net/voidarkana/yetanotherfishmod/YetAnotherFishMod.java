@@ -8,7 +8,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.voidarkana.yetanotherfishmod.client.renderers.BarbfishRenderer;
+import net.voidarkana.yetanotherfishmod.client.renderers.GuppyRenderer;
+import net.voidarkana.yetanotherfishmod.client.renderers.MinnowRenderer;
+import net.voidarkana.yetanotherfishmod.client.renderers.CatfishRenderer;
 import net.voidarkana.yetanotherfishmod.client.renderers.FeatherbackRenderer;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
@@ -48,7 +50,9 @@ public class YetAnotherFishMod
 
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(YAFMEntities.FEATHERBACK.get(), FeatherbackRenderer::new);
-        EntityRenderers.register(YAFMEntities.BARB.get(), BarbfishRenderer::new);
+        EntityRenderers.register(YAFMEntities.MINNOW.get(), MinnowRenderer::new);
+        EntityRenderers.register(YAFMEntities.CATFISH.get(), CatfishRenderer::new);
+        EntityRenderers.register(YAFMEntities.GUPPY.get(), GuppyRenderer::new);
     }
 
 }

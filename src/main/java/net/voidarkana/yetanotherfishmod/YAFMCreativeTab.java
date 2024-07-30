@@ -18,10 +18,16 @@ public class YAFMCreativeTab {
                     .title(Component.translatable("creativetab.yafm_creative_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
 
-                        output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());
+                        output.accept(YAFMItems.BARB_BUCKET.get());
+                        output.accept(YAFMItems.CATFISH_BUCKET.get());
                         output.accept(YAFMItems.FEATHERBACK_BUCKET.get());
+                        output.accept(YAFMItems.GUPPY_BUCKET.get());
 
                         output.accept(YAFMItems.BARB_SPAWN_EGG.get());
+                        output.accept(YAFMItems.CATFISH_SPAWN_EGG.get());
+                        output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());
+                        output.accept(YAFMItems.GUPPY_SPAWN_EGG.get());
+
                     })
                     .build());
 

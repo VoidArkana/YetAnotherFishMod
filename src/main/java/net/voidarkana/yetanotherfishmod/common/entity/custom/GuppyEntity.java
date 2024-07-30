@@ -1,11 +1,6 @@
 package net.voidarkana.yetanotherfishmod.common.entity.custom;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -14,10 +9,12 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Bucketable;
+import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.base.SchoolingFish;
+import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -26,56 +23,18 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class BarbfishEntity extends BucketableFishEntity implements GeoEntity {
+public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
-    protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.genericfish.swim");
-    protected static final RawAnimation FLOP = RawAnimation.begin().thenLoop("animation.genericfish.flop");
+    protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.guppy.swim");
+    protected static final RawAnimation FLOP = RawAnimation.begin().thenLoop("animation.guppy.flop");
 
-    private static final EntityDataAccessor<Integer> MODEL_VARIANT = SynchedEntityData.defineId(BarbfishEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.defineId(BarbfishEntity.class, EntityDataSerializers.INT);
-
-    public BarbfishEntity(EntityType<? extends BucketableFishEntity> pEntityType, Level pLevel) {
+    public GuppyEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D)
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.8F);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(MODEL_VARIANT, 0);
-        this.entityData.define(SKIN_VARIANT, 0);
-    }
-
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("VariantModel", this.getVariantModel());
-        compound.putInt("VariantSkin", this.getVariantSkin());
-    }
-
-    public int getVariantModel() {
-        return this.entityData.get(MODEL_VARIANT);
-    }
-
-    public void setVariantModel(int variant) {
-        this.entityData.set(MODEL_VARIANT, variant);
-    }
-
-    public int getVariantSkin() {
-        return this.entityData.get(SKIN_VARIANT);
-    }
-
-    public void setVariantSkin(int variant) {
-        this.entityData.set(SKIN_VARIANT, variant);
-    }
-
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setVariantModel(compound.getInt("VariantModel"));
-        this.setVariantSkin(compound.getInt("VariantSkin"));
     }
 
     @Override
@@ -100,14 +59,9 @@ public class BarbfishEntity extends BucketableFishEntity implements GeoEntity {
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        this.setVariantModel(this.random.nextInt(3));
-        this.setVariantSkin(this.random.nextInt(4));
+        this.setVariantModel(this.random.nextInt(2));
+        this.setVariantSkin(this.random.nextInt(6));
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-    }
-
-    @Override
-    protected SoundEvent getFlopSound() {
-        return SoundEvents.COD_FLOP;
     }
 
     @Override
@@ -115,7 +69,7 @@ public class BarbfishEntity extends BucketableFishEntity implements GeoEntity {
         controllerRegistrar.add(new AnimationController[]{new AnimationController(this, "Normal", 5, this::Controller)});
     }
 
-    protected <E extends BarbfishEntity> PlayState Controller(AnimationState<E> event) {
+    protected <E extends GuppyEntity> PlayState Controller(AnimationState<E> event) {
         if (this.isInWater()){
             event.setAndContinue(SWIM);
         }else{
@@ -126,6 +80,6 @@ public class BarbfishEntity extends BucketableFishEntity implements GeoEntity {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return null;
+        return new ItemStack(YAFMItems.GUPPY_BUCKET.get());
     }
 }

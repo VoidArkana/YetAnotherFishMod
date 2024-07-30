@@ -21,6 +21,14 @@ public class YAFMItemModelProvider extends ItemModelProvider {
         simpleItem(YAFMItems.FEATHERBACK_BUCKET);
 
         withExistingParent(YAFMItems.BARB_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.BARB_BUCKET);
+
+        withExistingParent(YAFMItems.CATFISH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.CATFISH_BUCKET);
+
+        withExistingParent(YAFMItems.GUPPY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.GUPPY_BUCKET);
+
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

@@ -98,11 +98,6 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
     }
 
     @Override
-    protected SoundEvent getFlopSound() {
-        return SoundEvents.COD_FLOP;
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController[]{new AnimationController(this, "Normal", 5, this::Controller)});
     }

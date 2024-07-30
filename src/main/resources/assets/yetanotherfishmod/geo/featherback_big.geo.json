@@ -18,7 +18,7 @@
 				{
 					"name": "swim_control",
 					"parent": "root",
-					"pivot": [0, 2, 0]
+					"pivot": [0, 7, 3]
 				},
 				{
 					"name": "body",

@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -121,7 +123,21 @@ public abstract class BucketableFishEntity extends WaterAnimal implements Bucket
         return true;
     }
 
-    protected abstract SoundEvent getFlopSound();
+    protected SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
+
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return SoundEvents.COD_HURT;
+    }
+
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.COD_AMBIENT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
     protected SoundEvent getSwimSound() {
         return SoundEvents.FISH_SWIM;
@@ -144,19 +160,6 @@ public abstract class BucketableFishEntity extends WaterAnimal implements Bucket
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    static class FishSwimGoal extends RandomSwimmingGoal {
-        private final BucketableFishEntity fish;
-
-        public FishSwimGoal(BucketableFishEntity pFish) {
-            super(pFish, 1.0D, 40);
-            this.fish = pFish;
-        }
-
-        public boolean canUse() {
-            return this.fish.canRandomSwim() && super.canUse();
-        }
     }
 
 }

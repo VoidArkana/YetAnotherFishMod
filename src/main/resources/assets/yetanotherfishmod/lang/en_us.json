@@ -1,10 +1,19 @@
 {
   "item.yetanotherfishmod.featherback_spawn_egg" : "Featherback Spawn Egg",
-  "item.yetanotherfishmod.featherback_bucket" : "Featherback Bucket",
+  "item.yetanotherfishmod.featherback_bucket" : "Bucket of Featherback",
   "entity.yetanotherfishmod.featherback" : "Featherback",
 
-  "item.yetanotherfishmod.barb_spawn_egg" : "Barbfish Spawn Egg",
-  "entity.yetanotherfishmod.barb" : "Barbfish",
+  "item.yetanotherfishmod.minnow_spawn_egg" : "Minnow Spawn Egg",
+  "item.yetanotherfishmod.minnow_bucket" : "Bucket of Minnow",
+  "entity.yetanotherfishmod.minnow" : "Minnow",
+
+  "item.yetanotherfishmod.catfish_spawn_egg" : "Catfish Spawn Egg",
+  "item.yetanotherfishmod.catfish_bucket" : "Bucket of Catfish",
+  "entity.yetanotherfishmod.catfish" : "Catfish",
+
+  "item.yetanotherfishmod.guppy_spawn_egg" : "Guppy Spawn Egg",
+  "item.yetanotherfishmod.guppy_bucket" : "Bucket of Guppy",
+  "entity.yetanotherfishmod.guppy" : "Guppy",
 
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }

@@ -1,4 +1,9 @@
-// 1.20.1	2024-07-28T18:58:18.1873494	Item Models: yetanotherfishmod
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/yetanotherfishmod/models/item/barb_spawn_egg.json
+// 1.20.1	2024-07-30T18:21:55.6164554	Item Models: yetanotherfishmod
+4b580ea3424bfd221d780ef4099f8460f9537ba0 assets/yetanotherfishmod/models/item/catfish_bucket.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/yetanotherfishmod/models/item/catfish_spawn_egg.json
 8a7581915a3202ef5808f731b02ad14dc9f93315 assets/yetanotherfishmod/models/item/featherback_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/yetanotherfishmod/models/item/featherback_spawn_egg.json
+2f4f216894b1186833da91bb24f7b86be8cadd54 assets/yetanotherfishmod/models/item/guppy_bucket.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/yetanotherfishmod/models/item/guppy_spawn_egg.json
+c0881e2f313763df8113ed808110dd95215b655e assets/yetanotherfishmod/models/item/minnow_bucket.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/yetanotherfishmod/models/item/minnow_spawn_egg.json
