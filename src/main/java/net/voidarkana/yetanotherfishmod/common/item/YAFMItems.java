@@ -57,6 +57,16 @@ public class YAFMItems {
         }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
     });
 
+
+    public static final RegistryObject<Item> FRESHWATER_SHARK_SPAWN_EGG = ITEMS.register("freshwater_shark_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.FRESHWATER_SHARK, 0x292929, 0x7b0b0b, new Item.Properties()));
+
+    public static final RegistryObject<Item> FRESHWATER_SHARK_BUCKET = ITEMS.register("freshwater_shark_bucket", () -> {
+        return new FishBucketItem(YAFMEntities.FRESHWATER_SHARK, () -> {
+            return Fluids.WATER;
+        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
+    });
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

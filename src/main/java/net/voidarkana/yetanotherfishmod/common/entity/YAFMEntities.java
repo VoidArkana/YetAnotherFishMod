@@ -8,10 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.GuppyEntity;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.MinnowEntity;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.CatfishEntity;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.FeatherbackEntity;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.*;
 
 public class YAFMEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -40,6 +37,12 @@ public class YAFMEntities {
                     () -> EntityType.Builder.of(GuppyEntity::new, MobCategory.CREATURE)
                             .sized(0.3f, 0.3f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "guppy").toString()));
+
+    public static final RegistryObject<EntityType<FreshwaterSharkEntity>> FRESHWATER_SHARK =
+            ENTITY_TYPES.register("freshwater_shark",
+                    () -> EntityType.Builder.of(FreshwaterSharkEntity::new, MobCategory.CREATURE)
+                            .sized(0.6f, 0.4f)
+                            .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "freshwater_shark").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

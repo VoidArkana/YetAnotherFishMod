@@ -15,5 +15,24 @@
   "item.yetanotherfishmod.guppy_bucket" : "Bucket of Guppy",
   "entity.yetanotherfishmod.guppy" : "Guppy",
 
+  "item.yetanotherfishmod.freshwater_shark_spawn_egg" : "Freshwater Shark Spawn Egg",
+  "item.yetanotherfishmod.freshwater_shark_bucket" : "Bucket of Freshwater Shark",
+  "entity.yetanotherfishmod.freshwater_shark" : "Freshwater Shark",
+
+  "yafm.featherback.0" : "Xenomystus nigri",
+  "yafm.featherback.1" : "Papyrocranus afer",
+  "yafm.featherback.2" : "Chitala ornata",
+  "yafm.featherback.3" : "Chitala lopis",
+
+  "yafm.guppy_base.0" : "Grey Base",
+  "yafm.guppy_base.1" : "Blue Base",
+
+  "yafm.guppy_second.0" : "Orange Pigment",
+  "yafm.guppy_second.1" : "Pink Pigment",
+  "yafm.guppy_second.2" : "Teal Pigment",
+  "yafm.guppy_second.3" : "Green Pigment",
+  "yafm.guppy_second.4" : "Red Pigment",
+  "yafm.guppy_second.5" : "Yellow Pigment",
+
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }

@@ -154,7 +154,6 @@ public abstract class SchoolingFish extends BucketableFishEntity{
         if (this.isFollower()) {
             this.getNavigation().moveTo(this.leader, 1.2D);
         }
-
     }
 
     public void addFollowers(Stream<? extends SchoolingFish> pFollowers) {

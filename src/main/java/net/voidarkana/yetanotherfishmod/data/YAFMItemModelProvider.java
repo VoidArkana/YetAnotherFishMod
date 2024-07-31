@@ -29,6 +29,9 @@ public class YAFMItemModelProvider extends ItemModelProvider {
         withExistingParent(YAFMItems.GUPPY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         simpleItem(YAFMItems.GUPPY_BUCKET);
 
+        withExistingParent(YAFMItems.FRESHWATER_SHARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.FRESHWATER_SHARK_BUCKET);
+
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

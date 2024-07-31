@@ -2,8 +2,6 @@ package net.voidarkana.yetanotherfishmod.common.entity.custom;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -13,7 +11,8 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishJumpGoal;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.base.VariantSchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -23,16 +22,15 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity {
+public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEntity {
 
-    protected static final RawAnimation BIG_SWIM = RawAnimation.begin().thenLoop("animation.genericfish.twoblocktailandheadswim");
-    protected static final RawAnimation BIG_FLOP = RawAnimation.begin().thenLoop("animation.genericfish.twoblocktailandheadflop");
-    protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.genericfish.headswim");
-    protected static final RawAnimation FLOP = RawAnimation.begin().thenPlay("animation.genericfish.headflop");
+    protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.genericfish.swim");
+    protected static final RawAnimation FLOP = RawAnimation.begin().thenLoop("animation.genericfish.flop");
 
-    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(FeatherbackEntity.class, EntityDataSerializers.INT);
+    protected static final RawAnimation HEAD_SWIM = RawAnimation.begin().thenLoop("animation.genericfish.headswim");
+    protected static final RawAnimation HEAD_FLOP = RawAnimation.begin().thenLoop("animation.genericfish.headflop");
 
-    public FeatherbackEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+    public FreshwaterSharkEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.refreshDimensions();
     }
@@ -44,40 +42,24 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
 
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
-        return switch (this.getVariant()){
-            case 2, 3 ->super.getDimensions(pPose);
-            default ->super.getDimensions(pPose).scale(1F, 0.6F);
+        return switch (this.getVariantModel()){
+            case 1 ->super.getDimensions(pPose).scale(1.5F, 1.5F);
+            case 2 ->super.getDimensions(pPose).scale(1.7F, 1.7F);
+            case 3 ->super.getDimensions(pPose).scale(1F, 1F);
+            case 4 ->super.getDimensions(pPose).scale(1.5F, 1.5F);
+            case 5 ->super.getDimensions(pPose).scale(1F, 1F);
+            default ->super.getDimensions(pPose);
         };
     }
 
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(5, new FishJumpGoal(this, 15));
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.8F);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
-    }
-
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("Variant", this.getVariant());
-    }
-
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setVariant(compound.getInt("Variant"));
-    }
-
-    //variants
-    public int getVariant() {
-        return this.entityData.get(VARIANT);
-    }
-
-    public void setVariant(int variant) {
-        this.entityData.set(VARIANT, variant);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D)
+                .add(Attributes.MOVEMENT_SPEED, 1.5F);
     }
 
     @Override
@@ -85,7 +67,8 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         Bucketable.saveDefaultDataToBucketTag(this, bucket);
         compoundnbt.putFloat("Health", this.getHealth());
-        compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putInt("VariantModel", this.getVariantModel());
+        compoundnbt.putInt("VariantSkin", this.getVariantSkin());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -94,14 +77,31 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
-        this.setVariant(pTag.getInt("Variant"));
+        this.setVariantModel(pTag.getInt("VariantModel"));
+        this.setVariantSkin(pTag.getInt("VariantSkin"));
     }
 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        this.setVariant(this.random.nextInt(4));
+        int model = this.random.nextInt(6);
+        this.setVariantModel(model);
+
+        int skin;
+        if (model==5){
+            skin = this.random.nextInt(2);
+        }else{
+            skin = 0;
+        }
+
+        this.setVariantSkin(skin);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+
+    @Override
+    public ItemStack getBucketItemStack() {
+        return new ItemStack(YAFMItems.FRESHWATER_SHARK_BUCKET.get());
     }
 
     @Override
@@ -109,17 +109,13 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
         controllerRegistrar.add(new AnimationController[]{new AnimationController(this, "Normal", 5, this::Controller)});
     }
 
-    protected <E extends FeatherbackEntity> PlayState Controller(AnimationState<E> event) {
+    protected <E extends FreshwaterSharkEntity> PlayState Controller(AnimationState<E> event) {
         if (this.isInWater()){
-            event.setAndContinue(this.getVariant() > 1 ? BIG_SWIM : SWIM);
+            event.setAndContinue(this.getVariantModel() == 0 ? SWIM : HEAD_SWIM);
+            event.getController().setAnimationSpeed(1.5);
         }else{
-            event.setAndContinue(this.getVariant() > 1 ? BIG_FLOP : FLOP);
+            event.setAndContinue(this.getVariantModel() == 0 ? FLOP : HEAD_FLOP);
         }
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(YAFMItems.FEATHERBACK_BUCKET.get());
     }
 }
