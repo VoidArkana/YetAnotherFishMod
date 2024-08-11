@@ -19,10 +19,17 @@
   "item.yetanotherfishmod.freshwater_shark_bucket" : "Bucket of Freshwater Shark",
   "entity.yetanotherfishmod.freshwater_shark" : "Freshwater Shark",
 
-  "yafm.featherback.0" : "Xenomystus nigri",
-  "yafm.featherback.1" : "Papyrocranus afer",
-  "yafm.featherback.2" : "Chitala ornata",
-  "yafm.featherback.3" : "Chitala lopis",
+  "yafm.featherback_sci.0" : "Xenomystus nigri",
+  "yafm.featherback_sci.1" : "Papyrocranus afer",
+  "yafm.featherback_sci.2" : "Chitala ornata",
+  "yafm.featherback_sci.3" : "Chitala lopis",
+
+  "yafm.featherback_common.0" : "African Brown Knifefish",
+  "yafm.featherback_common.1" : "Reticulated Knifefish ",
+  "yafm.featherback_common.2" : "Clown Featherback",
+  "yafm.featherback_common.3" : "Belida",
+
+  "yafm.guppy.sci" : "Poecilia reticulata",
 
   "yafm.guppy_base.0" : "Grey Base",
   "yafm.guppy_base.1" : "Blue Base",

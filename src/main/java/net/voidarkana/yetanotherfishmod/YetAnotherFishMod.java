@@ -46,6 +46,10 @@ public class YetAnotherFishMod
     private void commonSetup(final FMLCommonSetupEvent event) {}
 
     private void clientSetup(final FMLClientSetupEvent event) {
+
+        CALLBACKS.forEach(Runnable::run);
+        CALLBACKS.clear();
+
         EntityRenderers.register(YAFMEntities.FEATHERBACK.get(), FeatherbackRenderer::new);
         EntityRenderers.register(YAFMEntities.MINNOW.get(), MinnowRenderer::new);
         EntityRenderers.register(YAFMEntities.CATFISH.get(), CatfishRenderer::new);

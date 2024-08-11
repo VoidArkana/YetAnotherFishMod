@@ -59,15 +59,20 @@ public class MinnowEntity extends VariantSchoolingFish implements GeoEntity {
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
-        this.setVariantModel(pTag.getInt("VariantModel"));
-        this.setVariantSkin(pTag.getInt("VariantSkin"));
     }
 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        this.setVariantModel(this.random.nextInt(4));
-        this.setVariantSkin(this.random.nextInt(4));
+
+        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("VariantModel", 3)) {
+            this.setVariantModel(pDataTag.getInt("VariantModel"));
+            this.setVariantSkin(pDataTag.getInt("VariantSkin"));
+        }else{
+            this.setVariantModel(this.random.nextInt(4));
+            this.setVariantSkin(this.random.nextInt(4));
+        }
+
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 

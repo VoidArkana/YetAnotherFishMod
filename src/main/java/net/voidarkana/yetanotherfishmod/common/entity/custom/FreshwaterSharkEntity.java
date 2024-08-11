@@ -59,7 +59,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D)
-                .add(Attributes.MOVEMENT_SPEED, 1.5F);
+                .add(Attributes.MOVEMENT_SPEED, 1F);
     }
 
     @Override
@@ -77,24 +77,30 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
-        this.setVariantModel(pTag.getInt("VariantModel"));
-        this.setVariantSkin(pTag.getInt("VariantSkin"));
     }
 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        int model = this.random.nextInt(6);
-        this.setVariantModel(model);
 
-        int skin;
-        if (model==5){
-            skin = this.random.nextInt(2);
+        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("VariantModel", 3)) {
+            this.setVariantModel(pDataTag.getInt("VariantModel"));
+            this.setVariantSkin(pDataTag.getInt("VariantSkin"));
         }else{
-            skin = 0;
+
+            int model = this.random.nextInt(6);
+            this.setVariantModel(model);
+
+            int skin;
+            if (model==5){
+                skin = this.random.nextInt(2);
+            }else{
+                skin = 0;
+            }
+
+            this.setVariantSkin(skin);
         }
 
-        this.setVariantSkin(skin);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
