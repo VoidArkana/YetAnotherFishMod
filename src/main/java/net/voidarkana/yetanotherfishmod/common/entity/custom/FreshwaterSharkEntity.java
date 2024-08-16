@@ -2,6 +2,7 @@ package net.voidarkana.yetanotherfishmod.common.entity.custom;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishJumpGoal;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.VariantSchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +32,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     protected static final RawAnimation HEAD_SWIM = RawAnimation.begin().thenLoop("animation.genericfish.headswim");
     protected static final RawAnimation HEAD_FLOP = RawAnimation.begin().thenLoop("animation.genericfish.headflop");
 
-    public FreshwaterSharkEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+    public FreshwaterSharkEntity(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.refreshDimensions();
     }
@@ -102,6 +104,12 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
         }
 
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+        return null;
     }
 
 

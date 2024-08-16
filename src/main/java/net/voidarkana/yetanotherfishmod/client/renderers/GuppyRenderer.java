@@ -25,7 +25,9 @@ public class GuppyRenderer extends GeoEntityRenderer<GuppyEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(GuppyEntity barbfishEntity) {
-        return new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/guppy/base/guppy_base_"+barbfishEntity.getVariantSkin()+".png");
+        return new ResourceLocation(YetAnotherFishMod.MOD_ID, barbfishEntity.isBaby()
+                ? "textures/entity/guppy/baby_guppy.png"
+                : "textures/entity/guppy/base/guppy_base_"+barbfishEntity.getVariantSkin()+".png");
     }
 
     @Override

@@ -21,6 +21,7 @@ public class GuppyFins extends GeoRenderLayer<GuppyEntity> {
     @Override
     public void render(PoseStack poseStack, GuppyEntity entity, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
+        if (!entity.isInvisible() && !entity.isBaby()) {
             RenderType cameo = RenderType.entityCutoutNoCull(new ResourceLocation(YetAnotherFishMod.MOD_ID,
                     "textures/entity/guppy/fins/"+entity.getFinsName(entity.getFinModel())
                             +"/guppy_fin_"+entity.getFinsName(entity.getFinModel())+"_"+entity.getFinColor()+".png"));
@@ -29,5 +30,6 @@ public class GuppyFins extends GeoRenderLayer<GuppyEntity> {
 
             this.getRenderer().reRender(this.getGeoModel().getBakedModel(trilobiteModel), poseStack, bufferSource, entity, renderType,
                     bufferSource.getBuffer(cameo), partialTick, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        }
     }
 }

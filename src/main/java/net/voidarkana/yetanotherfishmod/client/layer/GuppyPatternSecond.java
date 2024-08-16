@@ -21,15 +21,17 @@ public class GuppyPatternSecond extends GeoRenderLayer<GuppyEntity> {
     @Override
     public void render(PoseStack poseStack, GuppyEntity entity, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        if (entity.getHasSecondPattern()) {
-            RenderType cameo = RenderType.entityCutoutNoCull(new ResourceLocation(YetAnotherFishMod.MOD_ID,
-                    "textures/entity/guppy/patterns/"+entity.getSecondPatternName(entity.getSecondPattern())
-                            +"/guppy_pattern_"+entity.getSecondPatternName(entity.getSecondPattern())+"_"+entity.getSecondPatternColor()+".png"));
+        if (!entity.isInvisible() && !entity.isBaby()) {
+            if (entity.getHasSecondPattern()) {
+                RenderType cameo = RenderType.entityCutoutNoCull(new ResourceLocation(YetAnotherFishMod.MOD_ID,
+                        "textures/entity/guppy/patterns/"+entity.getSecondPatternName(entity.getSecondPattern())
+                                +"/guppy_pattern_"+entity.getSecondPatternName(entity.getSecondPattern())+"_"+entity.getSecondPatternColor()+".png"));
 
-            ResourceLocation trilobiteModel = new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/guppy.geo.json");
+                ResourceLocation trilobiteModel = new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/guppy.geo.json");
 
-            this.getRenderer().reRender(this.getGeoModel().getBakedModel(trilobiteModel), poseStack, bufferSource, entity, renderType,
-                    bufferSource.getBuffer(cameo), partialTick, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                this.getRenderer().reRender(this.getGeoModel().getBakedModel(trilobiteModel), poseStack, bufferSource, entity, renderType,
+                        bufferSource.getBuffer(cameo), partialTick, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            }
         }
 
     }

@@ -4,18 +4,22 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FollowIndiscriminateSchoolLeaderGoal;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.SchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import org.jetbrains.annotations.Nullable;
@@ -50,13 +54,21 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
     private static final EntityDataAccessor<Boolean> HAS_PATTERN_1 = SynchedEntityData.defineId(GuppyEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> HAS_PATTERN_2 = SynchedEntityData.defineId(GuppyEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public GuppyEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+    public GuppyEntity(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.8F);
+                .add(Attributes.MOVEMENT_SPEED, 0.65F);
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(5, new FollowIndiscriminateSchoolLeaderGoal(this));
+        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5D));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 25));
     }
 
     @Override
@@ -204,23 +216,19 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         compoundnbt.putInt("TailModel", this.getTailModel());
         compoundnbt.putInt("TailColor", this.getTailColor());
 
-
-        compoundnbt.putBoolean("HasSecondaryPattern", this.getHasSecondPattern());
+        compoundnbt.putBoolean("HasMainPattern", this.getHasMainPattern());
         compoundnbt.putInt("MainPattern", this.getMainPattern());
         compoundnbt.putInt("MainPatternColor", this.getMainPatternColor());
 
         compoundnbt.putBoolean("HasSecondaryPattern", this.getHasSecondPattern());
         compoundnbt.putInt("SecondaryPattern", this.getSecondPattern());
         compoundnbt.putInt("SecondaryPatternColor", this.getSecondPatternColor());
+
+        compoundnbt.putInt("Age", this.getAge());
+
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
-    }
-
-    @Override
-    public void loadFromBucketTag(CompoundTag pTag) {
-        Bucketable.loadDefaultDataFromBucketTag(this, pTag);
-//        this.setVariantSkin(pTag.getInt("VariantSkin"));
     }
 
     @Nullable
@@ -243,7 +251,12 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
             this.setSecondPattern(pDataTag.getInt("SecondaryPattern"));
             this.setSecondPatternColor(pDataTag.getInt("SecondaryPatternColor"));
 
+            if (pDataTag.contains("Age")) {
+                this.setAge(pDataTag.getInt("Age"));
+            }
+
         }else{
+
             this.setVariantSkin(this.random.nextInt(12));
 
             this.setFinModel(this.random.nextInt(2));
@@ -260,7 +273,7 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
             //8 dipped
             //9 belly
 
-            this.setTailModel(this.random.nextInt(10));
+            this.setTailModel(this.random.nextInt(19));
             this.setTailColor(this.random.nextInt(22));
 
             //10 fullbody
@@ -287,7 +300,13 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
-    public String getFinsName(int fin){
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+        return null;
+    }
+
+    public static String getFinsName(int fin){
         if (fin == 0){
             return "jumbo";
         }else{
@@ -295,22 +314,31 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         }
     }
 
-    public String getTailName(int pattern){
+    public static String getTailName(int pattern){
         return switch (pattern){
-            case 1 -> "sword";
-            case 2 -> "toppin";
-            case 3 -> "topsword";
-            case 4 -> "btmsword";
-            case 5 -> "btmpin";
-            case 6 -> "flag";
-            case 7 -> "square";
-            case 8 -> "scissor";
-            case 9 -> "lyre";
+            case 1 -> "btmpin";
+            case 2 -> "btmsword";
+            case 3 -> "drkcapped";
+            case 4 -> "drkmoon";
+            case 5 -> "drkmosaic";
+            case 6 -> "drkstreak";
+            case 7 -> "flag";
+            case 8 -> "lhtcapped";
+            case 9 -> "lhtmoon";
+            case 10 -> "lhtmosaic";
+            case 11 -> "lhtstreak";
+            case 12 -> "lyre";
+            case 13 -> "scissor";
+            case 14 -> "square";
+            case 15 -> "sunrise";
+            case 16 -> "sword";
+            case 17 -> "toppin";
+            case 18 -> "topsword";
             default -> "round";
         };
     }
 
-    public String getMainPatternName(int pattern){
+    public static String getMainPatternName(int pattern){
         return switch (pattern){
             case 1 -> "checkered2";
             case 2 -> "line1";
@@ -326,7 +354,7 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         };
     }
 
-    public String getSecondPatternName(int pattern){
+    public static String getSecondPatternName(int pattern){
         return switch (pattern){
             case 1 -> "checkered2";
             case 2 -> "line1";
@@ -357,6 +385,11 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
     protected <E extends GuppyEntity> PlayState Controller(AnimationState<E> event) {
         if (this.isInWater()){
             event.setAndContinue(SWIM);
+
+            if (this.isBaby()){
+                event.getController().setAnimationSpeed(2d);
+            }
+
         }else{
             event.setAndContinue(FLOP);
         }

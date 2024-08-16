@@ -31,11 +31,11 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public abstract class BucketableFishEntity extends WaterAnimal implements Bucketable, GeoAnimatable {
+public abstract class BucketableFishEntity extends BreedableWaterAnimal implements Bucketable, GeoAnimatable {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(BucketableFishEntity.class, EntityDataSerializers.BOOLEAN);
 
-    protected BucketableFishEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+    protected BucketableFishEntity(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
@@ -101,7 +101,7 @@ public abstract class BucketableFishEntity extends WaterAnimal implements Bucket
         return new WaterBoundPathNavigation(this, pLevel);
     }
 
-    protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         return Bucketable.bucketMobPickup(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
     }
 
@@ -139,6 +139,10 @@ public abstract class BucketableFishEntity extends WaterAnimal implements Bucket
 
     protected SoundEvent getSwimSound() {
         return SoundEvents.FISH_SWIM;
+    }
+
+    protected void playSwimSound(float pVolume) {
+        this.playSound(this.getSwimSound(), 0, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
     }
 
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {

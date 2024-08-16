@@ -24,7 +24,7 @@ public abstract class SchoolingFish extends BucketableFishEntity{
     private static final EntityDataAccessor<Integer> MODEL_VARIANT = SynchedEntityData.defineId(SchoolingFish.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.defineId(SchoolingFish.class, EntityDataSerializers.INT);
 
-    protected SchoolingFish(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+    protected SchoolingFish(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

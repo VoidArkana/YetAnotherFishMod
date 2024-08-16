@@ -13,7 +13,7 @@ import software.bernie.geckolib.model.data.EntityModelData;
 public class GuppyModel extends GeoModel<GuppyEntity> {
     @Override
     public ResourceLocation getModelResource(GuppyEntity barbfishEntity) {
-        return new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/guppy.geo.json");
+        return new ResourceLocation(YetAnotherFishMod.MOD_ID, barbfishEntity.isBaby() ?  "geo/baby_guppy.geo.json" : "geo/guppy.geo.json");
     }
 
     @Override
