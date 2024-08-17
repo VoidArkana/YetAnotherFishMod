@@ -28,6 +28,12 @@ public class FeatherbackRenderer extends GeoEntityRenderer<FeatherbackEntity> {
     @Override
     public void render(FeatherbackEntity entity, float entityYaw, float partialTicks, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLightIn) {
+        if(entity.isBaby()) {
+            poseStack.scale(0.6F, 0.6F, 0.6F);
+        }
+        else {
+            poseStack.scale(1.0F, 1.0F, 1.0F);
+        }
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
     }
 }

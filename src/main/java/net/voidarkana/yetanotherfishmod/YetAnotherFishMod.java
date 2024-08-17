@@ -12,6 +12,7 @@ import net.voidarkana.yetanotherfishmod.client.renderers.*;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
+import net.voidarkana.yetanotherfishmod.util.YAFMCreativeTab;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;

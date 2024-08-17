@@ -1,4 +1,4 @@
-package net.voidarkana.yetanotherfishmod.data;
+package net.voidarkana.yetanotherfishmod.util.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -20,7 +20,7 @@ public class DataGenerators {
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-//        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 //        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
 //        generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput));
@@ -28,10 +28,10 @@ public class DataGenerators {
 //        generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new YAFMItemModelProvider(packOutput, existingFileHelper));
 
-//        ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
-//                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+        YAFMBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
+                new YAFMBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-//        generator.addProvider(event.includeServer(),new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(),new YAFMItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
 //        generator.addProvider(true, new ModEntityTagsGenerator(packOutput, lookupProvider, existingFileHelper));
 

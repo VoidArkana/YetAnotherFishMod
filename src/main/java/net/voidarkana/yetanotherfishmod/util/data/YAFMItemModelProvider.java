@@ -1,4 +1,4 @@
-package net.voidarkana.yetanotherfishmod.data;
+package net.voidarkana.yetanotherfishmod.util.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -31,6 +31,11 @@ public class YAFMItemModelProvider extends ItemModelProvider {
 
         withExistingParent(YAFMItems.FRESHWATER_SHARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         simpleItem(YAFMItems.FRESHWATER_SHARK_BUCKET);
+
+        simpleItem(YAFMItems.REGULAR_FEED);
+        simpleItem(YAFMItems.QUALITY_FEED);
+        simpleItem(YAFMItems.GREAT_FEED);
+        simpleItem(YAFMItems.PREMIUM_FEED);
 
     }
 

@@ -6,22 +6,26 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FollowIndiscriminateSchoolLeaderGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.SchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
+import net.voidarkana.yetanotherfishmod.util.YAFMTags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -63,11 +67,19 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.65F);
     }
 
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(YAFMTags.Items.FISH_FEED);
+
+    public boolean isFood(ItemStack pStack) {
+        return FOOD_ITEMS.test(pStack);
+    }
+
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(5, new FollowIndiscriminateSchoolLeaderGoal(this));
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.5D));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 25));
     }
 
@@ -300,12 +312,6 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
-    @Nullable
-    @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return null;
-    }
-
     public static String getFinsName(int fin){
         if (fin == 0){
             return "jumbo";
@@ -401,5 +407,241 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         return new ItemStack(YAFMItems.GUPPY_BUCKET.get());
     }
 
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+        if (itemstack.is(YAFMItems.REGULAR_FEED.get())){
+            this.setFeedQuality(0);
+        }
+        if (itemstack.is(YAFMItems.QUALITY_FEED.get())){
+            this.setFeedQuality(1);
+        }
+        if (itemstack.is(YAFMItems.GREAT_FEED.get())){
+            this.setFeedQuality(2);
+        }
+        if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
+            this.setFeedQuality(3);
+        }
+
+        return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+        GuppyEntity otherParent = (GuppyEntity) pOtherParent;
+        GuppyEntity baby = YAFMEntities.GUPPY.get().create(pLevel);
+
+        if (baby != null){
+
+
+            int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
+            int skin;
+            int finModel;
+            int finColor;
+            int tailModel;
+            int tailColor;
+            boolean hasMainPattern;
+            int mainPatternType;
+            int mainPatternColor;
+            boolean hasSecondPattern;
+            int secondPatternType;
+            int secondPatternColor;
+
+            switch (lowerQuality){
+
+                case 1:
+                    if (this.random.nextBoolean()){
+                        skin = this.random.nextInt(12);
+                        finModel = this.random.nextInt(2);
+                        finColor = this.random.nextInt(22);
+
+                        tailModel = this.random.nextInt(19);
+                        tailColor = this.random.nextInt(22);
+
+                        hasMainPattern = this.random.nextInt(3)==0;
+                        mainPatternType = this.random.nextInt(11);
+                        mainPatternColor = this.random.nextInt(22);
+
+                        hasSecondPattern = this.random.nextInt(3)==0;
+                        secondPatternType = this.random.nextInt(18);
+                        secondPatternColor = this.random.nextInt(22);
+                    }else {
+                        skin = this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin();
+                        finModel = this.random.nextBoolean() ? this.getFinModel() : otherParent.getFinModel();
+                        finColor = this.random.nextBoolean() ? this.getFinColor() : otherParent.getFinColor();
+
+                        tailModel = this.random.nextBoolean() ? this.getTailModel() : otherParent.getTailModel();
+                        tailColor = this.random.nextBoolean() ? this.getTailColor() : otherParent.getTailColor();
+
+                        hasMainPattern = this.random.nextBoolean() ? this.getHasMainPattern() : otherParent.getHasMainPattern();
+                        mainPatternType = this.random.nextBoolean() ? this.getMainPattern() : otherParent.getMainPattern();
+                        mainPatternColor = this.random.nextBoolean() ? this.getMainPatternColor() : otherParent.getMainPatternColor();
+
+                        hasSecondPattern = this.random.nextBoolean() ? this.getHasSecondPattern() : otherParent.getHasSecondPattern();
+                        secondPatternType = this.random.nextBoolean() ? this.getSecondPattern() : otherParent.getSecondPattern();
+                        secondPatternColor = this.random.nextBoolean() ? this.getSecondPatternColor(): otherParent.getSecondPatternColor();
+                    }
+                    break;
+
+                case 2:
+                    skin = this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin();
+                    finModel = this.random.nextBoolean() ? this.getFinModel() : otherParent.getFinModel();
+                    finColor = this.random.nextBoolean() ? this.getFinColor() : otherParent.getFinColor();
+
+                    tailModel = this.random.nextBoolean() ? this.getTailModel() : otherParent.getTailModel();
+                    tailColor = this.random.nextBoolean() ? this.getTailColor() : otherParent.getTailColor();
+
+                    hasMainPattern = this.random.nextBoolean() ? this.getHasMainPattern() : otherParent.getHasMainPattern();
+                    mainPatternType = this.random.nextBoolean() ? this.getMainPattern() : otherParent.getMainPattern();
+                    mainPatternColor = this.random.nextBoolean() ? this.getMainPatternColor() : otherParent.getMainPatternColor();
+
+                    hasSecondPattern = this.random.nextBoolean() ? this.getHasSecondPattern() : otherParent.getHasSecondPattern();
+                    secondPatternType = this.random.nextBoolean() ? this.getSecondPattern() : otherParent.getSecondPattern();
+                    secondPatternColor = this.random.nextBoolean() ? this.getSecondPatternColor(): otherParent.getSecondPatternColor();
+                    break;
+
+                case 3:
+                    boolean parent = this.random.nextBoolean();
+
+                    skin = parent ? this.getVariantSkin() : otherParent.getVariantSkin();
+                    finModel = parent ? this.getFinModel() : otherParent.getFinModel();
+                    finColor = parent ? this.getFinColor() : otherParent.getFinColor();
+
+                    tailModel = parent ? this.getTailModel() : otherParent.getTailModel();
+                    tailColor = parent ? this.getTailColor() : otherParent.getTailColor();
+
+                    hasMainPattern = parent ? this.getHasMainPattern() : otherParent.getHasMainPattern();
+                    mainPatternType = parent ? this.getMainPattern() : otherParent.getMainPattern();
+                    mainPatternColor = parent ? this.getMainPatternColor() : otherParent.getMainPatternColor();
+
+                    hasSecondPattern = parent ? this.getHasSecondPattern() : otherParent.getHasSecondPattern();
+                    secondPatternType = parent ? this.getSecondPattern() : otherParent.getSecondPattern();
+                    secondPatternColor = parent ? this.getSecondPatternColor(): otherParent.getSecondPatternColor();
+                    break;
+
+                default:
+                    skin = this.random.nextInt(12);
+                    finModel = this.random.nextInt(2);
+                    finColor = this.random.nextInt(22);
+
+                    tailModel = this.random.nextInt(19);
+                    tailColor = this.random.nextInt(22);
+
+                    hasMainPattern = this.random.nextInt(3)==0;
+                    mainPatternType = this.random.nextInt(11);
+                    mainPatternColor = this.random.nextInt(22);
+
+                    hasSecondPattern = this.random.nextInt(3)==0;
+                    secondPatternType = this.random.nextInt(18);
+                    secondPatternColor = this.random.nextInt(22);
+                    break;
+            }
+
+            baby.setVariantSkin(skin);
+            baby.setFinModel(finModel);
+            baby.setFinColor(finColor);
+            baby.setTailModel(tailModel);
+            baby.setTailColor(tailColor);
+
+            baby.setHasMainPattern(hasMainPattern);
+            baby.setMainPattern(mainPatternType);
+            baby.setMainPatternColor(mainPatternColor);
+
+            baby.setHasSecondPattern(hasSecondPattern);
+            baby.setSecondPattern(secondPatternType);
+            baby.setSecondPatternColor(secondPatternColor);
+            baby.setFromBucket(true);
+        }
+
+        return baby;
+    }
+
+
+    @Override
+    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
+        AgeableMob ageablemob = this.getBreedOffspring(pLevel, pMate);
+        AgeableMob ageableMob2 = null;
+        AgeableMob ageableMob3 = null;
+        AgeableMob ageableMob4 = null;
+        AgeableMob ageableMob5 = null;
+
+        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageablemob);
+        ageablemob = event.getChild();
+
+        if (this.random.nextBoolean() || this.random.nextBoolean()){
+            ageableMob2 = this.getBreedOffspring(pLevel, pMate);
+            final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event2 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob2);
+            ageableMob2 = event2.getChild();
+
+            if (this.random.nextBoolean()){
+                ageableMob3 = this.getBreedOffspring(pLevel, pMate);
+                final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event3 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob3);
+                ageableMob3 = event3.getChild();
+
+                if (this.random.nextBoolean()){
+
+                    ageableMob4 = this.getBreedOffspring(pLevel, pMate);
+                    final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event4 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob4);
+                    ageableMob4 = event4.getChild();
+
+                    if (this.random.nextBoolean()){
+                        ageableMob5 = this.getBreedOffspring(pLevel, pMate);
+                        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event5 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob5);
+                        ageableMob5 = event5.getChild();
+                    }
+                }
+            }
+        }
+
+        final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+        if (cancelled) {
+            //Reset the "inLove" state for the animals
+            this.setAge(6000);
+            pMate.setAge(6000);
+            this.resetLove();
+            pMate.resetLove();
+            return;
+        }
+        if (ageablemob != null) {
+
+            ageablemob.setBaby(true);
+            ageablemob.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageablemob);
+            pLevel.addFreshEntityWithPassengers(ageablemob);
+
+            if (ageableMob2 != null){
+
+                ageableMob2.setBaby(true);
+                ageableMob2.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob2);
+                pLevel.addFreshEntityWithPassengers(ageableMob2);
+
+                if (ageableMob3 != null){
+
+                    ageableMob3.setBaby(true);
+                    ageableMob3.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                    this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob3);
+                    pLevel.addFreshEntityWithPassengers(ageableMob3);
+
+                    if (ageableMob4 != null){
+
+                        ageableMob4.setBaby(true);
+                        ageableMob4.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                        this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob4);
+                        pLevel.addFreshEntityWithPassengers(ageableMob4);
+
+                        if (ageableMob5 != null){
+
+                            ageableMob5.setBaby(true);
+                            ageableMob5.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob5);
+                            pLevel.addFreshEntityWithPassengers(ageableMob5);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

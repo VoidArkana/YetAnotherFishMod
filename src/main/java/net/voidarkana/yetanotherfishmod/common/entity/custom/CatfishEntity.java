@@ -7,19 +7,28 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FollowIndiscriminateSchoolLeaderGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
+import net.voidarkana.yetanotherfishmod.util.YAFMTags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -36,6 +45,12 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
     protected static final RawAnimation PIRAIBA_FLOP = RawAnimation.begin().thenPlay("animation.catfish.piraiba_flop");
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(CatfishEntity.class, EntityDataSerializers.INT);
+
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(YAFMTags.Items.FISH_FEED);
+
+    public boolean isFood(ItemStack pStack) {
+        return FOOD_ITEMS.test(pStack);
+    }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
         this.refreshDimensions();
@@ -60,6 +75,13 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.8F);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 2D, FOOD_ITEMS, false));
     }
 
     @Override
@@ -120,7 +142,12 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return null;
+        CatfishEntity baby = YAFMEntities.CATFISH.get().create(pLevel);
+        if (baby != null){
+            baby.setVariant(this.getVariant());
+            baby.setFromBucket(true);
+        }
+        return baby;
     }
 
     @Override
@@ -155,5 +182,119 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
             event.setAndContinue(this.getVariant() > 0 ? FLOP : PIRAIBA_FLOP);
         }
         return PlayState.CONTINUE;
+    }
+
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+        if (itemstack.is(YAFMItems.REGULAR_FEED.get())){
+            this.setFeedQuality(0);
+        }
+        if (itemstack.is(YAFMItems.QUALITY_FEED.get())){
+            this.setFeedQuality(1);
+        }
+        if (itemstack.is(YAFMItems.GREAT_FEED.get())){
+            this.setFeedQuality(2);
+        }
+        if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
+            this.setFeedQuality(3);
+        }
+
+        return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
+    public boolean canMate(Animal pOtherAnimal) {
+        CatfishEntity mate = (CatfishEntity) pOtherAnimal;
+        return super.canMate(pOtherAnimal) && this.getVariant() == mate.getVariant();
+    }
+
+    @Override
+    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
+        AgeableMob ageablemob = this.getBreedOffspring(pLevel, pMate);
+        AgeableMob ageableMob2 = null;
+        AgeableMob ageableMob3 = null;
+        AgeableMob ageableMob4 = null;
+        AgeableMob ageableMob5 = null;
+
+        CatfishEntity otherParent = (CatfishEntity) pMate;
+        int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
+
+        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageablemob);
+        ageablemob = event.getChild();
+
+        if ((lowerQuality > 0 && this.random.nextBoolean()) || lowerQuality > 2){
+            ageableMob2 = this.getBreedOffspring(pLevel, pMate);
+            final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event2 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob2);
+            ageableMob2 = event2.getChild();
+
+            if ((lowerQuality > 1 && this.random.nextInt(4)==0) || (lowerQuality > 2 && this.random.nextBoolean())){
+                ageableMob3 = this.getBreedOffspring(pLevel, pMate);
+                final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event3 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob3);
+                ageableMob3 = event3.getChild();
+
+                if (lowerQuality > 2 && this.random.nextBoolean()){
+
+                    ageableMob4 = this.getBreedOffspring(pLevel, pMate);
+                    final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event4 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob4);
+                    ageableMob4 = event4.getChild();
+
+                    if (this.random.nextBoolean()){
+                        ageableMob5 = this.getBreedOffspring(pLevel, pMate);
+                        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event5 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob5);
+                        ageableMob5 = event5.getChild();
+                    }
+                }
+            }
+        }
+
+        final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+        if (cancelled) {
+            //Reset the "inLove" state for the animals
+            this.setAge(6000);
+            pMate.setAge(6000);
+            this.resetLove();
+            pMate.resetLove();
+            return;
+        }
+        if (ageablemob != null) {
+
+            ageablemob.setBaby(true);
+            ageablemob.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageablemob);
+            pLevel.addFreshEntityWithPassengers(ageablemob);
+
+            if (ageableMob2 != null){
+
+                ageableMob2.setBaby(true);
+                ageableMob2.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob2);
+                pLevel.addFreshEntityWithPassengers(ageableMob2);
+
+                if (ageableMob3 != null){
+
+                    ageableMob3.setBaby(true);
+                    ageableMob3.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                    this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob3);
+                    pLevel.addFreshEntityWithPassengers(ageableMob3);
+
+                    if (ageableMob4 != null){
+
+                        ageableMob4.setBaby(true);
+                        ageableMob4.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                        this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob4);
+                        pLevel.addFreshEntityWithPassengers(ageableMob4);
+
+                        if (ageableMob5 != null){
+
+                            ageableMob5.setBaby(true);
+                            ageableMob5.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob5);
+                            pLevel.addFreshEntityWithPassengers(ageableMob5);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

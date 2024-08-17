@@ -1,6 +1,9 @@
 package net.voidarkana.yetanotherfishmod.common.entity.custom.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -14,12 +17,29 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.GuppyEntity;
 
 public abstract class BreedableWaterAnimal extends Animal {
+
+    private static final EntityDataAccessor<Integer> FEED_TYPE = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.INT);
 
     protected BreedableWaterAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(FEED_TYPE, 0);
+    }
+
+    public int getFeedQuality() {
+        return this.entityData.get(FEED_TYPE);
+    }
+
+    public void setFeedQuality(int variant) {
+        this.entityData.set(FEED_TYPE, variant);
     }
 
 

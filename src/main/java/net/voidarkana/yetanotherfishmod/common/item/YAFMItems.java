@@ -67,6 +67,19 @@ public class YAFMItems {
         }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
     });
 
+
+    public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
+            ()-> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> QUALITY_FEED = ITEMS.register("quality_feed",
+            ()-> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GREAT_FEED = ITEMS.register("great_feed",
+            ()-> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> PREMIUM_FEED = ITEMS.register("premium_feed",
+            ()-> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

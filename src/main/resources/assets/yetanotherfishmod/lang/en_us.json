@@ -118,5 +118,10 @@
   "yafm.guppy_color.20" : "Dark Green",
   "yafm.guppy_color.21" : "Red",
 
+  "item.yetanotherfishmod.regular_feed" : "Fish Feed",
+  "item.yetanotherfishmod.quality_feed" : "Quality Fish Feed",
+  "item.yetanotherfishmod.great_feed" : "Great Fish Feed",
+  "item.yetanotherfishmod.premium_feed" : "Premium Fish Feed",
+
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }
