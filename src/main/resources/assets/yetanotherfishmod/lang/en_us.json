@@ -122,6 +122,12 @@
   "item.yetanotherfishmod.quality_feed" : "Quality Fish Feed",
   "item.yetanotherfishmod.great_feed" : "Great Fish Feed",
   "item.yetanotherfishmod.premium_feed" : "Premium Fish Feed",
+  "item.yetanotherfishmod.bad_feed" : "Questionable Fish Feed",
+
+  "block.yetanotherfishmod.duckweed" : "Duckweed",
+
+  "item.yetanotherfishmod.raw_fish" : "Raw Fish",
+  "item.yetanotherfishmod.cooked_fish" : "Cooked Fish",
 
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }

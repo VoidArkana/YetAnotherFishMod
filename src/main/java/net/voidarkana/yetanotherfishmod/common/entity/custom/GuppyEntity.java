@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -36,16 +35,10 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(YAFMTags.Items.FISH_FEED);
+
     protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.guppy.swim");
     protected static final RawAnimation FLOP = RawAnimation.begin().thenLoop("animation.guppy.flop");
-
-    //base (skin variant)
-    //fin model
-    //fin color
-    //tail model
-    //tail color
-    //pattern 1
-    //pattern 2
 
     private static final EntityDataAccessor<Integer> FIN_MODEL = SynchedEntityData.defineId(GuppyEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> FIN_COLOR = SynchedEntityData.defineId(GuppyEntity.class, EntityDataSerializers.INT);
@@ -66,8 +59,6 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.65F);
     }
-
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(YAFMTags.Items.FISH_FEED);
 
     public boolean isFood(ItemStack pStack) {
         return FOOD_ITEMS.test(pStack);
@@ -605,35 +596,35 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
         }
         if (ageablemob != null) {
 
-            ageablemob.setBaby(true);
+            ageablemob.setAge(-12000);
             ageablemob.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageablemob);
             pLevel.addFreshEntityWithPassengers(ageablemob);
 
             if (ageableMob2 != null){
 
-                ageableMob2.setBaby(true);
+                ageableMob2.setAge(-12000);
                 ageableMob2.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
                 this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob2);
                 pLevel.addFreshEntityWithPassengers(ageableMob2);
 
                 if (ageableMob3 != null){
 
-                    ageableMob3.setBaby(true);
+                    ageableMob3.setAge(-12000);
                     ageableMob3.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
                     this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob3);
                     pLevel.addFreshEntityWithPassengers(ageableMob3);
 
                     if (ageableMob4 != null){
 
-                        ageableMob4.setBaby(true);
+                        ageableMob4.setAge(-12000);
                         ageableMob4.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
                         this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob4);
                         pLevel.addFreshEntityWithPassengers(ageableMob4);
 
                         if (ageableMob5 != null){
 
-                            ageableMob5.setBaby(true);
+                            ageableMob5.setAge(-12000);
                             ageableMob5.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
                             this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob5);
                             pLevel.addFreshEntityWithPassengers(ageableMob5);
@@ -643,5 +634,8 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
             }
         }
     }
+
+
+
 
 }

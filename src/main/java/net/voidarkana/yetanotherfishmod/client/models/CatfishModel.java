@@ -1,8 +1,13 @@
 package net.voidarkana.yetanotherfishmod.client.models;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.animal.Cat;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.CatfishEntity;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.GuppyEntity;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -41,8 +46,33 @@ public class CatfishModel extends GeoModel<CatfishEntity> {
 
         CoreGeoBone swimControl = this.getAnimationProcessor().getBone("swim_control");
 
+        CoreGeoBone head = this.getAnimationProcessor().getBone("head_rot");
+        CoreGeoBone tailRot = this.getAnimationProcessor().getBone("tail_rot");
+        CoreGeoBone tailTipRot = this.getAnimationProcessor().getBone("tail_tip_rot");
+        CoreGeoBone whiskerBR = this.getAnimationProcessor().getBone("whisker_br_rot");
+        CoreGeoBone whiskerBL = this.getAnimationProcessor().getBone("whisker_bl_rot");
+
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
         swimControl.setRotX(((entityData.headPitch() * ((float) Math.PI / 180F))/2));
+
+        head.setRotY(-((animatable.tilt * ((float) Math.PI / 180F))));
+        tailRot.setRotY(((animatable.tilt * ((float) Math.PI / 180F))));
+        tailTipRot.setRotY(((animatable.tilt * ((float) Math.PI / 180F))));
+        whiskerBR.setRotZ(-((animatable.tilt * ((float) Math.PI / 180F))));
+        whiskerBL.setRotZ(-((animatable.tilt * ((float) Math.PI / 180F))));
+
+        if (animatable.getVariant() == 0) {
+            CoreGeoBone tailFinRot = this.getAnimationProcessor().getBone("tail_fin_rot");
+
+            CoreGeoBone whiskerTR = this.getAnimationProcessor().getBone("whisker_tr_rot");
+            CoreGeoBone whiskerTL = this.getAnimationProcessor().getBone("whisker_tl_rot");
+
+            tailFinRot.setRotY(((animatable.tilt * ((float) Math.PI / 180F))));
+
+            whiskerTR.setRotZ(((animatable.tilt * ((float) Math.PI / 180F))));
+            whiskerTL.setRotZ(((animatable.tilt * ((float) Math.PI / 180F))));
+        }
     }
+
 }

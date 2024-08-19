@@ -106,7 +106,9 @@ public abstract class VariantSchoolingFish extends BucketableFishEntity{
 
     public boolean isFollower() {
         return this.leader != null && this.leader.isAlive()
-                && this.leader.getVariantModel()==this.getVariantModel() && this.leader.getVariantSkin()==this.getVariantSkin();
+                && this.leader.getVariantModel()==this.getVariantModel()
+                && this.leader.getVariantSkin()==this.getVariantSkin()
+                && this.isBaby() == this.leader.isBaby();
     }
 
     public VariantSchoolingFish startFollowing(VariantSchoolingFish pLeader) {
@@ -162,7 +164,9 @@ public abstract class VariantSchoolingFish extends BucketableFishEntity{
         pFollowers.limit((long)(this.getMaxSchoolSize() - this.schoolSize)).filter((p_27538_) -> {
             return p_27538_ != this;
         }).forEach((fish) -> {
-            if (this.getVariantSkin()==fish.getVariantSkin() && this.getVariantModel()==fish.getVariantModel()){
+            if (this.getVariantSkin()==fish.getVariantSkin()
+                    && this.getVariantModel()==fish.getVariantModel()
+                    && this.isBaby()==fish.isBaby()){
                 fish.startFollowing(this);
             }
         });

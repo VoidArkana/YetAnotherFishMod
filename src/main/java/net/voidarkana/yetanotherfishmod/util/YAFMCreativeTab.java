@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
+import net.voidarkana.yetanotherfishmod.common.block.YAFMBlocks;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 
 public class YAFMCreativeTab {
@@ -19,6 +20,10 @@ public class YAFMCreativeTab {
                     .title(Component.translatable("creativetab.yafm_creative_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
 
+                        output.accept(YAFMItems.RAW_FISH.get());
+                        output.accept(YAFMItems.COOKED_FISH.get());
+
+                        output.accept(YAFMItems.BAD_FEED.get());
                         output.accept(YAFMItems.REGULAR_FEED.get());
                         output.accept(YAFMItems.QUALITY_FEED.get());
                         output.accept(YAFMItems.GREAT_FEED.get());
@@ -35,6 +40,8 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());
                         output.accept(YAFMItems.FRESHWATER_SHARK_SPAWN_EGG.get());
                         output.accept(YAFMItems.GUPPY_SPAWN_EGG.get());
+
+                        output.accept(YAFMBlocks.DUCKWEED.get());
 
                     })
                     .build());

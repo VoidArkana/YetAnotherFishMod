@@ -1,12 +1,14 @@
 package net.voidarkana.yetanotherfishmod.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.client.models.FreshwaterSharkModel;
-import net.voidarkana.yetanotherfishmod.client.models.MinnowModel;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.CatfishEntity;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.FreshwaterSharkEntity;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -18,19 +20,39 @@ public class FreshwaterSharkRenderer extends GeoEntityRenderer<FreshwaterSharkEn
 
     @Override
     public ResourceLocation getTextureLocation(FreshwaterSharkEntity fish) {
-        return switch (fish.getVariantModel()){
-            case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_bala_adult.png");
-            case 2 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_highfin_adult.png");
-            case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_highfin_juvenile.png");
-            case 4 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_rainbow_adult.png");
-            case 5 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_rainbow_juvenile_"+fish.getVariantSkin()+".png");
-            default -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_bala_juvenile.png");
-        };
+        if (fish.isBaby()){
+            return switch (fish.getVariantModel()){
+                case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_highfin_juvenile.png");
+                case 2 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_rainbow_juvenile.png");
+                case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_ruby.png");
+                default -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_bala_juvenile.png");
+            };
+        }else {
+            return switch (fish.getVariantModel()){
+                case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_highfin_adult_"+fish.getVariantSkin()+".png");
+                case 2 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_rainbow_adult.png");
+                case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_ruby.png");
+                default -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/freshwater_shark/shark_bala_adult.png");
+            };
+        }
     }
+
 
     @Override
     public void render(FreshwaterSharkEntity entity, float entityYaw, float partialTicks, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLightIn) {
+        if(entity.isBaby() && entity.getVariantModel()==3) {
+            poseStack.scale(0.6F, 0.6F, 0.6F);
+        }
+        else {
+            poseStack.scale(1.0F, 1.0F, 1.0F);
+        }
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
+    }
+
+    @Override
+    protected void applyRotations(FreshwaterSharkEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
+        super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
     }
 }

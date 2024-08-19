@@ -55,8 +55,13 @@
 					]
 				},
 				{
-					"name": "tail",
+					"name": "tail_rot",
 					"parent": "body",
+					"pivot": [0, 6, 2]
+				},
+				{
+					"name": "tail",
+					"parent": "tail_rot",
 					"pivot": [0, 6, 2],
 					"cubes": [
 						{"origin": [0, 3, 4], "size": [0, 6, 8], "uv": [0, 7]},

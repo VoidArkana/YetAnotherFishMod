@@ -40,8 +40,18 @@ public class FeatherbackModel extends GeoModel<FeatherbackEntity> {
 
         CoreGeoBone swimControl = this.getAnimationProcessor().getBone("swim_control");
 
+        CoreGeoBone tailRot = this.getAnimationProcessor().getBone("tail_rot");
+
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
         swimControl.setRotX(((entityData.headPitch() * ((float) Math.PI / 180F))/2));
+
+        tailRot.setRotY(((animatable.tilt * ((float) Math.PI / 180F))));
+
+        if (animatable.getVariant() == 2 || animatable.getVariant() == 3){
+            CoreGeoBone tailTipRot = this.getAnimationProcessor().getBone("tail_tip_rot");
+            tailTipRot.setRotY(((animatable.tilt * ((float) Math.PI / 180F))));
+        }
+
     }
 }

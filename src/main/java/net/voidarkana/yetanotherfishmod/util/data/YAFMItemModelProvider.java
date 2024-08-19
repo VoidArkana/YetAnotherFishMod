@@ -36,7 +36,10 @@ public class YAFMItemModelProvider extends ItemModelProvider {
         simpleItem(YAFMItems.QUALITY_FEED);
         simpleItem(YAFMItems.GREAT_FEED);
         simpleItem(YAFMItems.PREMIUM_FEED);
+        simpleItem(YAFMItems.BAD_FEED);
 
+        simpleItem(YAFMItems.COOKED_FISH);
+        simpleItem(YAFMItems.RAW_FISH);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

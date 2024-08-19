@@ -1,11 +1,14 @@
 package net.voidarkana.yetanotherfishmod.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.client.models.FeatherbackModel;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.CatfishEntity;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.FeatherbackEntity;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -35,5 +38,11 @@ public class FeatherbackRenderer extends GeoEntityRenderer<FeatherbackEntity> {
             poseStack.scale(1.0F, 1.0F, 1.0F);
         }
         super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
+    }
+
+    @Override
+    protected void applyRotations(FeatherbackEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
+        super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
     }
 }

@@ -31,8 +31,13 @@
 					]
 				},
 				{
-					"name": "tail",
+					"name": "tail_rot",
 					"parent": "body",
+					"pivot": [-0.5, 10.5, 6]
+				},
+				{
+					"name": "tail",
+					"parent": "tail_rot",
 					"pivot": [-0.5, 10.5, 6],
 					"cubes": [
 						{"origin": [-1.5, 8, 6], "size": [2, 5, 6], "uv": [24, 19]},
@@ -40,8 +45,13 @@
 					]
 				},
 				{
-					"name": "tail_tip",
+					"name": "tail_tip_rot",
 					"parent": "tail",
+					"pivot": [-0.5, 11.5, 12]
+				},
+				{
+					"name": "tail_tip",
+					"parent": "tail_tip_rot",
 					"pivot": [-0.5, 11.5, 12],
 					"cubes": [
 						{"origin": [-0.5, 8, 14], "size": [0, 7, 6], "uv": [28, 24]},

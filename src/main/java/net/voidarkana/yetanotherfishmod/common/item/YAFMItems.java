@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishBucketItem;
+import net.voidarkana.yetanotherfishmod.common.item.custom.YAFMFoods;
 
 @Mod.EventBusSubscriber(modid = YetAnotherFishMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class YAFMItems {
@@ -79,6 +80,16 @@ public class YAFMItems {
 
     public static final RegistryObject<Item> PREMIUM_FEED = ITEMS.register("premium_feed",
             ()-> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BAD_FEED = ITEMS.register("bad_feed",
+            ()-> new Item(new Item.Properties()));
+
+
+    public static final RegistryObject<Item> RAW_FISH = ITEMS.register("raw_fish",
+            ()-> new Item(new Item.Properties().food(YAFMFoods.RAW_FISH)));
+
+    public static final RegistryObject<Item> COOKED_FISH = ITEMS.register("cooked_fish",
+            ()-> new Item(new Item.Properties().food(YAFMFoods.COOKED_FISH)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
