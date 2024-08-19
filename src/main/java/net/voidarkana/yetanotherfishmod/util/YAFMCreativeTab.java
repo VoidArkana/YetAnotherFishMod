@@ -42,6 +42,7 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.GUPPY_SPAWN_EGG.get());
 
                         output.accept(YAFMBlocks.DUCKWEED.get());
+                        output.accept(YAFMBlocks.HORNWORT.get());
 
                     })
                     .build());

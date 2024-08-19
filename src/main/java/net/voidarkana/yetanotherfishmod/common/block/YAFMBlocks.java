@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.block.custom.DuckweedBlock;
+import net.voidarkana.yetanotherfishmod.common.block.custom.HornwortBlock;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 
 import java.util.function.Function;
@@ -27,6 +28,10 @@ public class YAFMBlocks {
             ()-> new DuckweedBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).mapColor(MapColor.COLOR_LIGHT_GREEN)
                     .instabreak().noCollission()),
                     (entry) -> new PlaceOnWaterBlockItem(entry.get(), new Item.Properties()));
+
+
+    public static final RegistryObject<Block> HORNWORT = registerBlock("hornwort",
+            ()-> new HornwortBlock(BlockBehaviour.Properties.copy(Blocks.SEAGRASS).noOcclusion().instabreak().noCollission()));
 
 
     private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {

@@ -52,6 +52,7 @@ public class YetAnotherFishMod
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(()->{
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.DUCKWEED.get().asItem(), 0.4F);
+            ComposterBlock.COMPOSTABLES.put(YAFMBlocks.HORNWORT.get().asItem(), 0.4F);
         });
     }
 

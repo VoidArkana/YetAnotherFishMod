@@ -109,7 +109,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
 
             int skin;
 
-            if (model==2){
+            if (model==1){
                 skin = this.random.nextInt(3);
             }else{
                 skin = 0;
@@ -127,6 +127,23 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
         FreshwaterSharkEntity baby = YAFMEntities.FRESHWATER_SHARK.get().create(pLevel);
         if (baby != null){
             baby.setVariantModel(this.getVariantModel());
+            if (this.getVariantModel()==1){
+                FreshwaterSharkEntity otherParent = (FreshwaterSharkEntity) pOtherParent;
+                int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
+
+                switch (lowerQuality){
+                    case 1:
+                        this.setVariantSkin(this.random.nextBoolean() ? this.random.nextInt(3)
+                                : this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin());
+                        break;
+                    case 2, 3:
+                        this.setVariantSkin(this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin());
+                        break;
+                    default:
+                        this.setVariantSkin(this.random.nextInt(3));
+                        break;
+                }
+            }
             baby.setFromBucket(true);
         }
         return baby;
@@ -175,7 +192,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     @Override
     public boolean canMate(Animal pOtherAnimal) {
         FreshwaterSharkEntity mate = (FreshwaterSharkEntity) pOtherAnimal;
-        return super.canMate(pOtherAnimal) && this.getVariantSkin() == mate.getVariantSkin();
+        return super.canMate(pOtherAnimal) && this.getVariantModel() == mate.getVariantModel();
     }
 
     @Override
@@ -186,7 +203,8 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
         AgeableMob ageableMob4 = null;
         AgeableMob ageableMob5 = null;
 
-        CatfishEntity otherParent = (CatfishEntity) pMate;
+        /** DON'T FORGET!!!!*/
+        FreshwaterSharkEntity otherParent = (FreshwaterSharkEntity) pMate;
         int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
 
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageablemob);
