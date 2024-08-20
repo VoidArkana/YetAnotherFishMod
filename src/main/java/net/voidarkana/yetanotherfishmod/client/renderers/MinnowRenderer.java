@@ -37,6 +37,7 @@ public class MinnowRenderer extends GeoEntityRenderer<MinnowEntity> {
     @Override
     protected void applyRotations(MinnowEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
-    }
+        if (animatable.isInWater()){
+            poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
+        }    }
 }

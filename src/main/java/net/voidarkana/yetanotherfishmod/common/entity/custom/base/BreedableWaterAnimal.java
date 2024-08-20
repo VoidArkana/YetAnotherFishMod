@@ -127,18 +127,6 @@ public abstract class BreedableWaterAnimal extends Animal {
         return pPos.getY() >= j && pPos.getY() <= i && pLevel.getFluidState(pPos.below()).is(FluidTags.WATER) && pLevel.getBlockState(pPos.above()).is(Blocks.WATER);
     }
 
-//    @Override
-//    public void tick() {
-//        super.tick();
-//
-//        if (this.isInWater()) {
-//            float added = (float) position().y() * (float) getDeltaMovement().y();
-//            float xTilt = Mth.clamp(added, -25.0F, 20.0F);
-//
-//            setXRot(-Mth.lerp(getXRot(), xTilt, xTilt));
-//        }
-//
-//    }
 
     @Override
     public void aiStep() {

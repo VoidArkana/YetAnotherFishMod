@@ -84,6 +84,9 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("VariantModel", this.getVariantModel());
         compoundnbt.putInt("VariantSkin", this.getVariantSkin());
+        compoundnbt.putInt("Age", this.getAge());
+
+        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -101,6 +104,10 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
         if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("VariantModel", 3)) {
             this.setVariantModel(pDataTag.getInt("VariantModel"));
             this.setVariantSkin(pDataTag.getInt("VariantSkin"));
+            if (pDataTag.contains("Age")) {
+                this.setAge(pDataTag.getInt("Age"));
+            }
+            this.setCanGrowUp(pDataTag.getBoolean("CanGrow"));
         }else{
 
             int model = this.random.nextInt(4); //
@@ -133,14 +140,14 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
 
                 switch (lowerQuality){
                     case 1:
-                        this.setVariantSkin(this.random.nextBoolean() ? this.random.nextInt(3)
+                        baby.setVariantSkin(this.random.nextBoolean() ? this.random.nextInt(3)
                                 : this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin());
                         break;
                     case 2, 3:
-                        this.setVariantSkin(this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin());
+                        baby.setVariantSkin(this.random.nextBoolean() ? this.getVariantSkin() : otherParent.getVariantSkin());
                         break;
                     default:
-                        this.setVariantSkin(this.random.nextInt(3));
+                        baby.setVariantSkin(this.random.nextInt(3));
                         break;
                 }
             }

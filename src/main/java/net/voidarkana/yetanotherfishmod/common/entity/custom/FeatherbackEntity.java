@@ -111,6 +111,9 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
         Bucketable.saveDefaultDataToBucketTag(this, bucket);
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putInt("Age", this.getAge());
+
+        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -127,6 +130,10 @@ public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity
 
         if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("Variant", 3)) {
             this.setVariant(pDataTag.getInt("Variant"));
+            if (pDataTag.contains("Age")) {
+                this.setAge(pDataTag.getInt("Age"));
+            }
+            this.setCanGrowUp(pDataTag.getBoolean("CanGrow"));
         }else{
             this.setVariant(this.random.nextInt(4));
         }

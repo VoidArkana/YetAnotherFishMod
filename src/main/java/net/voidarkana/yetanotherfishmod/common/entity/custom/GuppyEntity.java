@@ -229,6 +229,8 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
         compoundnbt.putInt("Age", this.getAge());
 
+        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -257,6 +259,8 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
             if (pDataTag.contains("Age")) {
                 this.setAge(pDataTag.getInt("Age"));
             }
+
+            this.setCanGrowUp(pDataTag.getBoolean("CanGrow"));
 
         }else{
 

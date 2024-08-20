@@ -43,6 +43,7 @@ public class CatfishRenderer extends GeoEntityRenderer<CatfishEntity> {
     @Override
     protected void applyRotations(CatfishEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
-    }
+        if (animatable.isInWater()){
+            poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, -animatable.prevTilt, -animatable.tilt)));
+        }    }
 }

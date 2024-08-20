@@ -4,6 +4,8 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -63,6 +65,7 @@ public class DuckweedBlock extends Block implements IPlantable, BonemealableBloc
 
         if (itemstack.is(YAFMBlocks.DUCKWEED.get().asItem()) && blockstate.getValue(GROWTH_STAGE) < 2) {
             this.usePlayerItem(pPlayer, pHand, itemstack);
+            pLevel.playSound((Player)null, pPos, SoundEvents.LILY_PAD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             int prev = blockstate.getValue(GROWTH_STAGE);
             pLevel.setBlock(pPos, pState.setValue(GROWTH_STAGE, Integer.valueOf(prev + 1)), 2);
             return InteractionResult.SUCCESS;
@@ -96,11 +99,16 @@ public class DuckweedBlock extends Block implements IPlantable, BonemealableBloc
         BlockState blockstate3 = blockgetter.getBlockState(blockpos3);
         BlockState blockstate4 = blockgetter.getBlockState(blockpos4);
 
+        BlockState blockstateBelow1 = blockgetter.getBlockState(blockpos1.below());
+        BlockState blockstateBelow2 = blockgetter.getBlockState(blockpos2.below());
+        BlockState blockstateBelow3 = blockgetter.getBlockState(blockpos3.below());
+        BlockState blockstateBelow4 = blockgetter.getBlockState(blockpos4.below());
+
         return super.getStateForPlacement(pContext)
-                .setValue(NORTH, Boolean.valueOf(this.connectsTo(blockstate1, blockstate, blockstate1.isFaceSturdy(blockgetter, blockpos1, Direction.SOUTH))))
-                .setValue(EAST, Boolean.valueOf(this.connectsTo(blockstate2, blockstate, blockstate2.isFaceSturdy(blockgetter, blockpos1, Direction.WEST))))
-                .setValue(SOUTH, Boolean.valueOf(this.connectsTo(blockstate3, blockstate, blockstate3.isFaceSturdy(blockgetter, blockpos1, Direction.NORTH))))
-                .setValue(WEST, Boolean.valueOf(this.connectsTo(blockstate4, blockstate, blockstate4.isFaceSturdy(blockgetter, blockpos1, Direction.EAST))));
+                .setValue(NORTH, Boolean.valueOf(this.connectsTo(blockstate1, blockstate, blockstateBelow1.isFaceSturdy(blockgetter, blockpos1.below(), Direction.SOUTH))))
+                .setValue(EAST, Boolean.valueOf(this.connectsTo(blockstate2, blockstate, blockstateBelow2.isFaceSturdy(blockgetter, blockpos2.below(), Direction.WEST))))
+                .setValue(SOUTH, Boolean.valueOf(this.connectsTo(blockstate3, blockstate, blockstateBelow3.isFaceSturdy(blockgetter, blockpos3.below(), Direction.NORTH))))
+                .setValue(WEST, Boolean.valueOf(this.connectsTo(blockstate4, blockstate, blockstateBelow4.isFaceSturdy(blockgetter, blockpos4.below(), Direction.EAST))));
     }
 
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
@@ -153,9 +161,9 @@ public class DuckweedBlock extends Block implements IPlantable, BonemealableBloc
 
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
         super.entityInside(pState, pLevel, pPos, pEntity);
-        if (pLevel instanceof ServerLevel && pEntity instanceof Boat) {
-            pLevel.destroyBlock(new BlockPos(pPos), true, pEntity);
-        }
+//        if (pLevel instanceof ServerLevel && pEntity instanceof Boat) {
+//            pLevel.destroyBlock(new BlockPos(pPos), true, pEntity);
+//        }
 
     }
 
