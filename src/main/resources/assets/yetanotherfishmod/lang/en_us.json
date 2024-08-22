@@ -19,6 +19,10 @@
   "item.yetanotherfishmod.freshwater_shark_bucket" : "Bucket of Freshwater Shark",
   "entity.yetanotherfishmod.freshwater_shark" : "Freshwater Shark",
 
+  "item.yetanotherfishmod.pleco_spawn_egg" : "Pleco Spawn Egg",
+  "item.yetanotherfishmod.pleco_bucket" : "Bucket of Pleco",
+  "entity.yetanotherfishmod.pleco" : "Pleco",
+
   "yafm.featherback_sci.0" : "Xenomystus nigri",
   "yafm.featherback_sci.1" : "Papyrocranus afer",
   "yafm.featherback_sci.2" : "Chitala ornata",
@@ -129,6 +133,76 @@
 
   "item.yetanotherfishmod.raw_fish" : "Raw Fish",
   "item.yetanotherfishmod.cooked_fish" : "Cooked Fish",
+
+  "yafm.catfish_sci.0" : "Brachyplatystoma filamentosum",
+  "yafm.catfish_sci.1" : "Ictalurus furcatus",
+  "yafm.catfish_sci.2" : "Phractocephalus hemioliopterus",
+  "yafm.catfish_sci.3" : "Pangasianodon hypophthalmus",
+
+  "yafm.catfish_common.0" : "Piraiba Catfish",
+  "yafm.catfish_common.1" : "Blue Catfish",
+  "yafm.catfish_common.2" : "Redtail Catfish",
+  "yafm.catfish_common.3" : "Pangasius",
+
+  "yafm.freshwater_shark_sci.0" : "Balantiocheilos melanopterus",
+  "yafm.freshwater_shark_sci.1" : "Myxocrynus asiaticus",
+  "yafm.freshwater_shark_sci.2" : "Labeo chrysophekadion",
+  "yafm.freshwater_shark_sci.3" : "Epalzeorhynchos frenatum",
+
+  "yafm.freshwater_shark_common.0" : "Bala Shark",
+  "yafm.freshwater_shark_common.1" : "High Fin Shark",
+  "yafm.freshwater_shark_common.2" : "Black Sharkminnow",
+  "yafm.freshwater_shark_common.3" : "Rainbow Shark",
+
+  "yafm.highfin_skin.0" : ", Brown",
+  "yafm.highfin_skin.1" : ", Red ",
+  "yafm.highfin_skin.2" : ", Golden",
+
+
+  "yafm.minnow_sci.0.0" : "Puntius tetrazona",
+  "yafm.minnow_sci.0.1" : "Rhodeus ocellatus",
+  "yafm.minnow_sci.0.2" : "Trigonostigma heteromorpha",
+  "yafm.minnow_sci.0.3" : "Puntius padamya",
+
+  "yafm.minnow_sci.1.0" : "Sahyadria denisonii",
+  "yafm.minnow_sci.1.1" : "Puntius titteya",
+  "yafm.minnow_sci.1.2" : "Barbodes semifasciolatus",
+  "yafm.minnow_sci.1.3" : "Sawbwa resplendens",
+
+  "yafm.minnow_sci.2.0" : "Notropis chrosomus",
+  "yafm.minnow_sci.2.1" : "Pimephales promelas",
+  "yafm.minnow_sci.2.2" : "Notropis hypselopterus",
+  "yafm.minnow_sci.2.3" : "Cyprinella lutrensis",
+
+  "yafm.minnow_sci.3.0" : "Boraras brigittae",
+  "yafm.minnow_sci.3.1" : "Sundadanio axelrodi",
+  "yafm.minnow_sci.3.2" : "Microdevario kubotai",
+  "yafm.minnow_sci.3.3" : "Brevibora dorsiocellata",
+
+
+  "yafm.minnow_common.0.0" : "Tiger Barb",
+  "yafm.minnow_common.0.1" : "Rosy Bitterling",
+  "yafm.minnow_common.0.2" : "Harlequin Rasbora",
+  "yafm.minnow_common.0.3" : "Odessa Barb",
+
+  "yafm.minnow_common.1.0" : "Red-line Torpedo Barb",
+  "yafm.minnow_common.1.1" : "Cherry Barb",
+  "yafm.minnow_common.1.2" : "Gold Barb",
+  "yafm.minnow_common.1.3" : "Sawbwa Barb",
+
+  "yafm.minnow_common.2.0" : "Rainbow Shiner",
+  "yafm.minnow_common.2.1" : "Fathead",
+  "yafm.minnow_common.2.2" : "Sailfin Shiner",
+  "yafm.minnow_common.2.3" : "Red Shiner",
+
+  "yafm.minnow_common.3.0" : "Chili Rasbora",
+  "yafm.minnow_common.3.1" : "Neon Blue Rasbora",
+  "yafm.minnow_common.3.2" : "Kubotai Rasbora",
+  "yafm.minnow_common.3.3" : "Eyespot Rasbora",
+
+
+  "yafm.pleco_sci" : "Pterygoplichthys ambrosettii",
+  "yafm.pleco_common" : "Snow King Pleco",
 
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }

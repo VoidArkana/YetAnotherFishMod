@@ -182,7 +182,7 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
         controllerRegistrar.add(new AnimationController[]{new AnimationController(this, "Normal", 5, this::Controller)});
     }
 
-    protected <E extends FeatherbackEntity> PlayState Controller(AnimationState<E> event) {
+    protected <E extends CatfishEntity> PlayState Controller(AnimationState<E> event) {
         if (this.isInWater()){
             event.setAndContinue(this.getVariant() > 0 ? SWIM : PIRAIBA_SWIM);
         }else{

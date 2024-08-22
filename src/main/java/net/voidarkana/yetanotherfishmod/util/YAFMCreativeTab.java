@@ -34,12 +34,14 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.FEATHERBACK_BUCKET.get());
                         output.accept(YAFMItems.FRESHWATER_SHARK_BUCKET.get());
                         output.accept(YAFMItems.GUPPY_BUCKET.get());
+                        output.accept(YAFMItems.PLECO_BUCKET.get());
 
                         output.accept(YAFMItems.BARB_SPAWN_EGG.get());
                         output.accept(YAFMItems.CATFISH_SPAWN_EGG.get());
                         output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());
                         output.accept(YAFMItems.FRESHWATER_SHARK_SPAWN_EGG.get());
                         output.accept(YAFMItems.GUPPY_SPAWN_EGG.get());
+                        output.accept(YAFMItems.PLECO_SPAWN_EGG.get());
 
                         output.accept(YAFMBlocks.DUCKWEED.get());
                         output.accept(YAFMBlocks.HORNWORT.get());

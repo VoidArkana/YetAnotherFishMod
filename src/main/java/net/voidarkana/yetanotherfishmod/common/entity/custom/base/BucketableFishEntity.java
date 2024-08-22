@@ -37,8 +37,6 @@ public abstract class BucketableFishEntity extends BreedableWaterAnimal implemen
 
     protected BucketableFishEntity(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override
@@ -95,10 +93,6 @@ public abstract class BucketableFishEntity extends BreedableWaterAnimal implemen
         }
 
         super.aiStep();
-    }
-
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel);
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {

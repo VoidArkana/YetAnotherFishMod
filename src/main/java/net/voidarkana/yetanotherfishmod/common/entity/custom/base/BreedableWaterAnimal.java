@@ -13,6 +13,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -41,6 +46,8 @@ public abstract class BreedableWaterAnimal extends Animal {
     protected BreedableWaterAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override
@@ -48,6 +55,10 @@ public abstract class BreedableWaterAnimal extends Animal {
         super.defineSynchedData();
         this.entityData.define(FEED_TYPE, 0);
         this.entityData.define(CAN_GROW_UP, true);
+    }
+
+    protected PathNavigation createNavigation(Level pLevel) {
+        return new WaterBoundPathNavigation(this, pLevel);
     }
 
     public int getFeedQuality() {
@@ -80,9 +91,6 @@ public abstract class BreedableWaterAnimal extends Animal {
         return pLevel.isUnobstructed(this);
     }
 
-    /**
-     * Get number of ticks, at least during which the living entity will be silent.
-     */
     public int getAmbientSoundInterval() {
         return 120;
     }
@@ -104,9 +112,6 @@ public abstract class BreedableWaterAnimal extends Animal {
 
     }
 
-    /**
-     * Gets called every tick from main Entity class
-     */
     public void baseTick() {
         int i = this.getAirSupply();
         super.baseTick();
@@ -132,7 +137,7 @@ public abstract class BreedableWaterAnimal extends Animal {
     public void aiStep() {
         super.aiStep();
         prevTilt = tilt;
-        if (this.isInWater()) {
+        if (this.isInWater() && !this.onGround()) {
             final float v = Mth.degreesDifference(this.getYRot(), yRotO);
             if (Math.abs(v) > 1) {
                 if (Math.abs(tilt) < 25) {

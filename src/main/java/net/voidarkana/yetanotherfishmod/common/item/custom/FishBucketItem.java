@@ -150,5 +150,90 @@ public class FishBucketItem extends MobBucketItem {
             }
         }
 
+        if (getFishType() == YAFMEntities.CATFISH.get()) {
+            CompoundTag compoundtag = pStack.getTag();
+            if (compoundtag != null && compoundtag.contains("Variant", 3)) {
+                int i = compoundtag.getInt("Variant");
+
+
+                String featherback_sci = "yafm.catfish_sci." + i;
+                String common = "yafm.catfish_common." + i;
+
+                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
+                MutableComponent mutablecomponent = Component.translatable(featherback_sci);
+                mutablecomponent.withStyle(bchatformatting);
+
+                if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(mutablecomponent);
+                }
+            }
+        }
+
+        if (getFishType() == YAFMEntities.FRESHWATER_SHARK.get()) {
+            CompoundTag compoundtag = pStack.getTag();
+            if (compoundtag != null && compoundtag.contains("ModelVariant", 3)) {
+                int i = compoundtag.getInt("ModelVariant");
+
+                String featherback_sci = "yafm.freshwater_shark_sci." + i;
+                String common = "yafm.freshwater_shark_common." + i;
+
+                MutableComponent commonName = Component.translatable(common);
+
+                if (i==1){
+                    int j = compoundtag.getInt("SkinVariant");
+                    String skinVariant = "yafm.highfin_skin." + j;
+                    commonName.append(Component.translatable(skinVariant));
+                }
+
+                pTooltipComponents.add(commonName.withStyle(achatformatting));
+
+                MutableComponent mutablecomponent = Component.translatable(featherback_sci);
+                mutablecomponent.withStyle(bchatformatting);
+
+                if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(mutablecomponent);
+                }
+            }
+        }
+
+        if (getFishType() == YAFMEntities.MINNOW.get()) {
+            CompoundTag compoundtag = pStack.getTag();
+            if (compoundtag != null && compoundtag.contains("VariantModel", 3)) {
+                int i = compoundtag.getInt("VariantModel");
+                int j = compoundtag.getInt("VariantSkin");
+
+                String featherback_sci = "yafm.minnow_sci." + i + "." + j;
+                String common = "yafm.minnow_common." + i + "." + j;
+
+                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
+                MutableComponent mutablecomponent = Component.translatable(featherback_sci);
+                mutablecomponent.withStyle(bchatformatting);
+
+                if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(mutablecomponent);
+                }
+            }
+        }
+
+        if (getFishType() == YAFMEntities.PLECO.get()) {
+//            CompoundTag compoundtag = pStack.getTag();
+//            if (compoundtag != null && compoundtag.contains("Variant", 3)) {
+//                int i = compoundtag.getInt("Variant");
+
+                String featherback_sci = "yafm.pleco_sci";
+                String common = "yafm.pleco_common";
+
+                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
+                MutableComponent mutablecomponent = Component.translatable(featherback_sci);
+                mutablecomponent.withStyle(bchatformatting);
+
+                if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(mutablecomponent);
+                }
+            //}
+        }
     }
 }

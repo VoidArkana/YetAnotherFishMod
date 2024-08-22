@@ -66,6 +66,7 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.CATFISH.get(), CatfishRenderer::new);
         EntityRenderers.register(YAFMEntities.GUPPY.get(), GuppyRenderer::new);
         EntityRenderers.register(YAFMEntities.FRESHWATER_SHARK.get(), FreshwaterSharkRenderer::new);
+        EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
     }
 
 }

@@ -44,6 +44,12 @@ public class YAFMEntities {
                             .sized(0.6f, 0.4f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "freshwater_shark").toString()));
 
+    public static final RegistryObject<EntityType<PlecoEntity>> PLECO =
+            ENTITY_TYPES.register("pleco",
+                    () -> EntityType.Builder.of(PlecoEntity::new, MobCategory.CREATURE)
+                            .sized(1f, 0.5f)
+                            .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "pleco").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

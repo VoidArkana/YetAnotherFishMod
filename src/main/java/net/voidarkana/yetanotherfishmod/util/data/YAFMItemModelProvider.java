@@ -40,6 +40,9 @@ public class YAFMItemModelProvider extends ItemModelProvider {
 
         simpleItem(YAFMItems.COOKED_FISH);
         simpleItem(YAFMItems.RAW_FISH);
+
+        withExistingParent(YAFMItems.PLECO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.PLECO_BUCKET);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

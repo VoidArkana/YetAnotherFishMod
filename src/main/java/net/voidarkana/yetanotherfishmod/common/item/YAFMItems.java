@@ -69,6 +69,15 @@ public class YAFMItems {
     });
 
 
+    public static final RegistryObject<Item> PLECO_SPAWN_EGG = ITEMS.register("pleco_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.PLECO, 0x24211e, 0x97874b, new Item.Properties()));
+
+    public static final RegistryObject<Item> PLECO_BUCKET = ITEMS.register("pleco_bucket", () -> {
+        return new FishBucketItem(YAFMEntities.PLECO, () -> {
+            return Fluids.WATER;
+        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
+    });
+
     public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
             ()-> new Item(new Item.Properties()));
 
