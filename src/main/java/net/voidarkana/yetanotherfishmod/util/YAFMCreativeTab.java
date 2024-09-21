@@ -36,6 +36,7 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.GUPPY_BUCKET.get());
                         output.accept(YAFMItems.PLECO_BUCKET.get());
 
+                        output.accept(YAFMItems.ARAPAIMA_SPAWN_EGG.get());
                         output.accept(YAFMItems.BARB_SPAWN_EGG.get());
                         output.accept(YAFMItems.CATFISH_SPAWN_EGG.get());
                         output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());

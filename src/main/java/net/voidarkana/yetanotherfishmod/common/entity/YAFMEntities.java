@@ -16,39 +16,45 @@ public class YAFMEntities {
 
     public static final RegistryObject<EntityType<FeatherbackEntity>> FEATHERBACK =
             ENTITY_TYPES.register("featherback",
-                    () -> EntityType.Builder.of(FeatherbackEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(FeatherbackEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(0.7f, 0.9f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "featherback").toString()));
 
     public static final RegistryObject<EntityType<MinnowEntity>> MINNOW =
             ENTITY_TYPES.register("minnow",
-                    () -> EntityType.Builder.of(MinnowEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(MinnowEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(0.3f, 0.2f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "minnow").toString()));
 
     public static final RegistryObject<EntityType<CatfishEntity>> CATFISH =
             ENTITY_TYPES.register("catfish",
-                    () -> EntityType.Builder.of(CatfishEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(CatfishEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(1f, 1f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "catfish").toString()));
 
     public static final RegistryObject<EntityType<GuppyEntity>> GUPPY =
             ENTITY_TYPES.register("guppy",
-                    () -> EntityType.Builder.of(GuppyEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(GuppyEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(0.3f, 0.3f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "guppy").toString()));
 
     public static final RegistryObject<EntityType<FreshwaterSharkEntity>> FRESHWATER_SHARK =
             ENTITY_TYPES.register("freshwater_shark",
-                    () -> EntityType.Builder.of(FreshwaterSharkEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(FreshwaterSharkEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(0.6f, 0.4f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "freshwater_shark").toString()));
 
     public static final RegistryObject<EntityType<PlecoEntity>> PLECO =
             ENTITY_TYPES.register("pleco",
-                    () -> EntityType.Builder.of(PlecoEntity::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(PlecoEntity::new, MobCategory.WATER_AMBIENT)
                             .sized(1f, 0.5f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "pleco").toString()));
+
+    public static final RegistryObject<EntityType<ArapaimaEntity>> ARAPAIMA =
+            ENTITY_TYPES.register("arapaima",
+                    () -> EntityType.Builder.of(ArapaimaEntity::new, MobCategory.WATER_AMBIENT)
+                            .sized(1.2f, 0.7f)
+                            .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "arapaima").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

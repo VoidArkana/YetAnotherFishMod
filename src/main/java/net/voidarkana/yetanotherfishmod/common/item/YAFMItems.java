@@ -78,6 +78,10 @@ public class YAFMItems {
         }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
     });
 
+    public static final RegistryObject<Item> ARAPAIMA_SPAWN_EGG = ITEMS.register("arapaima_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.ARAPAIMA, 0x1b2321, 0x521c1a, new Item.Properties()));
+
+
     public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
             ()-> new Item(new Item.Properties()));
 

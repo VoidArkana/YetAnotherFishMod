@@ -2,22 +2,29 @@ package net.voidarkana.yetanotherfishmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkRegistry;
 import net.voidarkana.yetanotherfishmod.client.renderers.*;
 import net.voidarkana.yetanotherfishmod.common.block.YAFMBlocks;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
+import net.voidarkana.yetanotherfishmod.server.MessageHurtMultipart;
+import net.voidarkana.yetanotherfishmod.util.ClientProxy;
+import net.voidarkana.yetanotherfishmod.util.CommonProxy;
 import net.voidarkana.yetanotherfishmod.util.YAFMCreativeTab;
 import org.slf4j.Logger;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +33,23 @@ import java.util.List;
 @Mod(YetAnotherFishMod.MOD_ID)
 public class YetAnotherFishMod
 {
+    public static final SimpleChannel NETWORK_WRAPPER;
+    private static final String PROTOCOL_VERSION = Integer.toString(1);
+    private static int packetsRegistered;
+
+    public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+
+    static {
+        NetworkRegistry.ChannelBuilder channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation("yetanotherfishmod", "main_channel"));
+        String version = PROTOCOL_VERSION;
+        version.getClass();
+        channel = channel.clientAcceptedVersions(version::equals);
+        version = PROTOCOL_VERSION;
+        version.getClass();
+        NETWORK_WRAPPER = channel.serverAcceptedVersions(version::equals).networkProtocolVersion(() -> {
+            return PROTOCOL_VERSION;
+        }).simpleChannel();
+    }
 
     public static final String MOD_ID = "yetanotherfishmod";
     public static final List<Runnable> CALLBACKS = new ArrayList<>();
@@ -47,6 +71,8 @@ public class YetAnotherFishMod
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new YAFMEvents());
 
+        PROXY.init();
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -56,7 +82,9 @@ public class YetAnotherFishMod
         });
     }
 
+
     private void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(PROXY::clientInit);
 
         CALLBACKS.forEach(Runnable::run);
         CALLBACKS.clear();
@@ -67,6 +95,15 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.GUPPY.get(), GuppyRenderer::new);
         EntityRenderers.register(YAFMEntities.FRESHWATER_SHARK.get(), FreshwaterSharkRenderer::new);
         EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
+        EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
     }
 
+    public static <MSG> void sendMSGToServer(MSG message) {
+        NETWORK_WRAPPER.sendToServer(message);
+    }
+
+    private void setup(final FMLCommonSetupEvent event) {
+        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
+        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
+    }
 }

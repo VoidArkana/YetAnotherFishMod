@@ -43,7 +43,7 @@ public abstract class BreedableWaterAnimal extends Animal {
     private static final EntityDataAccessor<Integer> FEED_TYPE = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> CAN_GROW_UP = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
 
-    protected BreedableWaterAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    protected BreedableWaterAnimal(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
@@ -57,6 +57,7 @@ public abstract class BreedableWaterAnimal extends Animal {
         this.entityData.define(CAN_GROW_UP, true);
     }
 
+    @Override
     protected PathNavigation createNavigation(Level pLevel) {
         return new WaterBoundPathNavigation(this, pLevel);
     }

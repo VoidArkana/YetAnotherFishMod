@@ -43,6 +43,8 @@ public class YAFMItemModelProvider extends ItemModelProvider {
 
         withExistingParent(YAFMItems.PLECO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         simpleItem(YAFMItems.PLECO_BUCKET);
+
+        withExistingParent(YAFMItems.ARAPAIMA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

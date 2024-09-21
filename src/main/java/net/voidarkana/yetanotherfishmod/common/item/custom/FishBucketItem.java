@@ -172,8 +172,8 @@ public class FishBucketItem extends MobBucketItem {
 
         if (getFishType() == YAFMEntities.FRESHWATER_SHARK.get()) {
             CompoundTag compoundtag = pStack.getTag();
-            if (compoundtag != null && compoundtag.contains("ModelVariant", 3)) {
-                int i = compoundtag.getInt("ModelVariant");
+            if (compoundtag != null && compoundtag.contains("VariantModel", 3)) {
+                int i = compoundtag.getInt("VariantModel");
 
                 String featherback_sci = "yafm.freshwater_shark_sci." + i;
                 String common = "yafm.freshwater_shark_common." + i;
@@ -181,7 +181,7 @@ public class FishBucketItem extends MobBucketItem {
                 MutableComponent commonName = Component.translatable(common);
 
                 if (i==1){
-                    int j = compoundtag.getInt("SkinVariant");
+                    int j = compoundtag.getInt("VariantSkin");
                     String skinVariant = "yafm.highfin_skin." + j;
                     commonName.append(Component.translatable(skinVariant));
                 }

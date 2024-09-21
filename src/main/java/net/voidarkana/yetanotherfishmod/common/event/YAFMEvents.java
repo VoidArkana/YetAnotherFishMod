@@ -19,6 +19,7 @@ public class YAFMEvents {
         event.put(YAFMEntities.GUPPY.get(), GuppyEntity.createAttributes().build());
         event.put(YAFMEntities.FRESHWATER_SHARK.get(), FreshwaterSharkEntity.createAttributes().build());
         event.put(YAFMEntities.PLECO.get(), PlecoEntity.createAttributes().build());
+        event.put(YAFMEntities.ARAPAIMA.get(), ArapaimaEntity.createAttributes().build());
     }
 
 }
