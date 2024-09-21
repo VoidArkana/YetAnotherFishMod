@@ -20,6 +20,7 @@ import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import net.voidarkana.yetanotherfishmod.server.MessageHurtMultipart;
+import net.voidarkana.yetanotherfishmod.server.MessageInteractMultipart;
 import net.voidarkana.yetanotherfishmod.util.ClientProxy;
 import net.voidarkana.yetanotherfishmod.util.CommonProxy;
 import net.voidarkana.yetanotherfishmod.util.YAFMCreativeTab;
@@ -76,6 +77,10 @@ public class YetAnotherFishMod
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
+        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
+        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
+
         event.enqueueWork(()->{
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.DUCKWEED.get().asItem(), 0.4F);
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.HORNWORT.get().asItem(), 0.4F);
@@ -102,8 +107,4 @@ public class YetAnotherFishMod
         NETWORK_WRAPPER.sendToServer(message);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
-        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
-    }
 }

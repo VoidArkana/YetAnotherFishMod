@@ -47,8 +47,8 @@ public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
     public ArapaimaEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
-        this.head = new ArapaimaPart(this, 0.9F,0.9F );
-        this.tail = new ArapaimaPart(this, 0.9F, 0.9F);
+        this.head = new ArapaimaPart(this, 1.2F,0.9F );
+        this.tail = new ArapaimaPart(this, 1.2F, 0.9F);
         this.allParts = new ArapaimaPart[]{this.head, this.tail};
 
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
@@ -114,21 +114,34 @@ public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
         } else {
             tilt = 0;
         }
-    }
 
-    @Override
-    public void tick() {
-        super.tick();
-        if (!this.isNoAi()){
+        if (!this.isNoAi()) {
+            if (this.ringBufferIndex < 0) {
+                for (int i = 0; i < this.ringBuffer.length; ++i) {
+                    this.ringBuffer[i][0] = this.getYRot();
+                    this.ringBuffer[i][1] = (float) this.getY();
+                }
+            }
+            this.ringBufferIndex++;
+            if (this.ringBufferIndex == this.ringBuffer.length) {
+                this.ringBufferIndex = 0;
+            }
+            this.ringBuffer[this.ringBufferIndex][0] = this.getYRot();
+            this.ringBuffer[ringBufferIndex][1] = (float) this.getY();
             Vec3[] avector3d = new Vec3[this.allParts.length];
+
             for (int j = 0; j < this.allParts.length; ++j) {
                 this.allParts[j].collideWithNearbyEntities();
                 avector3d[j] = new Vec3(this.allParts[j].getX(), this.allParts[j].getY(), this.allParts[j].getZ());
             }
-            final float pitch = this.getXRot() * Mth.DEG_TO_RAD * 0.8F;
+            final float f17 = this.getYRot() * Mth.DEG_TO_RAD;
+            final float pitch = this.getXRot() * Mth.DEG_TO_RAD;
+            final float xRotDiv90 = Math.abs(this.getXRot() / 90F);
+            final float f3 = Mth.sin(f17) * (1 - xRotDiv90);
+            final float f18 = Mth.cos(f17) * (1 - xRotDiv90);
 
-            this.setPartPositionFromBuffer(this.head, pitch, 1.6F, 0);
-            this.setPartPositionFromBuffer(this.tail, pitch, 2.45F, 0);
+            this.setPartPosition(this.head, f3 * -1.6F, -pitch * 0.8F, -f18 * -1.6F);
+            this.setPartPosition(this.tail, f3 * 1.6F, pitch * 0.3F, f18 * -1.6F);
 
             for (int l = 0; l < this.allParts.length; ++l) {
                 this.allParts[l].xo = avector3d[l].x;
@@ -138,48 +151,22 @@ public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
                 this.allParts[l].yOld = avector3d[l].y;
                 this.allParts[l].zOld = avector3d[l].z;
             }
-            this.setNoGravity(this.isInWater());
         }
     }
 
-    public float getRingBuffer(int bufferOffset, float partialTicks, boolean pitch) {
-        int i = (this.ringBufferIndex - bufferOffset) & 63;
-        int j = (this.ringBufferIndex - bufferOffset - 1) & 63;
-        int k = pitch ? 1 : 0;
-        float prevBuffer = this.ringBuffer[j][k];
-        float buffer = this.ringBuffer[i][k];
-        float end = prevBuffer + (buffer - prevBuffer) * partialTicks;
-        return rotlerp(prevBuffer, end, 10);
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
     }
 
-    protected float rotlerp(float in, float target, float maxShift) {
-        float f = Mth.wrapDegrees(target - in);
-        if (f > maxShift) {
-            f = maxShift;
-        }
-
-        if (f < -maxShift) {
-            f = -maxShift;
-        }
-
-        float f1 = in + f;
-        if (f1 < 0.0F) {
-            f1 += 360.0F;
-        } else if (f1 > 360.0F) {
-            f1 -= 360.0F;
-        }
-
-        return f1;
+    @Override
+    public net.minecraftforge.entity.PartEntity<?>[] getParts() {
+        return this.allParts;
     }
 
-    private void setPartPositionFromBuffer(ArapaimaPart part, float pitch, float offsetScale, int ringBufferOffset) {
-        float f2 = Mth.sin(getRingBuffer(ringBufferOffset, 1.0F, false) * Mth.DEG_TO_RAD) * (1 - Math.abs((this.getXRot()) / 90F));
-        float f3 = Mth.cos(getRingBuffer(ringBufferOffset, 1.0F, false) * Mth.DEG_TO_RAD) * (1 - Math.abs((this.getXRot()) / 90F));
-        setPartPosition(part, f2, pitch, -f3, offsetScale);
-    }
-
-    private void setPartPosition(ArapaimaPart part, double offsetX, double offsetY, double offsetZ, float offsetScale) {
-        part.setPos(this.getX() + offsetX * offsetScale * part.scale, this.getY() + offsetY * offsetScale * part.scale, this.getZ() + offsetZ * offsetScale * part.scale);
+    private void setPartPosition(ArapaimaPart part, double offsetX, double offsetY, double offsetZ) {
+        part.setPos(this.getX() + offsetX * part.scale, this.getY() + offsetY * part.scale, this.getZ() + offsetZ * part.scale);
     }
 
     protected SoundEvent getFlopSound() {

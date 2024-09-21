@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
@@ -106,6 +107,10 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
 
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         throw new UnsupportedOperationException();
+    }
+
+    public void onAttackedFromServer(LivingEntity parent, float damage, DamageSource damageSource) {
+        parent.hurt(damageSource, damage);
     }
 
 }

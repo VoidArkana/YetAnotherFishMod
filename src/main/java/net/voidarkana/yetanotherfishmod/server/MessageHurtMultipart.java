@@ -8,10 +8,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ArapaimaPart;
 
 import java.util.function.Supplier;
 
@@ -72,9 +74,10 @@ public class MessageHurtMultipart {
                             Holder<DamageType> holder = registry.getHolder(registry.getId(dmg)).orElseGet(null);
                             if (holder != null) {
                                 DamageSource source = new DamageSource(registry.getHolder(registry.getId(dmg)).get());
-//                                if (part instanceof IHurtableMultipart && parent instanceof LivingEntity) {
-//                                    ((IHurtableMultipart) part).onAttackedFromServer((LivingEntity) parent, message.damage, source);
-//                                }
+
+                                if (part instanceof ArapaimaPart && parent instanceof LivingEntity) {
+                                    ((ArapaimaPart) part).onAttackedFromServer((LivingEntity) parent, message.damage, source);
+                                }
                                 if (part == null && parent != null && parent.isMultipartEntity()) {
                                     parent.hurt(source, message.damage);
                                 }

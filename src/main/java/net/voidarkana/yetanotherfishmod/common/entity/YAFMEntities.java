@@ -53,7 +53,7 @@ public class YAFMEntities {
     public static final RegistryObject<EntityType<ArapaimaEntity>> ARAPAIMA =
             ENTITY_TYPES.register("arapaima",
                     () -> EntityType.Builder.of(ArapaimaEntity::new, MobCategory.WATER_AMBIENT)
-                            .sized(1.2f, 0.7f)
+                            .sized(1.5f, 0.8f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "arapaima").toString()));
 
     public static void register(IEventBus eventBus) {
