@@ -1,6 +1,8 @@
 package net.voidarkana.yetanotherfishmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -101,6 +103,8 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.FRESHWATER_SHARK.get(), FreshwaterSharkRenderer::new);
         EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
         EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
+
+        //ItemBlockRenderTypes.setRenderLayer(YAFMBlocks.AQUARIUM_GLASS.get(), RenderType.translucent());
     }
 
     public static <MSG> void sendMSGToServer(MSG message) {

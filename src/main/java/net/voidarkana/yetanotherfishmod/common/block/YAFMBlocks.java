@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
+import net.voidarkana.yetanotherfishmod.common.block.custom.AquariumGlassBlock;
 import net.voidarkana.yetanotherfishmod.common.block.custom.DuckweedBlock;
 import net.voidarkana.yetanotherfishmod.common.block.custom.HornwortBlock;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
@@ -32,6 +33,10 @@ public class YAFMBlocks {
 
     public static final RegistryObject<Block> HORNWORT = registerBlock("hornwort",
             ()-> new HornwortBlock(BlockBehaviour.Properties.copy(Blocks.SEAGRASS).noOcclusion().instabreak().noCollission()));
+
+
+    public static final RegistryObject<Block> AQUARIUM_GLASS = registerBlock("aquarium_glass",
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.BLUE_STAINED_GLASS).mapColor(MapColor.WATER)));
 
 
     private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {

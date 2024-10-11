@@ -47,6 +47,8 @@ public class YAFMCreativeTab {
                         output.accept(YAFMBlocks.DUCKWEED.get());
                         output.accept(YAFMBlocks.HORNWORT.get());
 
+                        output.accept(YAFMBlocks.AQUARIUM_GLASS.get());
+
                     })
                     .build());
 

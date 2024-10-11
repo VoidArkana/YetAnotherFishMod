@@ -23,6 +23,9 @@
   "item.yetanotherfishmod.pleco_bucket" : "Bucket of Pleco",
   "entity.yetanotherfishmod.pleco" : "Pleco",
 
+  "item.yetanotherfishmod.arapaima_spawn_egg" : "Arapaima Spawn Egg",
+  "entity.yetanotherfishmod.arapaima" : "Arapaima",
+
   "yafm.featherback_sci.0" : "Xenomystus nigri",
   "yafm.featherback_sci.1" : "Papyrocranus afer",
   "yafm.featherback_sci.2" : "Chitala ornata",
