@@ -19,15 +19,9 @@ public class YAFMClientEvents {
                 pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos)
                         : 0x4f9ce3, YAFMBlocks.AQUARIUM_GLASS.get());
 
-//        event.register((state, world, pos, tintIndex) -> {
-//                    if (world == null || pos == null) {
-//                        return 0x4f9ce3;
-//                    }else {
-//                        return BiomeColors.getAverageWaterColor(world, pos);
-//                    }
-//                },
-//                YAFMBlocks.AQUARIUM_GLASS.get()
-//        );
+
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get());
     }
 
     @SubscribeEvent
@@ -38,14 +32,8 @@ public class YAFMClientEvents {
             return event.getBlockColors().getColor(blockstate, null, null, pTintIndex);
         }, YAFMBlocks.AQUARIUM_GLASS.get());
 
-//        BlockColors blockColors = event.getBlockColors();
-//
-//        ItemColors itemcolors = new ItemColors();
-//
-//        event.register((stack, tintIndex) -> {
-//            BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
-//            return blockColors.getColor(blockstate, null, null, tintIndex);
-//            }, YAFMBlocks.AQUARIUM_GLASS.get());
+
+        event.getItemColors().register((pStack, pTintIndex) -> 0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get());
 
     }
 }

@@ -98,7 +98,7 @@ public class PlecoEntity extends AbstractSwimmingBottomDweller implements GeoEnt
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         return null;
     }
 

@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "translucent",
+	"textures": {
+		"3": "#texture",
+		"particle": "yetanotherfishmod:block/aquarium_glass/full"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 0],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [16, 0, 0, 16], "texture": "#3","tintindex": 0, "cullface": "north"}
+			}
+		}
+	]
+}

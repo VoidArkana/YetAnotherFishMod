@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.yetanotherfishmod.client.renderers.FreshwaterSharkRenderer;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishBreedGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishJumpGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.VariantSchoolingFish;
@@ -72,7 +73,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(5, new FishJumpGoal(this, 15));
     }
@@ -130,7 +131,7 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         FreshwaterSharkEntity baby = YAFMEntities.FRESHWATER_SHARK.get().create(pLevel);
         if (baby != null){
             baby.setVariantModel(this.getVariantModel());
@@ -197,98 +198,9 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     }
 
     @Override
-    public boolean canMate(Animal pOtherAnimal) {
+    public boolean canMate(BreedableWaterAnimal pOtherAnimal) {
         FreshwaterSharkEntity mate = (FreshwaterSharkEntity) pOtherAnimal;
         return super.canMate(pOtherAnimal) && this.getVariantModel() == mate.getVariantModel();
     }
 
-    @Override
-    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
-        AgeableMob ageablemob = this.getBreedOffspring(pLevel, pMate);
-        AgeableMob ageableMob2 = null;
-        AgeableMob ageableMob3 = null;
-        AgeableMob ageableMob4 = null;
-        AgeableMob ageableMob5 = null;
-
-        /** DON'T FORGET!!!!*/
-        FreshwaterSharkEntity otherParent = (FreshwaterSharkEntity) pMate;
-        int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
-
-        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageablemob);
-        ageablemob = event.getChild();
-
-        if ((lowerQuality > 0 && this.random.nextBoolean()) || lowerQuality > 2){
-            ageableMob2 = this.getBreedOffspring(pLevel, pMate);
-            final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event2 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob2);
-            ageableMob2 = event2.getChild();
-
-            if ((lowerQuality > 1 && this.random.nextInt(4)==0) || (lowerQuality > 2 && this.random.nextBoolean())){
-                ageableMob3 = this.getBreedOffspring(pLevel, pMate);
-                final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event3 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob3);
-                ageableMob3 = event3.getChild();
-
-                if (lowerQuality > 2 && this.random.nextBoolean()){
-
-                    ageableMob4 = this.getBreedOffspring(pLevel, pMate);
-                    final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event4 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob4);
-                    ageableMob4 = event4.getChild();
-
-                    if (this.random.nextBoolean()){
-                        ageableMob5 = this.getBreedOffspring(pLevel, pMate);
-                        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event5 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob5);
-                        ageableMob5 = event5.getChild();
-                    }
-                }
-            }
-        }
-
-        final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-        if (cancelled) {
-            //Reset the "inLove" state for the animals
-            this.setAge(6000);
-            pMate.setAge(6000);
-            this.resetLove();
-            pMate.resetLove();
-            return;
-        }
-        if (ageablemob != null) {
-
-            ageablemob.setBaby(true);
-            ageablemob.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageablemob);
-            pLevel.addFreshEntityWithPassengers(ageablemob);
-
-            if (ageableMob2 != null){
-
-                ageableMob2.setBaby(true);
-                ageableMob2.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-                this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob2);
-                pLevel.addFreshEntityWithPassengers(ageableMob2);
-
-                if (ageableMob3 != null){
-
-                    ageableMob3.setBaby(true);
-                    ageableMob3.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-                    this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob3);
-                    pLevel.addFreshEntityWithPassengers(ageableMob3);
-
-                    if (ageableMob4 != null){
-
-                        ageableMob4.setBaby(true);
-                        ageableMob4.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-                        this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob4);
-                        pLevel.addFreshEntityWithPassengers(ageableMob4);
-
-                        if (ageableMob5 != null){
-
-                            ageableMob5.setBaby(true);
-                            ageableMob5.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-                            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob5);
-                            pLevel.addFreshEntityWithPassengers(ageableMob5);
-                        }
-                    }
-                }
-            }
-        }
-    }
 }

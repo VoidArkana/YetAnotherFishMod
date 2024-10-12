@@ -38,6 +38,12 @@ public class YAFMBlocks {
     public static final RegistryObject<Block> AQUARIUM_GLASS = registerBlock("aquarium_glass",
             ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.BLUE_STAINED_GLASS).mapColor(MapColor.WATER)));
 
+    public static final RegistryObject<Block> CLEAR_AQUARIUM_GLASS = registerBlock("clear_aquarium_glass",
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.NONE)));
+
+    public static final RegistryObject<Block> INFERNAL_AQUARIUM_GLASS = registerBlock("infernal_aquarium_glass",
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 8;})));
+
 
     private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {
         Supplier<T> entry = create(key, block);

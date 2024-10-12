@@ -10,6 +10,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.VariantSchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
@@ -76,7 +77,7 @@ public class MinnowEntity extends VariantSchoolingFish implements GeoEntity {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         return null;
     }
 

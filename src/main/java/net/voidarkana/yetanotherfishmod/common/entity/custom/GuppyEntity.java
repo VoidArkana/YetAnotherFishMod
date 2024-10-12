@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishBreedGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FollowIndiscriminateSchoolLeaderGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.SchoolingFish;
@@ -66,7 +67,7 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(5, new FollowIndiscriminateSchoolLeaderGoal(this));
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.5D));
@@ -423,7 +424,7 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         GuppyEntity otherParent = (GuppyEntity) pOtherParent;
         GuppyEntity baby = YAFMEntities.GUPPY.get().create(pLevel);
 
@@ -554,35 +555,35 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
 
     @Override
-    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
-        AgeableMob ageablemob = this.getBreedOffspring(pLevel, pMate);
-        AgeableMob ageableMob2 = null;
-        AgeableMob ageableMob3 = null;
-        AgeableMob ageableMob4 = null;
-        AgeableMob ageableMob5 = null;
+    public void spawnChildFromBreeding(ServerLevel pLevel, BreedableWaterAnimal pMate) {
+        BreedableWaterAnimal ageablemob = this.getBreedOffspring(pLevel, pMate);
+        BreedableWaterAnimal ageableMob2 = null;
+        BreedableWaterAnimal ageableMob3 = null;
+        BreedableWaterAnimal ageableMob4 = null;
+        BreedableWaterAnimal ageableMob5 = null;
 
-        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageablemob);
+        final BreedableWaterAnimal.BabyFishSpawnEvent event = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageablemob);
         ageablemob = event.getChild();
 
         if (this.random.nextBoolean() || this.random.nextBoolean()){
             ageableMob2 = this.getBreedOffspring(pLevel, pMate);
-            final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event2 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob2);
+            final BreedableWaterAnimal.BabyFishSpawnEvent event2 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob2);
             ageableMob2 = event2.getChild();
 
             if (this.random.nextBoolean()){
                 ageableMob3 = this.getBreedOffspring(pLevel, pMate);
-                final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event3 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob3);
+                final BreedableWaterAnimal.BabyFishSpawnEvent event3 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob3);
                 ageableMob3 = event3.getChild();
 
                 if (this.random.nextBoolean()){
 
                     ageableMob4 = this.getBreedOffspring(pLevel, pMate);
-                    final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event4 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob4);
+                    final BreedableWaterAnimal.BabyFishSpawnEvent event4 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob4);
                     ageableMob4 = event4.getChild();
 
                     if (this.random.nextBoolean()){
                         ageableMob5 = this.getBreedOffspring(pLevel, pMate);
-                        final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event5 = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(this, pMate, ageableMob5);
+                        final BreedableWaterAnimal.BabyFishSpawnEvent event5 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob5);
                         ageableMob5 = event5.getChild();
                     }
                 }
