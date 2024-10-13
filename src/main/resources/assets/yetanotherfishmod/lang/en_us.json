@@ -133,9 +133,15 @@
 
   "block.yetanotherfishmod.duckweed" : "Duckweed",
   "block.yetanotherfishmod.hornwort" : "Hornwort",
+
   "block.yetanotherfishmod.aquarium_glass" : "Aquarium Glass Block",
   "block.yetanotherfishmod.infernal_aquarium_glass" : "Infernal Aquarium Glass Block",
   "block.yetanotherfishmod.clear_aquarium_glass" : "Clear Aquarium Glass Block",
+  "block.yetanotherfishmod.tinted_aquarium_glass" : "Tinted Aquarium Glass Block",
+
+  "block.yetanotherfishmod.aquarium_glass_pane" : "Aquarium Glass Pane",
+  "block.yetanotherfishmod.infernal_aquarium_glass_pane" : "Infernal Aquarium Glass Pane",
+  "block.yetanotherfishmod.clear_aquarium_glass_pane" : "Clear Aquarium Glass Pane",
 
   "item.yetanotherfishmod.raw_fish" : "Raw Fish",
   "item.yetanotherfishmod.cooked_fish" : "Cooked Fish",

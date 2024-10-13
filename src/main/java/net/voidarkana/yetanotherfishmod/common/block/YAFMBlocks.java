@@ -12,9 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
-import net.voidarkana.yetanotherfishmod.common.block.custom.AquariumGlassBlock;
-import net.voidarkana.yetanotherfishmod.common.block.custom.DuckweedBlock;
-import net.voidarkana.yetanotherfishmod.common.block.custom.HornwortBlock;
+import net.voidarkana.yetanotherfishmod.common.block.custom.*;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 
 import java.util.function.Function;
@@ -43,6 +41,19 @@ public class YAFMBlocks {
 
     public static final RegistryObject<Block> INFERNAL_AQUARIUM_GLASS = registerBlock("infernal_aquarium_glass",
             ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 8;})));
+
+    public static final RegistryObject<Block> TINTED_AQUARIUM_GLASS = registerBlock("tinted_aquarium_glass",
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.WATER).lightLevel((p_50755_) -> {return 3;})));
+
+
+    public static final RegistryObject<Block> AQUARIUM_GLASS_PANE = registerBlock("aquarium_glass_pane",
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.BLUE_STAINED_GLASS).mapColor(MapColor.WATER)));
+
+    public static final RegistryObject<Block> CLEAR_AQUARIUM_GLASS_PANE = registerBlock("clear_aquarium_glass_pane",
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.BLUE_STAINED_GLASS).mapColor(MapColor.NONE)));
+
+    public static final RegistryObject<Block> INFERNAL_AQUARIUM_GLASS_PANE = registerBlock("infernal_aquarium_glass_pane",
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.BLUE_STAINED_GLASS).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 8;})));
 
 
     private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {

@@ -17,11 +17,13 @@ public class YAFMClientEvents {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
         event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
                 pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos)
-                        : 0x4f9ce3, YAFMBlocks.AQUARIUM_GLASS.get());
-
+                        : 0x4f9ce3,
+                YAFMBlocks.AQUARIUM_GLASS.get(),
+                YAFMBlocks.AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_AQUARIUM_GLASS.get());
 
         event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
-                0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get());
+                0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get(), YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get());
     }
 
     @SubscribeEvent
@@ -29,11 +31,14 @@ public class YAFMClientEvents {
 
         event.getItemColors().register((pStack, pTintIndex) -> {
             BlockState blockstate = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
-            return event.getBlockColors().getColor(blockstate, null, null, pTintIndex);
-        }, YAFMBlocks.AQUARIUM_GLASS.get());
+            return event.getBlockColors().getColor(blockstate, null, null, pTintIndex);},
+                YAFMBlocks.AQUARIUM_GLASS.get(),
+                YAFMBlocks.AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_AQUARIUM_GLASS.get());
 
-
-        event.getItemColors().register((pStack, pTintIndex) -> 0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get());
+        event.getItemColors().register((pStack, pTintIndex) -> 0xff6f36,
+                YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get(),
+                YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get());
 
     }
 }

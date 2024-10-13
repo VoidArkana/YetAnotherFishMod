@@ -48,8 +48,15 @@ public class YAFMCreativeTab {
                         output.accept(YAFMBlocks.HORNWORT.get());
 
                         output.accept(YAFMBlocks.AQUARIUM_GLASS.get());
+                        output.accept(YAFMBlocks.AQUARIUM_GLASS_PANE.get());
+
                         output.accept(YAFMBlocks.CLEAR_AQUARIUM_GLASS.get());
+                        output.accept(YAFMBlocks.CLEAR_AQUARIUM_GLASS_PANE.get());
+
                         output.accept(YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get());
+                        output.accept(YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get());
+
+                        output.accept(YAFMBlocks.TINTED_AQUARIUM_GLASS.get());
 
                     })
                     .build());

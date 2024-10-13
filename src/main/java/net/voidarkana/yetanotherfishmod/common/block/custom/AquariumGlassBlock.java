@@ -94,11 +94,7 @@ public class AquariumGlassBlock extends AbstractGlassBlock {
                 .setValue(DOWN, this.connectsTo(blockstate5));
     }
 
-    public boolean connectsTo(BlockState pState) {
-        return this.isSameGlass(pState);
-    }
-
-    private boolean isSameGlass(BlockState pState) {
+    private boolean connectsTo(BlockState pState) {
         return pState.is(this) && this.defaultBlockState().is(this);
     }
 

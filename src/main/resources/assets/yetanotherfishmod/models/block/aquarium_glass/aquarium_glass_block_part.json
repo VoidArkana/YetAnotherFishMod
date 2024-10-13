@@ -3,7 +3,7 @@
 	"render_type": "translucent",
 	"textures": {
 		"3": "#texture",
-		"particle": "yetanotherfishmod:block/aquarium_glass/full"
+		"particle": "#texture"
 	},
 	"elements": [
 		{

@@ -15,14 +15,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LiquidBlockRendererMixin {
 
     @Inject(
-            method = {"Lnet/minecraft/client/renderer/block/LiquidBlockRenderer;isFaceOccludedByNeighbor(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;FLnet/minecraft/world/level/block/state/BlockState;)Z"},
-            remap = true,
+            method = {"isFaceOccludedByNeighbor(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;FLnet/minecraft/world/level/block/state/BlockState;)Z"},
             cancellable = true,
             at = @At(value = "TAIL")
     )
-
     private static void isFaceOccludedByNeighbor(BlockGetter blockGetter, BlockPos pos, Direction direction, float f, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (state.is(YAFMBlocks.AQUARIUM_GLASS.get()) || state.is(YAFMBlocks.CLEAR_AQUARIUM_GLASS.get()) || state.is(YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get())) {
+        if (state.is(YAFMBlocks.CLEAR_AQUARIUM_GLASS_PANE.get()) || state.is(YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get())
+                || state.is(YAFMBlocks.AQUARIUM_GLASS_PANE.get()) || state.is(YAFMBlocks.AQUARIUM_GLASS.get())
+                || state.is(YAFMBlocks.CLEAR_AQUARIUM_GLASS.get()) || state.is(YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get())
+                || state.is(YAFMBlocks.TINTED_AQUARIUM_GLASS.get())) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(
+            method = {"isFaceOccludedBySelf"},
+            cancellable = true,
+            at = @At(value = "TAIL")
+    )
+    private static void isFaceOccludedBySelf(BlockGetter pLevel, BlockPos pPos, BlockState state, Direction pFace, CallbackInfoReturnable<Boolean> cir) {
+        if (state.is(YAFMBlocks.AQUARIUM_GLASS_PANE.get())
+                || state.is(YAFMBlocks.CLEAR_AQUARIUM_GLASS_PANE.get())
+                || state.is(YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get())
+                && !pFace.getAxis().isVertical()) {
             cir.setReturnValue(true);
         }
     }
