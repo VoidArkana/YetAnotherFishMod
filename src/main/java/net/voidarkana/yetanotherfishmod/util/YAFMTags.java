@@ -3,6 +3,7 @@ package net.voidarkana.yetanotherfishmod.util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,6 +29,26 @@ public class YAFMTags {
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(YetAnotherFishMod.MOD_ID, name));
+        }
+    }
+
+    public static class Blocks {
+
+        public static final TagKey<Block> AQUARIUM_GLASS = tag("aquarium_glass_blocks");
+        public static final TagKey<Block> INFERNAL_AQUARIUM_GLASS = tag("infernal_aquarium_glass_blocks");
+        public static final TagKey<Block> RADON_AQUARIUM_GLASS = tag("radon_aquarium_glass_blocks");
+
+        private static TagKey<Block> tag(String name){
+            return BlockTags.create(new ResourceLocation(YetAnotherFishMod.MOD_ID, name));
+        }
+    }
+
+    public static class Fluid {
+        public static final TagKey<net.minecraft.world.level.material.Fluid> AC_ACID
+                = tag("ac_acid");
+
+        private static TagKey<net.minecraft.world.level.material.Fluid> tag(String name){
+            return FluidTags.create(new ResourceLocation(YetAnotherFishMod.MOD_ID, name));
         }
     }
 

@@ -33,6 +33,8 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(),new YAFMItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
+        generator.addProvider(event.includeServer(),new YAFMFluidTagGenerator(packOutput, lookupProvider, existingFileHelper));
+
 //        generator.addProvider(true, new ModEntityTagsGenerator(packOutput, lookupProvider, existingFileHelper));
 
 //        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));

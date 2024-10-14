@@ -51,7 +51,6 @@
   "yafm.guppy_base.10" : "Silver Base",
   "yafm.guppy_base.11" : "Albino Base",
 
-
   "yafm.guppy_fin" : "Fins",
 
   "yafm.guppy_fin.jumbo" : "Jumbo",
@@ -135,13 +134,20 @@
   "block.yetanotherfishmod.hornwort" : "Hornwort",
 
   "block.yetanotherfishmod.aquarium_glass" : "Aquarium Glass Block",
-  "block.yetanotherfishmod.infernal_aquarium_glass" : "Infernal Aquarium Glass Block",
-  "block.yetanotherfishmod.clear_aquarium_glass" : "Clear Aquarium Glass Block",
-  "block.yetanotherfishmod.tinted_aquarium_glass" : "Tinted Aquarium Glass Block",
-
   "block.yetanotherfishmod.aquarium_glass_pane" : "Aquarium Glass Pane",
+
+  "block.yetanotherfishmod.infernal_aquarium_glass" : "Infernal Aquarium Glass Block",
   "block.yetanotherfishmod.infernal_aquarium_glass_pane" : "Infernal Aquarium Glass Pane",
+
+  "block.yetanotherfishmod.clear_aquarium_glass" : "Clear Aquarium Glass Block",
   "block.yetanotherfishmod.clear_aquarium_glass_pane" : "Clear Aquarium Glass Pane",
+
+  "block.yetanotherfishmod.radon_aquarium_glass" : "Radon Aquarium Glass Block",
+  "block.yetanotherfishmod.radon_aquarium_glass_pane" : "Radon Aquarium Glass Pane",
+
+  "block.yetanotherfishmod.tinted_aquarium_glass" : "Tinted Aquarium Glass Block",
+  "block.yetanotherfishmod.tinted_infernal_aquarium_glass" : "Tinted Infernal Aquarium Glass Block",
+  "block.yetanotherfishmod.tinted_radon_aquarium_glass" : "Tinted Radon Aquarium Glass Block",
 
   "item.yetanotherfishmod.raw_fish" : "Raw Fish",
   "item.yetanotherfishmod.cooked_fish" : "Cooked Fish",
