@@ -5,6 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -15,17 +16,15 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraftforge.common.Tags;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FishBreedGoal;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.ai.FollowIndiscriminateSchoolLeaderGoal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
@@ -61,7 +60,7 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
         return switch (this.getVariant()){
-            case 1 ->super.getDimensions(pPose).scale(1.1F, 1.1F);
+            case 1, 4, 5, 6 ->super.getDimensions(pPose).scale(1.1F, 1.1F);
             case 2 ->super.getDimensions(pPose);
             case 3 ->super.getDimensions(pPose).scale(0.8F, 0.8F);
             default ->super.getDimensions(pPose).scale(1.5F, 1.5F);
@@ -140,7 +139,47 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
             }
             this.setCanGrowUp(pDataTag.getBoolean("CanGrow"));
         }else{
-            this.setVariant(this.random.nextInt(4));
+            if (pReason == MobSpawnType.SPAWN_EGG || (pReason == MobSpawnType.BUCKET && pDataTag == null)){
+                this.setVariant(this.random.nextInt(7));
+            }
+            else {
+                if (pLevel.getBiome(this.blockPosition()).is(Tags.Biomes.IS_SWAMP)){
+                    switch (this.random.nextInt(4)){
+                        case 1:
+                            this.setVariant(1);
+                            break;
+                        case 2:
+                            this.setVariant(4);
+                            break;
+                        case 3:
+                            this.setVariant(5);
+                            break;
+                        default:
+                            this.setVariant(6);
+                    }
+                } else if (pLevel.getBiome(this.blockPosition()).is(BiomeTags.IS_RIVER)){
+
+                    switch (this.random.nextInt(5)){
+                        case 1:
+                            this.setVariant(1);
+                            break;
+                        case 2:
+                            this.setVariant(4);
+                            break;
+                        case 3:
+                            this.setVariant(5);
+                            break;
+                        case 4:
+                            this.setVariant(3);
+                            break;
+                        default:
+                            this.setVariant(6);
+                    }
+
+                } else if (pLevel.getBiome(this.blockPosition()).is(BiomeTags.IS_JUNGLE)){
+                    this.setVariant(this.random.nextBoolean() ? 0 : 2);
+                }
+            }
         }
 
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);

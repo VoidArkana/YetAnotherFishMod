@@ -1,5 +1,9 @@
 package net.voidarkana.yetanotherfishmod.common.item;
 
+import com.google.common.collect.Maps;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
@@ -12,7 +16,10 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishBucketItem;
+import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
 import net.voidarkana.yetanotherfishmod.common.item.custom.YAFMFoods;
+
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = YetAnotherFishMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class YAFMItems {
@@ -83,26 +90,33 @@ public class YAFMItems {
 
 
     public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
-            ()-> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> QUALITY_FEED = ITEMS.register("quality_feed",
-            ()-> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> GREAT_FEED = ITEMS.register("great_feed",
-            ()-> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> PREMIUM_FEED = ITEMS.register("premium_feed",
-            ()-> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BAD_FEED = ITEMS.register("bad_feed",
-            ()-> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()));
 
 
     public static final RegistryObject<Item> RAW_FISH = ITEMS.register("raw_fish",
-            ()-> new Item(new Item.Properties().food(YAFMFoods.RAW_FISH)));
+            () -> new Item(new Item.Properties().food(YAFMFoods.RAW_FISH)));
 
     public static final RegistryObject<Item> COOKED_FISH = ITEMS.register("cooked_fish",
-            ()-> new Item(new Item.Properties().food(YAFMFoods.COOKED_FISH)));
+            () -> new Item(new Item.Properties().food(YAFMFoods.COOKED_FISH)));
+
+    public static final RegistryObject<Item> DAPHNEA_SPAWN_EGG = ITEMS.register("daphnea_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.DAPHNEA, 0x90ba6d, 0xbdcdb0, new Item.Properties()));
+
+
+    public static final RegistryObject<Item> FISHNET = ITEMS.register("fishnet",
+            () -> new FishnetItem(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

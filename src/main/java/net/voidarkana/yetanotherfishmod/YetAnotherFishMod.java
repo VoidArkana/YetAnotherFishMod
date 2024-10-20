@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -16,11 +17,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
+import net.voidarkana.yetanotherfishmod.client.particles.YAFMParticles;
 import net.voidarkana.yetanotherfishmod.client.renderers.*;
 import net.voidarkana.yetanotherfishmod.common.block.YAFMBlocks;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
+import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntityPlacements;
+import net.voidarkana.yetanotherfishmod.common.entity.custom.DaphneaSwarmEntity;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
+import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
 import net.voidarkana.yetanotherfishmod.server.MessageHurtMultipart;
 import net.voidarkana.yetanotherfishmod.server.MessageInteractMultipart;
 import net.voidarkana.yetanotherfishmod.util.ClientProxy;
@@ -70,6 +75,7 @@ public class YetAnotherFishMod
         YAFMEntities.register(modEventBus);
         YAFMItems.register(modEventBus);
         YAFMBlocks.register(modEventBus);
+        YAFMParticles.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new YAFMEvents());
@@ -79,6 +85,8 @@ public class YetAnotherFishMod
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
+        YAFMEntityPlacements.entityPlacement();
 
         NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
         NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
@@ -104,7 +112,10 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
         EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
 
-        //ItemBlockRenderTypes.setRenderLayer(YAFMBlocks.AQUARIUM_GLASS.get(), RenderType.translucent());
+        EntityRenderers.register(YAFMEntities.DAPHNEA.get(), DaphneaSwarmRenderer::new);
+
+        ItemProperties.register(YAFMItems.FISHNET.get(), new ResourceLocation("has_entity"),
+                (stack, level, living, i) -> living != null && FishnetItem.containsEntity(stack) ? 1 : 0);
     }
 
     public static <MSG> void sendMSGToServer(MSG message) {

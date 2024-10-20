@@ -2,6 +2,7 @@ package net.voidarkana.yetanotherfishmod.common.entity.custom;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraftforge.common.Tags;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BreedableWaterAnimal;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.VariantSchoolingFish;
 import net.voidarkana.yetanotherfishmod.common.entity.custom.base.BucketableFishEntity;
@@ -64,15 +66,47 @@ public class MinnowEntity extends VariantSchoolingFish implements GeoEntity {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
 
+        pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+
         if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("VariantModel", 3)) {
             this.setVariantModel(pDataTag.getInt("VariantModel"));
             this.setVariantSkin(pDataTag.getInt("VariantSkin"));
         }else{
-            this.setVariantModel(this.random.nextInt(4));
-            this.setVariantSkin(this.random.nextInt(4));
+
+            int skin = this.random.nextInt(4);
+
+            if(pReason == MobSpawnType.SPAWN_EGG || (pReason == MobSpawnType.BUCKET && pDataTag == null)){
+                this.setVariantModel(this.random.nextInt(4));
+            }else {
+                int model;
+
+                if (pSpawnData instanceof MinnowEntity.FishGroupData){
+
+                    MinnowEntity.FishGroupData fish$fishgroupdata = (MinnowEntity.FishGroupData)pSpawnData;
+                    model = fish$fishgroupdata.variantModel;
+                    skin = fish$fishgroupdata.variantSkin;
+
+                }else {
+                    if (pLevel.getBiome(this.blockPosition()).is(Tags.Biomes.IS_SWAMP)){
+                        model = 3;
+                    }else if (pLevel.getBiome(this.blockPosition()).is(BiomeTags.IS_JUNGLE)){
+                        model = this.random.nextBoolean() ? 1 : 0;
+                    }else if (pLevel.getBiome(this.blockPosition()).is(BiomeTags.IS_RIVER)){
+                        model = 2;
+                    }else {
+                        model = this.random.nextInt(4);
+                    }
+
+                    pSpawnData = new MinnowEntity.FishGroupData(this, model, skin);
+                }
+
+                this.setVariantModel(model);
+            }
+
+            this.setVariantSkin(skin);
         }
 
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return pSpawnData;
     }
 
     @Nullable
@@ -98,6 +132,18 @@ public class MinnowEntity extends VariantSchoolingFish implements GeoEntity {
     @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(YAFMItems.BARB_BUCKET.get());
+    }
+
+
+    static class FishGroupData extends VariantSchoolingFish.SchoolSpawnGroupData {
+        final int variantModel;
+        final int variantSkin;
+
+        FishGroupData(MinnowEntity pLeader, int pVariantModel, int pVariantSkin) {
+            super(pLeader);
+            this.variantModel = pVariantModel;
+            this.variantSkin = pVariantSkin;
+        }
     }
 
 }

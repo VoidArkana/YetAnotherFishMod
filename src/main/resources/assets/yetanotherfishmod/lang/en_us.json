@@ -130,6 +130,8 @@
   "item.yetanotherfishmod.premium_feed" : "Premium Fish Feed",
   "item.yetanotherfishmod.bad_feed" : "Questionable Fish Feed",
 
+  "item.yetanotherfishmod.fishnet" : "Cooked Fish",
+
   "block.yetanotherfishmod.duckweed" : "Duckweed",
   "block.yetanotherfishmod.hornwort" : "Hornwort",
 
@@ -145,9 +147,13 @@
   "block.yetanotherfishmod.radon_aquarium_glass" : "Radon Aquarium Glass Block",
   "block.yetanotherfishmod.radon_aquarium_glass_pane" : "Radon Aquarium Glass Pane",
 
+  "block.yetanotherfishmod.sugar_aquarium_glass" : "Sugar Aquarium Glass Block",
+  "block.yetanotherfishmod.sugar_aquarium_glass_pane" : "Sugar Aquarium Glass Pane",
+
   "block.yetanotherfishmod.tinted_aquarium_glass" : "Tinted Aquarium Glass Block",
   "block.yetanotherfishmod.tinted_infernal_aquarium_glass" : "Tinted Infernal Aquarium Glass Block",
   "block.yetanotherfishmod.tinted_radon_aquarium_glass" : "Tinted Radon Aquarium Glass Block",
+  "block.yetanotherfishmod.tinted_sugar_aquarium_glass" : "Tinted Sugar Aquarium Glass Block",
 
   "item.yetanotherfishmod.raw_fish" : "Raw Fish",
   "item.yetanotherfishmod.cooked_fish" : "Cooked Fish",

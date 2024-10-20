@@ -22,5 +22,9 @@ public class YAFMFluidTagGenerator extends FluidTagsProvider {
         this.tag(YAFMTags.Fluid.AC_ACID)
                 .addOptional(new ResourceLocation("alexscaves:acid"))
                 .addOptional(new ResourceLocation("alexscaves:flowing_acid"));
+
+        this.tag(YAFMTags.Fluid.AC_SODA)
+                .addOptional(new ResourceLocation("alexscaves:purple_soda"))
+                .addOptional(new ResourceLocation("alexscaves:flowing_purple_soda"));
     }
 }

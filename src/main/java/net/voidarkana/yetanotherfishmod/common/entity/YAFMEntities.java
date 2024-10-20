@@ -56,6 +56,12 @@ public class YAFMEntities {
                             .sized(1.5f, 0.8f)
                             .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "arapaima").toString()));
 
+    public static final RegistryObject<EntityType<DaphneaSwarmEntity>> DAPHNEA =
+            ENTITY_TYPES.register("daphnea",
+                    () -> EntityType.Builder.of(DaphneaSwarmEntity::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.8f, 0.8f)
+                            .build(new ResourceLocation(YetAnotherFishMod.MOD_ID, "daphnea").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

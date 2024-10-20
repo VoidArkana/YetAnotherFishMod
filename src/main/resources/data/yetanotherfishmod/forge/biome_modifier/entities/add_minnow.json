@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#yetanotherfishmod:minnow_biomes",
+  "spawners": {
+    "type": "yetanotherfishmod:minnow",
+    "weight": 8,
+    "minCount": 3,
+    "maxCount": 8,
+    "category": "water_creature"
+  }
+}

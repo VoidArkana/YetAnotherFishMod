@@ -1,5 +1,6 @@
 package net.voidarkana.yetanotherfishmod.common.entity.custom;
 
+import com.google.errorprone.annotations.Var;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
@@ -11,10 +12,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -102,6 +102,8 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
 
+        pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+
         if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("VariantModel", 3)) {
             this.setVariantModel(pDataTag.getInt("VariantModel"));
             this.setVariantSkin(pDataTag.getInt("VariantSkin"));
@@ -111,22 +113,29 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
             this.setCanGrowUp(pDataTag.getBoolean("CanGrow"));
         }else{
 
-            int model = this.random.nextInt(4); //
-
-            this.setVariantModel(model);
-
+            int model;
             int skin;
 
-            if (model==1){
-                skin = this.random.nextInt(3);
-            }else{
-                skin = 0;
+            if (pSpawnData instanceof FreshwaterSharkEntity.FishGroupData){
+                FreshwaterSharkEntity.FishGroupData fish$fishgroupdata = (FreshwaterSharkEntity.FishGroupData)pSpawnData;
+                model = fish$fishgroupdata.variantModel;
+                skin = fish$fishgroupdata.variantSkin;
+            }else {
+                model = this.random.nextInt(4);
+
+                if (model==1){
+                    skin = this.random.nextInt(3);
+                }else{
+                    skin = 0;
+                }
+                pSpawnData = new FreshwaterSharkEntity.FishGroupData(this, model, skin);
             }
 
+            this.setVariantModel(model);
             this.setVariantSkin(skin);
         }
 
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return pSpawnData;
     }
 
     @Nullable
@@ -201,6 +210,17 @@ public class FreshwaterSharkEntity extends VariantSchoolingFish implements GeoEn
     public boolean canMate(BreedableWaterAnimal pOtherAnimal) {
         FreshwaterSharkEntity mate = (FreshwaterSharkEntity) pOtherAnimal;
         return super.canMate(pOtherAnimal) && this.getVariantModel() == mate.getVariantModel();
+    }
+
+    static class FishGroupData extends VariantSchoolingFish.SchoolSpawnGroupData {
+        final int variantModel;
+        final int variantSkin;
+
+        FishGroupData(FreshwaterSharkEntity pLeader, int pVariantModel, int pVariantSkin) {
+            super(pLeader);
+            this.variantModel = pVariantModel;
+            this.variantSkin = pVariantSkin;
+        }
     }
 
 }

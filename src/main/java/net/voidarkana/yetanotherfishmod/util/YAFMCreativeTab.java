@@ -29,6 +29,8 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.GREAT_FEED.get());
                         output.accept(YAFMItems.PREMIUM_FEED.get());
 
+                        output.accept(YAFMItems.FISHNET.get());
+
                         output.accept(YAFMItems.BARB_BUCKET.get());
                         output.accept(YAFMItems.CATFISH_BUCKET.get());
                         output.accept(YAFMItems.FEATHERBACK_BUCKET.get());
@@ -39,6 +41,7 @@ public class YAFMCreativeTab {
                         output.accept(YAFMItems.ARAPAIMA_SPAWN_EGG.get());
                         output.accept(YAFMItems.BARB_SPAWN_EGG.get());
                         output.accept(YAFMItems.CATFISH_SPAWN_EGG.get());
+                        output.accept(YAFMItems.DAPHNEA_SPAWN_EGG.get());
                         output.accept(YAFMItems.FEATHERBACK_SPAWN_EGG.get());
                         output.accept(YAFMItems.FRESHWATER_SHARK_SPAWN_EGG.get());
                         output.accept(YAFMItems.GUPPY_SPAWN_EGG.get());
@@ -61,6 +64,10 @@ public class YAFMCreativeTab {
                         output.accept(YAFMBlocks.RADON_AQUARIUM_GLASS.get());
                         output.accept(YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get());
                         output.accept(YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+                        output.accept(YAFMBlocks.SUGAR_AQUARIUM_GLASS.get());
+                        output.accept(YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get());
+                        output.accept(YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
                     })
                     .build());
 

@@ -21,6 +21,9 @@ public class CatfishModel extends GeoModel<CatfishEntity> {
             case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_generic.geo.json");
             case 2 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_big.geo.json");
             case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_pangasius.geo.json");
+            case 4 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_bullhead.geo.json");
+            case 5 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_channel.geo.json");
+            case 6 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_flathead.geo.json");
             default ->new ResourceLocation(YetAnotherFishMod.MOD_ID, "geo/catfish_piraiba.geo.json");
         };
     }
@@ -31,6 +34,9 @@ public class CatfishModel extends GeoModel<CatfishEntity> {
             case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_blue.png");
             case 2-> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_big.png");
             case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_pangasius.png");
+            case 4 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_bullhead.png");
+            case 5 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_channel.png");
+            case 6 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_flathead.png");
             default -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_piraiba.png");
         };
     }

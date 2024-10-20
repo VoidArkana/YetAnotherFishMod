@@ -70,6 +70,19 @@ public class YAFMBlocks {
             ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_GREEN).lightLevel((p_50755_) -> {return 5;})));
 
 
+
+    public static final RegistryObject<Block> SUGAR_AQUARIUM_GLASS = registerBlock("sugar_aquarium_glass",
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_PURPLE)));
+
+    public static final RegistryObject<Block> SUGAR_AQUARIUM_GLASS_PANE = registerBlock("sugar_aquarium_glass_pane",
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.PURPLE_STAINED_GLASS_PANE).mapColor(MapColor.COLOR_PURPLE)));
+
+    public static final RegistryObject<Block> TINTED_SUGAR_AQUARIUM_GLASS = registerBlock("tinted_sugar_aquarium_glass",
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_PURPLE).lightLevel((p_50755_) -> {return 5;})));
+
+
+
+
     private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {
         Supplier<T> entry = create(key, block);
         YAFMItems.ITEMS.register(key, () -> item.apply(entry));

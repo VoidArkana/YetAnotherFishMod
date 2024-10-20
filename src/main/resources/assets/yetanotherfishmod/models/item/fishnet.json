@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "yetanotherfishmod:item/fishnet"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "has_entity": 1
+      },
+      "model": "yetanotherfishmod:item/fishnet_full"
+    }
+  ]
+}

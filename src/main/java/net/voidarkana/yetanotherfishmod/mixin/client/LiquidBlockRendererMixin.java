@@ -39,7 +39,15 @@ public class LiquidBlockRendererMixin {
         }
 
         if (pFluidState.is(YAFMTags.Fluid.AC_ACID)){
-            if(pLevel.getBlockState(pPos.offset(pSide.getNormal())).is(YAFMTags.Blocks.RADON_AQUARIUM_GLASS)){
+            if(pLevel.getBlockState(pPos.offset(pSide.getNormal())).is(YAFMTags.Blocks.RADON_AQUARIUM_GLASS)
+                    || pLevel.getBlockState(pPos).is(YAFMTags.Blocks.RADON_AQUARIUM_GLASS)){
+                cir.setReturnValue(false);
+            }
+        }
+
+        if (pFluidState.is(YAFMTags.Fluid.AC_SODA)){
+            if(pLevel.getBlockState(pPos.offset(pSide.getNormal())).is(YAFMTags.Blocks.SUGAR_AQUARIUM_GLASS)
+                    || pLevel.getBlockState(pPos).is(YAFMTags.Blocks.SUGAR_AQUARIUM_GLASS)){
                 cir.setReturnValue(false);
             }
         }

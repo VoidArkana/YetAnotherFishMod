@@ -31,6 +31,11 @@ public class YAFMClientEvents {
                 0x4eb821, YAFMBlocks.RADON_AQUARIUM_GLASS.get(),
                 YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get(),
                 YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                0x8a1edc, YAFMBlocks.SUGAR_AQUARIUM_GLASS.get(),
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
     }
 
     @SubscribeEvent
@@ -52,6 +57,11 @@ public class YAFMClientEvents {
                 YAFMBlocks.RADON_AQUARIUM_GLASS.get(),
                 YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get(),
                 YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+        event.getItemColors().register((pStack, pTintIndex) -> 0x8a1edc,
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS.get(),
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
 
     }
 }

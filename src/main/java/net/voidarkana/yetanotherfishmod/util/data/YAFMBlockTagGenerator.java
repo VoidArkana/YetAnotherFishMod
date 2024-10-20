@@ -30,7 +30,10 @@ public class YAFMBlockTagGenerator extends BlockTagsProvider {
                 .add(YAFMBlocks.TINTED_INFERNAL_AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.RADON_AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get())
-                .add(YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+                .add(YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get())
+                .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS.get())
+                .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get())
+                .add(YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
 
         this.tag(YAFMTags.Blocks.INFERNAL_AQUARIUM_GLASS)
                 .add(YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get())
@@ -41,5 +44,10 @@ public class YAFMBlockTagGenerator extends BlockTagsProvider {
                 .add(YAFMBlocks.RADON_AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get())
                 .add(YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+        this.tag(YAFMTags.Blocks.SUGAR_AQUARIUM_GLASS)
+                .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS.get())
+                .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get())
+                .add(YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
     }
 }

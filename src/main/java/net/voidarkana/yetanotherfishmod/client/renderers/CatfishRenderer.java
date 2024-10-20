@@ -24,6 +24,9 @@ public class CatfishRenderer extends GeoEntityRenderer<CatfishEntity> {
             case 1 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_blue.png");
             case 2-> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_big.png");
             case 3 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_pangasius.png");
+            case 4 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_bullhead.png");
+            case 5 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_channel.png");
+            case 6 -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_flathead.png");
             default -> new ResourceLocation(YetAnotherFishMod.MOD_ID, "textures/entity/catfish/catfish_piraiba.png");
         };
     }

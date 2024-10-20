@@ -22,10 +22,7 @@ public class DataGenerators {
 
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-//        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
-//        generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput));
 
-//        generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new YAFMItemModelProvider(packOutput, existingFileHelper));
 
         YAFMBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
@@ -35,8 +32,8 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(),new YAFMFluidTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-//        generator.addProvider(true, new ModEntityTagsGenerator(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(),new YAFMBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-//        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(),new YAFMEntityTypeTagGenerator(packOutput, lookupProvider, existingFileHelper));
     }
 }
