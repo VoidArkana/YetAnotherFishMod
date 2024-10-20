@@ -60,9 +60,9 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
         return switch (this.getVariant()){
-            case 1, 4, 5, 6 ->super.getDimensions(pPose).scale(1.1F, 1.1F);
+            case 1, 4, 5, 6 ->super.getDimensions(pPose).scale(0.8F, 0.8F);
             case 2 ->super.getDimensions(pPose);
-            case 3 ->super.getDimensions(pPose).scale(0.8F, 0.8F);
+            case 3 ->super.getDimensions(pPose).scale(1.1F, 1.1F);
             default ->super.getDimensions(pPose).scale(1.5F, 1.5F);
         };
     }

@@ -235,5 +235,24 @@ public class FishBucketItem extends MobBucketItem {
                 }
             //}
         }
+
+        if (getFishType() == YAFMEntities.ARTEMIA.get()) {
+            CompoundTag compoundtag = pStack.getTag();
+            if (compoundtag != null && compoundtag.contains("VariantSkin", 3)) {
+                int j = compoundtag.getInt("VariantSkin");
+
+                String featherback_sci = "yafm.artemia_sci." + j;
+                String common = "yafm.artemia_common." + j;
+
+                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
+                MutableComponent mutablecomponent = Component.translatable(featherback_sci);
+                mutablecomponent.withStyle(bchatformatting);
+
+                if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(mutablecomponent);
+                }
+            }
+        }
     }
 }

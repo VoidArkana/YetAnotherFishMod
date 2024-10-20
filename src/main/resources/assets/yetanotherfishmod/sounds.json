@@ -1,0 +1,34 @@
+{
+  "salty": {
+    "sounds": [
+      {
+        "name": "yetanotherfishmod:salty",
+        "stream": true
+      }
+    ]
+  },
+  "axolotl": {
+    "sounds": [
+      {
+        "name": "yetanotherfishmod:axolotl",
+        "stream": true
+      }
+    ]
+  },
+  "dragonfish": {
+    "sounds": [
+      {
+        "name": "yetanotherfishmod:dragonfish",
+        "stream": true
+      }
+    ]
+  },
+  "shunji": {
+    "sounds": [
+      {
+        "name": "yetanotherfishmod:shunji",
+        "stream": true
+      }
+    ]
+  }
+}

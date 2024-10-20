@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
+import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.util.YAFMTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,11 +41,18 @@ public class YAFMEntityTypeTagGenerator extends EntityTypeTagsProvider {
                 .addOptional(new ResourceLocation("alexsmobs:stradpole"))
                 .addOptional(new ResourceLocation("babyfat:ranchu"))
                 .addOptional(new ResourceLocation("spawn:tuna"))
-                .addOptional(new ResourceLocation("alexscaves:mineguardians"));
+                .addOptional(new ResourceLocation("alexscaves:mineguardians"))
+                .addOptional(new ResourceLocation("upgrade_aquatic:thrasher"));
 
         this.tag(YAFMTags.EntityType.FISHNET_BLACKLIST)
                 .addOptional(new ResourceLocation("alexsmobs:cachalot_whale"))
                 .addOptional(new ResourceLocation("alexsmobs:orca"))
                 .addOptional(new ResourceLocation("alexscaves:hullbreaker"));
+
+        this.tag(YAFMTags.EntityType.PREDATOR_FISH).add(YAFMEntities.ARAPAIMA.get()).add(YAFMEntities.GUPPY.get())
+                .add(YAFMEntities.CATFISH.get()).add(YAFMEntities.FRESHWATER_SHARK.get()).add(YAFMEntities.FEATHERBACK.get())
+                .add(YAFMEntities.MINNOW.get());
+
+        this.tag(YAFMTags.EntityType.FISH_PREY).add(YAFMEntities.ARTEMIA.get());
     }
 }

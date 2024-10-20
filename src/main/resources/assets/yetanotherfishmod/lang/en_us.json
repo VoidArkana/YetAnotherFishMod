@@ -26,6 +26,10 @@
   "item.yetanotherfishmod.arapaima_spawn_egg" : "Arapaima Spawn Egg",
   "entity.yetanotherfishmod.arapaima" : "Arapaima",
 
+  "item.yetanotherfishmod.artemia_spawn_egg" : "Fairy Shrimp Spawn Egg",
+  "item.yetanotherfishmod.artemia_bucket" : "Bucket of Fairy Shrimp",
+  "entity.yetanotherfishmod.artemia" : "Fairy Shrimp",
+
   "yafm.featherback_sci.0" : "Xenomystus nigri",
   "yafm.featherback_sci.1" : "Papyrocranus afer",
   "yafm.featherback_sci.2" : "Chitala ornata",
@@ -130,7 +134,7 @@
   "item.yetanotherfishmod.premium_feed" : "Premium Fish Feed",
   "item.yetanotherfishmod.bad_feed" : "Questionable Fish Feed",
 
-  "item.yetanotherfishmod.fishnet" : "Cooked Fish",
+  "item.yetanotherfishmod.fishnet" : "Fishnet",
 
   "block.yetanotherfishmod.duckweed" : "Duckweed",
   "block.yetanotherfishmod.hornwort" : "Hornwort",
@@ -162,11 +166,17 @@
   "yafm.catfish_sci.1" : "Ictalurus furcatus",
   "yafm.catfish_sci.2" : "Phractocephalus hemioliopterus",
   "yafm.catfish_sci.3" : "Pangasianodon hypophthalmus",
+  "yafm.catfish_sci.4" : "Ameiurus Melas",
+  "yafm.catfish_sci.5" : "Ictalurus Punctatus",
+  "yafm.catfish_sci.6" : "Pylodictis Olivaris",
 
   "yafm.catfish_common.0" : "Piraiba Catfish",
   "yafm.catfish_common.1" : "Blue Catfish",
   "yafm.catfish_common.2" : "Redtail Catfish",
   "yafm.catfish_common.3" : "Pangasius",
+  "yafm.catfish_common.4" : "Bullhead Catfish",
+  "yafm.catfish_common.5" : "Channel Catfish",
+  "yafm.catfish_common.6" : "Flathead Catfish",
 
   "yafm.freshwater_shark_sci.0" : "Balantiocheilos melanopterus",
   "yafm.freshwater_shark_sci.1" : "Myxocrynus asiaticus",
@@ -227,6 +237,27 @@
 
   "yafm.pleco_sci" : "Pterygoplichthys ambrosettii",
   "yafm.pleco_common" : "Snow King Pleco",
+
+
+  "yafm.artemia_sci.0" : "Artemia Salina",
+  "yafm.artemia_sci.1" : "Thamnocephalus Platyurus",
+  "yafm.artemia_sci.2" : "Branchinella Thailandensis",
+
+  "yafm.artemia_common.0" : "Fairy Shrimp",
+  "yafm.artemia_common.1" : "Beavertail Fairy Shrimp",
+  "yafm.artemia_common.2" : "Thai Fairy Shrimp",
+
+  "item.yetanotherfishmod.salty_music_disc" : "Music Disc",
+  "item.yetanotherfishmod.salty_music_disc.desc" : "Ninni - Salty",
+
+  "item.yetanotherfishmod.axolotl_music_disc" : "Music Disc",
+  "item.yetanotherfishmod.axolotl_music_disc.desc" : "C418 - Axolotl",
+
+  "item.yetanotherfishmod.dragonfish_music_disc" : "Music Disc",
+  "item.yetanotherfishmod.dragonfish_music_disc.desc" : "C418 - Dragon Fish",
+
+  "item.yetanotherfishmod.shunji_music_disc" : "Music Disc",
+  "item.yetanotherfishmod.shunji_music_disc.desc" : "C418 - Shunji",
 
   "creativetab.yafm_creative_tab": "Yet Another Fish Mod"
 }

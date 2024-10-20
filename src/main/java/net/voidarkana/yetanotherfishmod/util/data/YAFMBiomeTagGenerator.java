@@ -48,6 +48,9 @@ public class YAFMBiomeTagGenerator extends BiomeTagsProvider {
                 .addTag(BiomeTags.IS_JUNGLE)
                 .addTag(Tags.Biomes.IS_SWAMP);
 
+        this.tag(YAFMTags.Biomes.ARTEMIA_BIOMES)
+                .addTag(Tags.Biomes.IS_DESERT);
+
     }
 
 }

@@ -1,14 +1,10 @@
 package net.voidarkana.yetanotherfishmod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -22,10 +18,10 @@ import net.voidarkana.yetanotherfishmod.client.renderers.*;
 import net.voidarkana.yetanotherfishmod.common.block.YAFMBlocks;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntityPlacements;
-import net.voidarkana.yetanotherfishmod.common.entity.custom.DaphneaSwarmEntity;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
+import net.voidarkana.yetanotherfishmod.common.sound.YAFMSounds;
 import net.voidarkana.yetanotherfishmod.server.MessageHurtMultipart;
 import net.voidarkana.yetanotherfishmod.server.MessageInteractMultipart;
 import net.voidarkana.yetanotherfishmod.util.ClientProxy;
@@ -73,6 +69,7 @@ public class YetAnotherFishMod
         YAFMCreativeTab.register(modEventBus);
 
         YAFMEntities.register(modEventBus);
+        YAFMSounds.register(modEventBus);
         YAFMItems.register(modEventBus);
         YAFMBlocks.register(modEventBus);
         YAFMParticles.register(modEventBus);
@@ -112,7 +109,9 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
         EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
 
-        EntityRenderers.register(YAFMEntities.DAPHNEA.get(), DaphneaSwarmRenderer::new);
+        EntityRenderers.register(YAFMEntities.DAPHNIA_SWARM.get(), DaphneaSwarmRenderer::new);
+
+        EntityRenderers.register(YAFMEntities.ARTEMIA.get(), ArtemiaRenderer::new);
 
         ItemProperties.register(YAFMItems.FISHNET.get(), new ResourceLocation("has_entity"),
                 (stack, level, living, i) -> living != null && FishnetItem.containsEntity(stack) ? 1 : 0);

@@ -25,7 +25,8 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
                 .add(YAFMItems.REGULAR_FEED.get())
                 .add(YAFMItems.GREAT_FEED.get())
                 .add(YAFMItems.QUALITY_FEED.get())
-                .add(YAFMItems.PREMIUM_FEED.get());
+                .add(YAFMItems.PREMIUM_FEED.get())
+                .add(YAFMItems.ARTEMIA_BUCKET.get());
 
         this.tag(ItemTags.FISHES).add(YAFMItems.RAW_FISH.get()).add(YAFMItems.COOKED_FISH.get());
 
@@ -35,9 +36,16 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
                 .add(YAFMItems.GUPPY_BUCKET.get())
                 .add(YAFMItems.FEATHERBACK_BUCKET.get())
                 .add(YAFMItems.PLECO_BUCKET.get())
-                .add(YAFMItems.CATFISH_BUCKET.get());
+                .add(YAFMItems.CATFISH_BUCKET.get())
+                .add(YAFMItems.ARTEMIA_BUCKET.get());
 
         this.tag(ItemTags.PIGLIN_LOVED)
                 .add(YAFMItems.PREMIUM_FEED.get());
+
+        this.tag(ItemTags.MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
+                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get());
+
+        this.tag(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
+                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get());
     }
 }

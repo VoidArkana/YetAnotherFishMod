@@ -3,7 +3,6 @@ package net.voidarkana.yetanotherfishmod.util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +19,7 @@ public class YAFMTags {
         public static final TagKey<Biome> CATFISH_BIOMES = tag("catfish_biomes");
         public static final TagKey<Biome> FEATHERBACK_BIOMES = tag("featherback_biomes");
         public static final TagKey<Biome> FWSHARK_BIOMES = tag("fwshark_biomes");
+        public static final TagKey<Biome> ARTEMIA_BIOMES = tag("artemia_biomes");
 
         private static TagKey<Biome> tag(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(YetAnotherFishMod.MOD_ID, pName));
@@ -64,6 +64,9 @@ public class YAFMTags {
 
         public static final TagKey<net.minecraft.world.entity.EntityType<?>> FISHNET_ADDITIONS = tag("fishnet_additions");
         public static final TagKey<net.minecraft.world.entity.EntityType<?>> FISHNET_BLACKLIST = tag("fishnet_blacklist");
+
+        public static final TagKey<net.minecraft.world.entity.EntityType<?>> PREDATOR_FISH = tag("predator_fish");
+        public static final TagKey<net.minecraft.world.entity.EntityType<?>> FISH_PREY = tag("fish_prey");
 
         private static TagKey<net.minecraft.world.entity.EntityType<?>> tag(String name){
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(YetAnotherFishMod.MOD_ID, name));

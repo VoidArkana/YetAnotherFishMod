@@ -1,12 +1,12 @@
 package net.voidarkana.yetanotherfishmod.common.item;
 
-import com.google.common.collect.Maps;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -18,8 +18,7 @@ import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishBucketItem;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
 import net.voidarkana.yetanotherfishmod.common.item.custom.YAFMFoods;
-
-import java.util.Map;
+import net.voidarkana.yetanotherfishmod.common.sound.YAFMSounds;
 
 @Mod.EventBusSubscriber(modid = YetAnotherFishMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class YAFMItems {
@@ -93,13 +92,13 @@ public class YAFMItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> QUALITY_FEED = ITEMS.register("quality_feed",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> GREAT_FEED = ITEMS.register("great_feed",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> PREMIUM_FEED = ITEMS.register("premium_feed",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> BAD_FEED = ITEMS.register("bad_feed",
             () -> new Item(new Item.Properties()));
@@ -112,11 +111,41 @@ public class YAFMItems {
             () -> new Item(new Item.Properties().food(YAFMFoods.COOKED_FISH)));
 
     public static final RegistryObject<Item> DAPHNEA_SPAWN_EGG = ITEMS.register("daphnea_spawn_egg",
-            () -> new ForgeSpawnEggItem(YAFMEntities.DAPHNEA, 0x90ba6d, 0xbdcdb0, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(YAFMEntities.DAPHNIA_SWARM, 0x90ba6d, 0xbdcdb0, new Item.Properties()));
 
 
     public static final RegistryObject<Item> FISHNET = ITEMS.register("fishnet",
             () -> new FishnetItem(new Item.Properties().stacksTo(1)));
+
+
+    public static final RegistryObject<Item> ARTEMIA_SPAWN_EGG = ITEMS.register("artemia_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.ARTEMIA, 0xb66259, 0x9e3c0e, new Item.Properties()));
+
+    public static final RegistryObject<Item> ARTEMIA_BUCKET = ITEMS.register("artemia_bucket", () -> {
+        return new FishBucketItem(YAFMEntities.ARTEMIA, () -> {
+            return Fluids.WATER;
+        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
+    });
+
+
+    public static final RegistryObject<Item> SALTY_MUSIC_DISC = ITEMS.register("salty_music_disc",
+            () -> new RecordItem(6, YAFMSounds.SALTY, new Item.Properties().stacksTo(1)
+                    .rarity(Rarity.RARE), 2400));
+
+
+    public static final RegistryObject<Item> AXOLOTL_MUSIC_DISC = ITEMS.register("axolotl_music_disc",
+            () -> new RecordItem(7, YAFMSounds.AXOLOTL, new Item.Properties().stacksTo(1)
+                    .rarity(Rarity.RARE), 6120));
+
+
+    public static final RegistryObject<Item> DRAGONFISH_MUSIC_DISC = ITEMS.register("dragonfish_music_disc",
+            () -> new RecordItem(8, YAFMSounds.DRAGONFISH, new Item.Properties().stacksTo(1)
+                    .rarity(Rarity.RARE), 7680));
+
+
+    public static final RegistryObject<Item> SHUNJI_MUSIC_DISC = ITEMS.register("shunji_music_disc",
+            () -> new RecordItem(9, YAFMSounds.SHUNJI, new Item.Properties().stacksTo(1)
+                    .rarity(Rarity.RARE), 4960));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

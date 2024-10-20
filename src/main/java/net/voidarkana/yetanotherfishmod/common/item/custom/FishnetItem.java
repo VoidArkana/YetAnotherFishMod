@@ -54,8 +54,8 @@ public class FishnetItem extends Item {
 
         if (!target.getPassengers().isEmpty()) target.ejectPassengers();
 
-        if (!target.getType().is(YAFMTags.EntityType.FISHNET_BLACKLIST) &&
-                (target instanceof WaterAnimal || target.getType().is(YAFMTags.EntityType.FISHNET_ADDITIONS))) {
+        if ((!target.getType().is(YAFMTags.EntityType.FISHNET_BLACKLIST) && target instanceof WaterAnimal)
+                || target.getType().is(YAFMTags.EntityType.FISHNET_ADDITIONS)) {
 
             if (!level.isClientSide) {
 
@@ -232,7 +232,7 @@ public class FishnetItem extends Item {
             if (context.getLevel().addFreshEntity(entity)) {
                 itemstack.shrink(1);
             }
-            context.getLevel().playSound(null, entity.blockPosition(), SoundEvents.BARREL_OPEN, SoundSource.AMBIENT, 1, 1);
+            context.getLevel().playSound(null, entity.blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.AMBIENT, 1, 1);
             context.getPlayer().setItemInHand(context.getHand(), new ItemStack(YAFMItems.FISHNET.get()));
 
             return InteractionResult.CONSUME;

@@ -8,7 +8,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -75,7 +74,7 @@ public abstract class SchoolingFish extends BucketableFishEntity{
     public abstract void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar);
 
     @Nullable
-    private SchoolingFish leader;
+    protected SchoolingFish leader;
     private int schoolSize = 1;
 
 
