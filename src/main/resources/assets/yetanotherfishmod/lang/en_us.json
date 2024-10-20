@@ -30,6 +30,10 @@
   "item.yetanotherfishmod.artemia_bucket" : "Bucket of Fairy Shrimp",
   "entity.yetanotherfishmod.artemia" : "Fairy Shrimp",
 
+  "item.yetanotherfishmod.daphnia_spawn_egg" : "Daphnia Spawn Egg",
+  "item.yetanotherfishmod.daphnia_bucket" : "Bucket of Daphnia",
+  "entity.yetanotherfishmod.daphnia" : "Daphnia",
+
   "yafm.featherback_sci.0" : "Xenomystus nigri",
   "yafm.featherback_sci.1" : "Papyrocranus afer",
   "yafm.featherback_sci.2" : "Chitala ornata",
@@ -234,10 +238,8 @@
   "yafm.minnow_common.3.2" : "Kubotai Rasbora",
   "yafm.minnow_common.3.3" : "Eyespot Rasbora",
 
-
   "yafm.pleco_sci" : "Pterygoplichthys ambrosettii",
   "yafm.pleco_common" : "Snow King Pleco",
-
 
   "yafm.artemia_sci.0" : "Artemia Salina",
   "yafm.artemia_sci.1" : "Thamnocephalus Platyurus",
@@ -246,6 +248,12 @@
   "yafm.artemia_common.0" : "Fairy Shrimp",
   "yafm.artemia_common.1" : "Beavertail Fairy Shrimp",
   "yafm.artemia_common.2" : "Thai Fairy Shrimp",
+
+  "yafm.daphnia_sci" : "Daphnia Pulex",
+  "yafm.daphnia_common" : "Common Water Flea",
+
+  "item.yetanotherfishmod.fresh_music_disc" : "Music Disc",
+  "item.yetanotherfishmod.fresh_music_disc.desc" : "MessySlimey - Fresh",
 
   "item.yetanotherfishmod.salty_music_disc" : "Music Disc",
   "item.yetanotherfishmod.salty_music_disc.desc" : "Ninni - Salty",

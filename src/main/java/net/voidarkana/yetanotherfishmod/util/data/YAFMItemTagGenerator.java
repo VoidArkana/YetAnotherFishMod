@@ -43,9 +43,9 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
                 .add(YAFMItems.PREMIUM_FEED.get());
 
         this.tag(ItemTags.MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
-                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get());
+                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get()).add(YAFMItems.FRESH_MUSIC_DISC.get());
 
         this.tag(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
-                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get());
+                .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get()).add(YAFMItems.FRESH_MUSIC_DISC.get());
     }
 }

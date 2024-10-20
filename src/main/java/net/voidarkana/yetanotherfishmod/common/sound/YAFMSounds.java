@@ -14,6 +14,8 @@ public class YAFMSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, YetAnotherFishMod.MOD_ID);
 
     public static final RegistryObject<SoundEvent> SALTY = registerSoundEvents("salty");
+    public static final RegistryObject<SoundEvent> FRESH = registerSoundEvents("fresh");
+
     public static final RegistryObject<SoundEvent> AXOLOTL = registerSoundEvents("axolotl");
     public static final RegistryObject<SoundEvent> DRAGONFISH = registerSoundEvents("dragonfish");
     public static final RegistryObject<SoundEvent> SHUNJI = registerSoundEvents("shunji");

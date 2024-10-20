@@ -46,12 +46,14 @@ public class YAFMItemModelProvider extends ItemModelProvider {
 
         withExistingParent(YAFMItems.ARAPAIMA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
-        withExistingParent(YAFMItems.DAPHNEA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(YAFMItems.DAPHNIA_BUCKET);
+        withExistingParent(YAFMItems.DAPHNIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(YAFMItems.ARTEMIA_BUCKET);
         withExistingParent(YAFMItems.ARTEMIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(YAFMItems.SALTY_MUSIC_DISC);
+        simpleItem(YAFMItems.FRESH_MUSIC_DISC);
         simpleItem(YAFMItems.AXOLOTL_MUSIC_DISC);
         simpleItem(YAFMItems.DRAGONFISH_MUSIC_DISC);
         simpleItem(YAFMItems.SHUNJI_MUSIC_DISC);

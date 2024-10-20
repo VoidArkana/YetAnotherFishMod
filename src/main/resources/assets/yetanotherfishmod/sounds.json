@@ -1,4 +1,12 @@
 {
+  "fresh": {
+    "sounds": [
+      {
+        "name": "yetanotherfishmod:fresh",
+        "stream": true
+      }
+    ]
+  },
   "salty": {
     "sounds": [
       {

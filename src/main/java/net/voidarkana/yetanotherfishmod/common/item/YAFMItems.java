@@ -1,12 +1,10 @@
 package net.voidarkana.yetanotherfishmod.common.item;
 
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -110,12 +108,9 @@ public class YAFMItems {
     public static final RegistryObject<Item> COOKED_FISH = ITEMS.register("cooked_fish",
             () -> new Item(new Item.Properties().food(YAFMFoods.COOKED_FISH)));
 
-    public static final RegistryObject<Item> DAPHNEA_SPAWN_EGG = ITEMS.register("daphnea_spawn_egg",
-            () -> new ForgeSpawnEggItem(YAFMEntities.DAPHNIA_SWARM, 0x90ba6d, 0xbdcdb0, new Item.Properties()));
-
-
     public static final RegistryObject<Item> FISHNET = ITEMS.register("fishnet",
             () -> new FishnetItem(new Item.Properties().stacksTo(1)));
+
 
 
     public static final RegistryObject<Item> ARTEMIA_SPAWN_EGG = ITEMS.register("artemia_spawn_egg",
@@ -128,10 +123,25 @@ public class YAFMItems {
     });
 
 
+
+    public static final RegistryObject<Item> DAPHNIA_SPAWN_EGG = ITEMS.register("daphnia_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.DAPHNIA, 0x90ba6d, 0xbdcdb0, new Item.Properties()));
+
+    public static final RegistryObject<Item> DAPHNIA_BUCKET = ITEMS.register("daphnia_bucket", () -> {
+        return new FishBucketItem(YAFMEntities.DAPHNIA, () -> {
+            return Fluids.WATER;
+        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
+    });
+
+
+
+    public static final RegistryObject<Item> FRESH_MUSIC_DISC = ITEMS.register("fresh_music_disc",
+            () -> new RecordItem(5, YAFMSounds.FRESH, new Item.Properties().stacksTo(1)
+                    .rarity(Rarity.RARE), 3840));
+
     public static final RegistryObject<Item> SALTY_MUSIC_DISC = ITEMS.register("salty_music_disc",
             () -> new RecordItem(6, YAFMSounds.SALTY, new Item.Properties().stacksTo(1)
                     .rarity(Rarity.RARE), 2400));
-
 
     public static final RegistryObject<Item> AXOLOTL_MUSIC_DISC = ITEMS.register("axolotl_music_disc",
             () -> new RecordItem(7, YAFMSounds.AXOLOTL, new Item.Properties().stacksTo(1)

@@ -25,9 +25,8 @@ public class YAFMEvents {
         event.put(YAFMEntities.PLECO.get(), PlecoEntity.createAttributes().build());
         event.put(YAFMEntities.ARAPAIMA.get(), ArapaimaEntity.createAttributes().build());
 
-        event.put(YAFMEntities.DAPHNIA_SWARM.get(), DaphneaSwarmEntity.createAttributes().build());
-
         event.put(YAFMEntities.ARTEMIA.get(), ArtemiaEntity.createAttributes().build());
+        event.put(YAFMEntities.DAPHNIA.get(), DaphniaEntity.createAttributes().build());
     }
 
     @SubscribeEvent

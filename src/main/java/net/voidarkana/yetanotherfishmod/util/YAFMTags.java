@@ -20,6 +20,7 @@ public class YAFMTags {
         public static final TagKey<Biome> FEATHERBACK_BIOMES = tag("featherback_biomes");
         public static final TagKey<Biome> FWSHARK_BIOMES = tag("fwshark_biomes");
         public static final TagKey<Biome> ARTEMIA_BIOMES = tag("artemia_biomes");
+        public static final TagKey<Biome> DAPHNIA_BIOMES = tag("daphnia_biomes");
 
         private static TagKey<Biome> tag(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(YetAnotherFishMod.MOD_ID, pName));

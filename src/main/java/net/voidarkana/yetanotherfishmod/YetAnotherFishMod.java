@@ -109,7 +109,7 @@ public class YetAnotherFishMod
         EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
         EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
 
-        EntityRenderers.register(YAFMEntities.DAPHNIA_SWARM.get(), DaphneaSwarmRenderer::new);
+        EntityRenderers.register(YAFMEntities.DAPHNIA.get(), DaphniaRenderer::new);
 
         EntityRenderers.register(YAFMEntities.ARTEMIA.get(), ArtemiaRenderer::new);
 

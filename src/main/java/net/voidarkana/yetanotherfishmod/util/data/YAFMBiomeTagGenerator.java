@@ -51,6 +51,9 @@ public class YAFMBiomeTagGenerator extends BiomeTagsProvider {
         this.tag(YAFMTags.Biomes.ARTEMIA_BIOMES)
                 .addTag(Tags.Biomes.IS_DESERT);
 
+        this.tag(YAFMTags.Biomes.DAPHNIA_BIOMES)
+                .addTag(BiomeTags.IS_RIVER);
+
     }
 
 }

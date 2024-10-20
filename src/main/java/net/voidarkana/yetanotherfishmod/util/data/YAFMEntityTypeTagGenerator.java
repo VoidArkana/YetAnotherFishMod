@@ -53,6 +53,6 @@ public class YAFMEntityTypeTagGenerator extends EntityTypeTagsProvider {
                 .add(YAFMEntities.CATFISH.get()).add(YAFMEntities.FRESHWATER_SHARK.get()).add(YAFMEntities.FEATHERBACK.get())
                 .add(YAFMEntities.MINNOW.get());
 
-        this.tag(YAFMTags.EntityType.FISH_PREY).add(YAFMEntities.ARTEMIA.get());
+        this.tag(YAFMTags.EntityType.FISH_PREY).add(YAFMEntities.ARTEMIA.get()).add(YAFMEntities.DAPHNIA.get());
     }
 }
