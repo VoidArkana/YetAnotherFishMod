@@ -31,6 +31,8 @@ public class YAFMTags {
     public static class Items {
 
         public static final TagKey<Item> FISH_FEED = tag("fish_feed");
+        public static final TagKey<Item> URANIUM = tag("uranium");
+        public static final TagKey<Item> SUGAR_GLASS = tag("sugar_glass");
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(YetAnotherFishMod.MOD_ID, name));

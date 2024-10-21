@@ -2,6 +2,7 @@ package net.voidarkana.yetanotherfishmod.util.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
@@ -19,6 +20,7 @@ public class YAFMBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+
         this.tag(YAFMTags.Blocks.AQUARIUM_GLASS)
                 .add(YAFMBlocks.AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.AQUARIUM_GLASS_PANE.get())
@@ -49,5 +51,7 @@ public class YAFMBlockTagGenerator extends BlockTagsProvider {
                 .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get())
                 .add(YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
+
+        this.tag(Tags.Blocks.GLASS).addTags(YAFMTags.Blocks.AQUARIUM_GLASS);
     }
 }

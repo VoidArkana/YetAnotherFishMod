@@ -3,10 +3,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "yetanotherfishmod:aquarium_glass"
+          "name": "yetanotherfishmod:tinted_infernal_aquarium_glass"
         }
       ],
       "rolls": 1.0

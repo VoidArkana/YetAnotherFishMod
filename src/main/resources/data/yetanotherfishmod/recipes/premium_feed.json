@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "F": {
+      "item": "yetanotherfishmod:great_feed"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GFG",
+    "GGG"
+  ],
+  "result": {
+    "item": "yetanotherfishmod:premium_feed",
+    "count": 2
+  },
+  "show_notification": true
+}

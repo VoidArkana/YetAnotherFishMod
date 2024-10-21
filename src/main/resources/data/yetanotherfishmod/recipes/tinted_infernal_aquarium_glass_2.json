@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:quartz"
+    },
+    "G": {
+      "item": "minecraft:tinted_glass"
+    }
+  },
+  "pattern": [
+    " L ",
+    "LGL",
+    " L "
+  ],
+  "result": {
+    "item": "yetanotherfishmod:tinted_infernal_aquarium_glass",
+    "count": 2
+  },
+  "show_notification": true
+}

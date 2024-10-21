@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "tag": "yetanotherfishmod:sugar_glass"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    " L ",
+    "LGL",
+    " L "
+  ],
+  "result": {
+    "item": "yetanotherfishmod:sugar_aquarium_glass",
+    "count": 2
+  },
+  "show_notification": true
+}

@@ -37,10 +37,12 @@ public class DaphniaEntity extends SchoolingFish implements GeoEntity {
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.DRIED_KELP);
 
+    public int inactiveTicks = 0;
+
     protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.daphnia.swim");
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.daphnia.idle");
     protected static final RawAnimation FLOP = RawAnimation.begin().thenLoop("animation.daphnia.flop");
-    protected static final RawAnimation JUMP = RawAnimation.begin().thenLoop("animation.daphnia.jump");
+    protected static final RawAnimation JUMP = RawAnimation.begin().thenPlay("animation.daphnia.jump");
 
     public DaphniaEntity(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -62,7 +64,7 @@ public class DaphniaEntity extends SchoolingFish implements GeoEntity {
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, WaterAnimal.class, 8.0F, 1.6D, 1.4D, (entity) -> {
             return entity.getType().is(YAFMTags.EntityType.PREDATOR_FISH);}));
 
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 80));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 100));
     }
 
     @Override
@@ -101,6 +103,28 @@ public class DaphniaEntity extends SchoolingFish implements GeoEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+
+        if (this.getDeltaMovement().horizontalDistanceSqr()<0.0001 && this.isInWater()){
+            inactiveTicks++;
+            this.setDeltaMovement(this.getDeltaMovement().add(0, -0.0025, 0));
+        }else {
+            inactiveTicks = 0;
+        }
+
+        if (inactiveTicks >= 20 && this.isInWater()){
+            this.setDeltaMovement(this.getDeltaMovement().add(0, 0.05, 0));
+            this.lookControl.setLookAt(this.position().x, this.position().y + 2, this.position().z);
+        }
+
+        if (inactiveTicks < 30){
+            inactiveTicks = 0;
+        }
+
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController[]{new AnimationController(this, "Normal", 5, this::Controller)});
     }
@@ -113,6 +137,10 @@ public class DaphniaEntity extends SchoolingFish implements GeoEntity {
 
                 if (entity.isBaby()){
                     event.getController().setAnimationSpeed(2d);}
+
+            } else if (this.inactiveTicks>=20 && this.inactiveTicks<30){
+
+                event.setAndContinue(JUMP);
 
             } else {
                 event.setAndContinue(IDLE);

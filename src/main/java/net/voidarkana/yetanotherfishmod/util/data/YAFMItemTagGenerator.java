@@ -3,8 +3,10 @@ package net.voidarkana.yetanotherfishmod.util.data;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
@@ -21,6 +23,7 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+
         this.tag(YAFMTags.Items.FISH_FEED)
                 .add(YAFMItems.REGULAR_FEED.get())
                 .add(YAFMItems.GREAT_FEED.get())
@@ -47,5 +50,9 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
 
         this.tag(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
                 .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get()).add(YAFMItems.FRESH_MUSIC_DISC.get());
+
+        this.tag(YAFMTags.Items.URANIUM).addOptional(new ResourceLocation( "alexscaves:uranium_shard"));
+
+        this.tag(YAFMTags.Items.SUGAR_GLASS).addOptional(new ResourceLocation( "alexscaves:sugar_glass"));
     }
 }

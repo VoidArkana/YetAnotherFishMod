@@ -15,6 +15,7 @@ import net.voidarkana.yetanotherfishmod.YetAnotherFishMod;
 import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntities;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishBucketItem;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
+import net.voidarkana.yetanotherfishmod.common.item.custom.FullFishnetItem;
 import net.voidarkana.yetanotherfishmod.common.item.custom.YAFMFoods;
 import net.voidarkana.yetanotherfishmod.common.sound.YAFMSounds;
 
@@ -82,8 +83,13 @@ public class YAFMItems {
         }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
     });
 
+
     public static final RegistryObject<Item> ARAPAIMA_SPAWN_EGG = ITEMS.register("arapaima_spawn_egg",
             () -> new ForgeSpawnEggItem(YAFMEntities.ARAPAIMA, 0x1b2321, 0x521c1a, new Item.Properties()));
+
+    public static final RegistryObject<Item> ARAPAIMA_FISHNET = ITEMS.register("arapaima_fishnet",
+            () -> new FullFishnetItem(YAFMEntities.ARAPAIMA, new Item.Properties().stacksTo(1)));
+
 
 
     public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
@@ -119,8 +125,7 @@ public class YAFMItems {
     public static final RegistryObject<Item> ARTEMIA_BUCKET = ITEMS.register("artemia_bucket", () -> {
         return new FishBucketItem(YAFMEntities.ARTEMIA, () -> {
             return Fluids.WATER;
-        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
-    });
+        }, Items.BUCKET, false, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));});
 
 
 
@@ -130,8 +135,7 @@ public class YAFMItems {
     public static final RegistryObject<Item> DAPHNIA_BUCKET = ITEMS.register("daphnia_bucket", () -> {
         return new FishBucketItem(YAFMEntities.DAPHNIA, () -> {
             return Fluids.WATER;
-        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
-    });
+        }, Items.BUCKET, false, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));});
 
 
 
@@ -143,15 +147,14 @@ public class YAFMItems {
             () -> new RecordItem(6, YAFMSounds.SALTY, new Item.Properties().stacksTo(1)
                     .rarity(Rarity.RARE), 2400));
 
+
     public static final RegistryObject<Item> AXOLOTL_MUSIC_DISC = ITEMS.register("axolotl_music_disc",
             () -> new RecordItem(7, YAFMSounds.AXOLOTL, new Item.Properties().stacksTo(1)
                     .rarity(Rarity.RARE), 6120));
 
-
     public static final RegistryObject<Item> DRAGONFISH_MUSIC_DISC = ITEMS.register("dragonfish_music_disc",
             () -> new RecordItem(8, YAFMSounds.DRAGONFISH, new Item.Properties().stacksTo(1)
                     .rarity(Rarity.RARE), 7680));
-
 
     public static final RegistryObject<Item> SHUNJI_MUSIC_DISC = ITEMS.register("shunji_music_disc",
             () -> new RecordItem(9, YAFMSounds.SHUNJI, new Item.Properties().stacksTo(1)
