@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "yetanotherfishmod:fresh_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "yetanotherfishmod:salty_music_disc"
+        },
+
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "yetanotherfishmod:axolotl_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "yetanotherfishmod:shunji_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "yetanotherfishmod:dragonfish_music_disc"
+        }
+      ]
+    }
+  ]
+}

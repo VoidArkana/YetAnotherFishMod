@@ -38,7 +38,7 @@ import software.bernie.geckolib.core.object.PlayState;
 public class FeatherbackEntity extends BucketableFishEntity implements GeoEntity {
 
     protected static final RawAnimation BIG_SWIM = RawAnimation.begin().thenLoop("animation.genericfish.twoblocktailandheadswim");
-    protected static final RawAnimation BIG_FLOP = RawAnimation.begin().thenLoop("animation.genericfish.twoblocktailandheadflop");
+    protected static final RawAnimation BIG_FLOP = RawAnimation.begin().thenLoop("animation.genericfish.fishwithheadflop");
     protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.genericfish.headswim");
     protected static final RawAnimation FLOP = RawAnimation.begin().thenPlay("animation.genericfish.headflop");
 

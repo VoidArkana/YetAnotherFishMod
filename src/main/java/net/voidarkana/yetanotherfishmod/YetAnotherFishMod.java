@@ -21,7 +21,9 @@ import net.voidarkana.yetanotherfishmod.common.entity.YAFMEntityPlacements;
 import net.voidarkana.yetanotherfishmod.common.event.YAFMEvents;
 import net.voidarkana.yetanotherfishmod.common.item.YAFMItems;
 import net.voidarkana.yetanotherfishmod.common.item.custom.FishnetItem;
+import net.voidarkana.yetanotherfishmod.common.loot.YAFMLootModifiers;
 import net.voidarkana.yetanotherfishmod.common.sound.YAFMSounds;
+import net.voidarkana.yetanotherfishmod.common.worldgen.YAFMConfiguredFeatures;
 import net.voidarkana.yetanotherfishmod.server.MessageHurtMultipart;
 import net.voidarkana.yetanotherfishmod.server.MessageInteractMultipart;
 import net.voidarkana.yetanotherfishmod.util.ClientProxy;
@@ -73,6 +75,9 @@ public class YetAnotherFishMod
         YAFMItems.register(modEventBus);
         YAFMBlocks.register(modEventBus);
         YAFMParticles.register(modEventBus);
+        YAFMLootModifiers.register(modEventBus);
+
+        YAFMConfiguredFeatures.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new YAFMEvents());

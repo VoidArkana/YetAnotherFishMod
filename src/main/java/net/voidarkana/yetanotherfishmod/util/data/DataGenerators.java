@@ -35,5 +35,9 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(),new YAFMBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
         generator.addProvider(event.includeServer(),new YAFMEntityTypeTagGenerator(packOutput, lookupProvider, existingFileHelper));
+
+        generator.addProvider(event.includeServer(), new YAFMWorldGenProvider(packOutput, lookupProvider));
+
+        //generator.addProvider(event.includeServer(), new YAFMGlobalLootModifiersProvider(packOutput));
     }
 }

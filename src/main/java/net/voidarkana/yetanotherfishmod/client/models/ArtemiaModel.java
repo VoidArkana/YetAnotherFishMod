@@ -47,7 +47,7 @@ public class ArtemiaModel extends GeoModel<ArtemiaEntity> {
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
-        swimControl.setRotX((entityData.headPitch() * ((float) Math.PI / 180F)));
+        swimControl.setRotX((entityData.headPitch() * ((float) Math.PI / 180F))*1.8F);
 
         head.setRotX(((entityData.headPitch() * ((float) Math.PI / 180F))/8));
         tailRot.setRotX(-((entityData.headPitch() * ((float) Math.PI / 180F))/4));
