@@ -25,7 +25,7 @@
               "function": "minecraft:looting_enchant"
             }
           ],
-          "name": "minecraft:bonemeal"
+          "name": "minecraft:bone_meal"
         }
       ],
       "rolls": 1.0
@@ -41,7 +41,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
-                "min": 1.0
+                "min": 0.0
               },
               "function": "minecraft:set_count"
             },
@@ -63,7 +63,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
-                "min": 0.0
+                "min": 1.0
               },
               "function": "minecraft:looting_enchant"
             }
@@ -73,5 +73,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "fintastic:entities/pleco"
 }

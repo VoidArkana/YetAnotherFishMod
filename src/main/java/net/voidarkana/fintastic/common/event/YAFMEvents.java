@@ -7,8 +7,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.fintastic.Fintastic;
-import net.voidarkana.fintastic.client.particles.DaphneaParticle;
-import net.voidarkana.fintastic.client.particles.YAFMParticles;
 import net.voidarkana.fintastic.common.entity.YAFMEntities;
 import net.voidarkana.fintastic.common.entity.custom.*;
 
@@ -27,12 +25,6 @@ public class YAFMEvents {
 
         event.put(YAFMEntities.ARTEMIA.get(), ArtemiaEntity.createAttributes().build());
         event.put(YAFMEntities.DAPHNIA.get(), DaphniaEntity.createAttributes().build());
-    }
-
-    @SubscribeEvent
-    public static void registerParticleFactories(final RegisterParticleProvidersEvent event){
-        Minecraft.getInstance().particleEngine.register(YAFMParticles.DAPHNEA_PARTICLES.get(),
-                DaphneaParticle.Factory :: new);
     }
 
 }

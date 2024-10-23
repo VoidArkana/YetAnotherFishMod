@@ -1,14 +1,24 @@
 package net.voidarkana.fintastic.client;
 
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.voidarkana.fintastic.Fintastic;
+import net.voidarkana.fintastic.client.renderers.*;
 import net.voidarkana.fintastic.common.block.YAFMBlocks;
+import net.voidarkana.fintastic.common.entity.YAFMEntities;
+import net.voidarkana.fintastic.common.item.YAFMItems;
+import net.voidarkana.fintastic.common.item.custom.FishnetItem;
+
+import static net.voidarkana.fintastic.Fintastic.PROXY;
 
 @Mod.EventBusSubscriber(modid = Fintastic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class YAFMClientEvents {

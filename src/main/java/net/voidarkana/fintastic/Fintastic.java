@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
-import net.voidarkana.fintastic.client.particles.YAFMParticles;
 import net.voidarkana.fintastic.client.renderers.*;
 import net.voidarkana.fintastic.common.block.YAFMBlocks;
 import net.voidarkana.fintastic.common.entity.YAFMEntities;
@@ -74,7 +75,6 @@ public class Fintastic
         YAFMSounds.register(modEventBus);
         YAFMItems.register(modEventBus);
         YAFMBlocks.register(modEventBus);
-        YAFMParticles.register(modEventBus);
         YAFMLootModifiers.register(modEventBus);
 
         YAFMConfiguredFeatures.register(modEventBus);
@@ -88,42 +88,34 @@ public class Fintastic
 
     private void commonSetup(final FMLCommonSetupEvent event) {
 
-        YAFMEntityPlacements.entityPlacement();
-
-        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
-        NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
-
         event.enqueueWork(()->{
+            YAFMEntityPlacements.entityPlacement();
+
+            NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
+            NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
+
+
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.DUCKWEED.get().asItem(), 0.4F);
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.HORNWORT.get().asItem(), 0.4F);
         });
     }
 
-
     private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(PROXY::clientInit);
-
-        CALLBACKS.forEach(Runnable::run);
-        CALLBACKS.clear();
-
-        EntityRenderers.register(YAFMEntities.FEATHERBACK.get(), FeatherbackRenderer::new);
-        EntityRenderers.register(YAFMEntities.MINNOW.get(), MinnowRenderer::new);
-        EntityRenderers.register(YAFMEntities.CATFISH.get(), CatfishRenderer::new);
-        EntityRenderers.register(YAFMEntities.GUPPY.get(), GuppyRenderer::new);
-        EntityRenderers.register(YAFMEntities.FRESHWATER_SHARK.get(), FreshwaterSharkRenderer::new);
-        EntityRenderers.register(YAFMEntities.PLECO.get(), PlecoRenderer::new);
-        EntityRenderers.register(YAFMEntities.ARAPAIMA.get(), ArapaimaRenderer::new);
-
-        EntityRenderers.register(YAFMEntities.DAPHNIA.get(), DaphniaRenderer::new);
-
-        EntityRenderers.register(YAFMEntities.ARTEMIA.get(), ArtemiaRenderer::new);
-
-        ItemProperties.register(YAFMItems.FISHNET.get(), new ResourceLocation("has_entity"),
-                (stack, level, living, i) -> living != null && FishnetItem.containsEntity(stack) ? 1 : 0);
+        event.enqueueWork(() -> PROXY.clientInit());
     }
 
     public static <MSG> void sendMSGToServer(MSG message) {
         NETWORK_WRAPPER.sendToServer(message);
     }
+
+//    public static <MSG> void sendMSGToAll(MSG message) {
+//        for (ServerPlayer player : ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayers()) {
+//            sendNonLocal(message, player);
+//        }
+//    }
+//
+//    public static <MSG> void sendNonLocal(MSG msg, ServerPlayer player) {
+//        NETWORK_WRAPPER.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+//    }
 
 }
