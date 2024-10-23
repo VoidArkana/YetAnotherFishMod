@@ -1,6 +1,0 @@
-{
-  "parent" : "yetanotherfishmod:block/aquarium_glass/aquarium_glass_block_part",
-  "textures": {
-    "texture": "yetanotherfishmod:block/tinted_aquarium_glass/onlytop"
-  }
-}

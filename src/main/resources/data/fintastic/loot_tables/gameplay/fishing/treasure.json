@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "fintastic:fresh_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "fintastic:salty_music_disc"
+        },
+
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "fintastic:axolotl_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "fintastic:shunji_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "fintastic:dragonfish_music_disc"
+        }
+      ]
+    }
+  ]
+}

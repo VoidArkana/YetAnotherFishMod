@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "fintastic:quality_feed"
+    },
+    {
+      "item": "fintastic:artemia_bucket"
+    }
+  ],
+  "result": {
+    "item": "fintastic:great_feed",
+    "count": 2
+  }
+}

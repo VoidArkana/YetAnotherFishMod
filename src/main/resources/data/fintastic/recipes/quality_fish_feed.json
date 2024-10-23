@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:seagrass"
+    },
+    {
+      "item": "fintastic:regular_feed"
+    },
+    {
+      "item": "fintastic:daphnia_bucket"
+    }
+  ],
+  "result": {
+    "item": "fintastic:quality_feed",
+    "count": 2
+  }
+}

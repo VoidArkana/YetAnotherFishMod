@@ -1,0 +1,7 @@
+{
+  "parent" : "fintastic:block/aquarium_glass_pane/aquarium_glass_pane",
+  "textures": {
+    "texture": "#texture",
+    "sides": "#texture"
+  }
+}

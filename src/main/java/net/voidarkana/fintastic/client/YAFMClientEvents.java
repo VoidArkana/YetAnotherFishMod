@@ -1,0 +1,67 @@
+package net.voidarkana.fintastic.client;
+
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.voidarkana.fintastic.Fintastic;
+import net.voidarkana.fintastic.common.block.YAFMBlocks;
+
+@Mod.EventBusSubscriber(modid = Fintastic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class YAFMClientEvents {
+
+    @SubscribeEvent
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos)
+                        : 0x4f9ce3,
+                YAFMBlocks.AQUARIUM_GLASS.get(),
+                YAFMBlocks.AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_AQUARIUM_GLASS.get());
+
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                0xff6f36, YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get(),
+                YAFMBlocks.TINTED_INFERNAL_AQUARIUM_GLASS.get(),
+                YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get());
+
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                0x4eb821, YAFMBlocks.RADON_AQUARIUM_GLASS.get(),
+                YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+        event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) ->
+                0x8a1edc, YAFMBlocks.SUGAR_AQUARIUM_GLASS.get(),
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
+    }
+
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+
+        event.getItemColors().register((pStack, pTintIndex) -> {
+            BlockState blockstate = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
+            return event.getBlockColors().getColor(blockstate, null, null, pTintIndex);},
+                YAFMBlocks.AQUARIUM_GLASS.get(),
+                YAFMBlocks.AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_AQUARIUM_GLASS.get());
+
+        event.getItemColors().register((pStack, pTintIndex) -> 0xff6f36,
+                YAFMBlocks.INFERNAL_AQUARIUM_GLASS.get(),
+                YAFMBlocks.TINTED_INFERNAL_AQUARIUM_GLASS.get(),
+                YAFMBlocks.INFERNAL_AQUARIUM_GLASS_PANE.get());
+
+        event.getItemColors().register((pStack, pTintIndex) -> 0x4eb821,
+                YAFMBlocks.RADON_AQUARIUM_GLASS.get(),
+                YAFMBlocks.RADON_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_RADON_AQUARIUM_GLASS.get());
+
+        event.getItemColors().register((pStack, pTintIndex) -> 0x8a1edc,
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS.get(),
+                YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get(),
+                YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
+
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#fintastic:featherback_biomes",
+  "spawners": {
+    "type": "fintastic:featherback",
+    "weight": 8,
+    "minCount": 1,
+    "maxCount": 2,
+    "category": "water_creature"
+  }
+}

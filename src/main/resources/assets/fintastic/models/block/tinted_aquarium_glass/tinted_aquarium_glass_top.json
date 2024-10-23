@@ -1,0 +1,6 @@
+{
+  "parent" : "fintastic:block/aquarium_glass/aquarium_glass_block_part",
+  "textures": {
+    "texture": "fintastic:block/tinted_aquarium_glass/top"
+  }
+}

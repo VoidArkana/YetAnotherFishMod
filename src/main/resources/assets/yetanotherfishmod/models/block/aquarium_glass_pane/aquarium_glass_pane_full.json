@@ -1,7 +1,0 @@
-{
-  "parent" : "yetanotherfishmod:block/aquarium_glass_pane/aquarium_glass_pane",
-  "textures": {
-    "texture": "yetanotherfishmod:block/aquarium_glass/full",
-    "sides": "yetanotherfishmod:block/aquarium_glass_pane_sides/full"
-  }
-}

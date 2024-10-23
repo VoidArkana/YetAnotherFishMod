@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "yetanotherfishmod:raw_fish"
-  },
-  "result": "yetanotherfishmod:cooked_fish",
-  "experience": 0.35,
-  "cookingtime": 200
-}

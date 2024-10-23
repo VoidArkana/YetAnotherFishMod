@@ -1,0 +1,42 @@
+{
+  "fresh": {
+    "sounds": [
+      {
+        "name": "fintastic:fresh",
+        "stream": true
+      }
+    ]
+  },
+  "salty": {
+    "sounds": [
+      {
+        "name": "fintastic:salty",
+        "stream": true
+      }
+    ]
+  },
+  "axolotl": {
+    "sounds": [
+      {
+        "name": "fintastic:axolotl",
+        "stream": true
+      }
+    ]
+  },
+  "dragonfish": {
+    "sounds": [
+      {
+        "name": "fintastic:dragonfish",
+        "stream": true
+      }
+    ]
+  },
+  "shunji": {
+    "sounds": [
+      {
+        "name": "fintastic:shunji",
+        "stream": true
+      }
+    ]
+  }
+}

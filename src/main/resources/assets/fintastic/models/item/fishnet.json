@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "fintastic:item/fishnet"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "has_entity": 1
+      },
+      "model": "fintastic:item/fishnet_full"
+    }
+  ]
+}

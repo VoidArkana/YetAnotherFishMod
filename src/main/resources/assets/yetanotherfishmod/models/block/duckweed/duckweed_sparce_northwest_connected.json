@@ -1,6 +1,0 @@
-{
-  "parent" : "yetanotherfishmod:block/duckweed/duckweed_layer",
-  "textures": {
-    "texture": "yetanotherfishmod:block/duckweed/duckweed_sparce_nw_c"
-  }
-}
