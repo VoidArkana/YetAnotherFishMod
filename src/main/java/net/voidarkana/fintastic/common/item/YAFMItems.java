@@ -84,11 +84,11 @@ public class YAFMItems {
     });
 
 
-    public static final RegistryObject<Item> ARAPAIMA_SPAWN_EGG = ITEMS.register("arapaima_spawn_egg",
-            () -> new ForgeSpawnEggItem(YAFMEntities.ARAPAIMA, 0x1b2321, 0x521c1a, new Item.Properties()));
-
     public static final RegistryObject<Item> ARAPAIMA_FISHNET = ITEMS.register("arapaima_fishnet",
             () -> new FullFishnetItem(YAFMEntities.ARAPAIMA, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> ARAPAIMA_SPAWN_EGG = ITEMS.register("arapaima_spawn_egg",
+            () -> new ForgeSpawnEggItem(YAFMEntities.ARAPAIMA, 0x1b2321, 0x521c1a, new Item.Properties()));
 
 
 

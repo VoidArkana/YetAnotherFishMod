@@ -14,8 +14,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.entity.PartEntity;
 import net.voidarkana.fintastic.Fintastic;
+import net.voidarkana.fintastic.common.item.YAFMItems;
 import net.voidarkana.fintastic.server.MessageHurtMultipart;
 import net.voidarkana.fintastic.server.MessageInteractMultipart;
 
@@ -112,4 +114,8 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
         parent.hurt(damageSource, damage);
     }
 
+    @Override
+    public ItemStack getPickedResult(HitResult target) {
+        return new ItemStack(YAFMItems.ARAPAIMA_SPAWN_EGG.get());
+    }
 }

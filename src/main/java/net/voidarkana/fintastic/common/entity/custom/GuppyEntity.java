@@ -434,7 +434,6 @@ public class GuppyEntity extends SchoolingFish implements GeoEntity {
 
         if (baby != null){
 
-
             int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
             int skin;
             int finModel;

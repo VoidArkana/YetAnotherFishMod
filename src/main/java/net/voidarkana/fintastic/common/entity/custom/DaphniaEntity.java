@@ -164,4 +164,95 @@ public class DaphniaEntity extends SchoolingFish implements GeoEntity {
     public boolean inRangeOfLeader() {
         return this.distanceToSqr(this.leader) <= 121.0D && this.distanceToSqr(this.leader) > 1.5D;
     }
+
+    @Override
+    public void spawnChildFromBreeding(ServerLevel pLevel, BreedableWaterAnimal pMate) {
+        BreedableWaterAnimal ageablemob = this.getBreedOffspring(pLevel, pMate);
+        BreedableWaterAnimal ageableMob2 = null;
+        BreedableWaterAnimal ageableMob3 = null;
+        BreedableWaterAnimal ageableMob4 = null;
+        BreedableWaterAnimal ageableMob5 = null;
+
+        final BreedableWaterAnimal.BabyFishSpawnEvent event = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageablemob);
+        ageablemob = event.getChild();
+
+        if (this.random.nextBoolean() || this.random.nextBoolean()){
+            ageableMob2 = this.getBreedOffspring(pLevel, pMate);
+            final BreedableWaterAnimal.BabyFishSpawnEvent event2 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob2);
+            ageableMob2 = event2.getChild();
+
+            if (this.random.nextBoolean()){
+                ageableMob3 = this.getBreedOffspring(pLevel, pMate);
+                final BreedableWaterAnimal.BabyFishSpawnEvent event3 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob3);
+                ageableMob3 = event3.getChild();
+
+                if (this.random.nextBoolean()){
+
+                    ageableMob4 = this.getBreedOffspring(pLevel, pMate);
+                    final BreedableWaterAnimal.BabyFishSpawnEvent event4 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob4);
+                    ageableMob4 = event4.getChild();
+
+                    if (this.random.nextBoolean()){
+                        ageableMob5 = this.getBreedOffspring(pLevel, pMate);
+                        final BreedableWaterAnimal.BabyFishSpawnEvent event5 = new BreedableWaterAnimal.BabyFishSpawnEvent(this, pMate, ageableMob5);
+                        ageableMob5 = event5.getChild();
+                    }
+                }
+            }
+        }
+
+        final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+        if (cancelled) {
+            //Reset the "inLove" state for the animals
+            this.setAge(6000);
+            pMate.setAge(6000);
+            this.resetLove();
+            pMate.resetLove();
+            return;
+        }
+        if (ageablemob != null) {
+
+            ageablemob.setAge(-12000);
+            ageablemob.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageablemob);
+            pLevel.addFreshEntityWithPassengers(ageablemob);
+
+            if (ageableMob2 != null){
+
+                ageableMob2.setAge(-12000);
+                ageableMob2.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob2);
+                pLevel.addFreshEntityWithPassengers(ageableMob2);
+
+                if (ageableMob3 != null){
+
+                    ageableMob3.setAge(-12000);
+                    ageableMob3.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                    this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob3);
+                    pLevel.addFreshEntityWithPassengers(ageableMob3);
+
+                    if (ageableMob4 != null){
+
+                        ageableMob4.setAge(-12000);
+                        ageableMob4.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                        this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob4);
+                        pLevel.addFreshEntityWithPassengers(ageableMob4);
+
+                        if (ageableMob5 != null){
+
+                            ageableMob5.setAge(-12000);
+                            ageableMob5.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+                            this.finalizeSpawnChildFromBreeding(pLevel, pMate, ageableMob5);
+                            pLevel.addFreshEntityWithPassengers(ageableMob5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public boolean isFood(ItemStack pStack) {
+        return FOOD_ITEMS.test(pStack);
+    }
 }

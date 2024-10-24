@@ -456,7 +456,6 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
-    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FEED_TYPE, 0);
@@ -464,12 +463,13 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.entityData.define(DATA_BABY_ID, false);
     }
 
-    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Age", this.getAge());
         pCompound.putInt("ForcedAge", this.forcedAge);
         pCompound.putBoolean("CanGrowUp", this.getCanGrowUp());
+
+        pCompound.putInt("FeedQuality", this.getFeedQuality());
 
         pCompound.putInt("InLove", this.inLove);
         if (this.loveCause != null) {
@@ -477,12 +477,13 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
     }
 
-    @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setAge(pCompound.getInt("Age"));
         this.forcedAge = pCompound.getInt("ForcedAge");
         this.setCanGrowUp(pCompound.getBoolean("CanGrowUp"));
+
+        this.setFeedQuality(pCompound.getInt("FeedQuality"));
 
         this.inLove = pCompound.getInt("InLove");
         this.loveCause = pCompound.hasUUID("LoveCause") ? pCompound.getUUID("LoveCause") : null;
@@ -500,7 +501,6 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     public void setFeedQuality(int variant) {
         this.entityData.set(FEED_TYPE, variant);
     }
-
 
     public Boolean getCanGrowUp() {
         return this.entityData.get(CAN_GROW_UP);
@@ -581,10 +581,59 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     @Override
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
 
-
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (this.isFood(itemstack)) {
-            int i = this.getAge();
+
+        int i = this.getAge();
+
+        if (this.isBaby() && itemstack.is(YAFMItems.BAD_FEED.get()) && this.getCanGrowUp()){
+            this.setCanGrowUp(false);
+
+            this.setAge(-12000);
+
+            for(int j = 0; j < 7; ++j) {
+                double d0 = this.random.nextGaussian() * 0.02D;
+                double d1 = this.random.nextGaussian() * 0.02D;
+                double d2 = this.random.nextGaussian() * 0.02D;
+                this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+
+        if (isFood(itemstack)){
+
+            if (itemstack.is(YAFMItems.REGULAR_FEED.get())){
+                this.setFeedQuality(0);
+            }
+            if (itemstack.is(YAFMItems.QUALITY_FEED.get())){
+                this.setFeedQuality(1);
+            }
+            if (itemstack.is(YAFMItems.GREAT_FEED.get())){
+                this.setFeedQuality(2);
+            }
+            if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
+                this.setFeedQuality(3);
+            }
+
+            if (this.isBaby() && this.getCanGrowUp()){
+                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true);
+                return InteractionResult.SUCCESS;
+            }else if (this.isBaby()){
+                if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
+                    this.setCanGrowUp(true);
+
+                    for(int j = 0; j < 7; ++j) {
+                        double d0 = this.random.nextGaussian() * 0.02D;
+                        double d1 = this.random.nextGaussian() * 0.02D;
+                        double d2 = this.random.nextGaussian() * 0.02D;
+                        this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+                    }
+
+                }else {
+                    return InteractionResult.PASS;
+                }
+            }
+
             if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
                 this.usePlayerItem(pPlayer, pHand, itemstack);
                 this.setInLove(pPlayer);
@@ -600,60 +649,6 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
-        }
-
-
-        int i = this.getAge();
-
-        if (this.isBaby() && isFood(itemstack)){
-
-
-            if (itemstack.is(YAFMItems.REGULAR_FEED.get())){
-                this.setFeedQuality(0);
-            }
-            if (itemstack.is(YAFMItems.QUALITY_FEED.get())){
-                this.setFeedQuality(1);
-            }
-            if (itemstack.is(YAFMItems.GREAT_FEED.get())){
-                this.setFeedQuality(2);
-            }
-            if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
-                this.setFeedQuality(3);
-            }
-
-            if (this.getCanGrowUp()){
-                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true);
-                return InteractionResult.SUCCESS;
-            }else{
-                if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
-                    this.setCanGrowUp(true);
-
-                    for(int j = 0; j < 7; ++j) {
-                        double d0 = this.random.nextGaussian() * 0.02D;
-                        double d1 = this.random.nextGaussian() * 0.02D;
-                        double d2 = this.random.nextGaussian() * 0.02D;
-                        this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-                    }
-
-                }else {
-                    return InteractionResult.PASS;
-                }
-            }
-        }
-
-        if (this.isBaby() && itemstack.is(YAFMItems.BAD_FEED.get()) && this.getCanGrowUp()){
-            this.setCanGrowUp(false);
-
-            this.setAge(-12000);
-
-            for(int j = 0; j < 7; ++j) {
-                double d0 = this.random.nextGaussian() * 0.02D;
-                double d1 = this.random.nextGaussian() * 0.02D;
-                double d2 = this.random.nextGaussian() * 0.02D;
-                this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-            }
-
-            return InteractionResult.SUCCESS;
         }
 
         return super.interactAt(pPlayer, pVec, pHand);

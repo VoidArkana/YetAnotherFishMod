@@ -255,4 +255,6 @@ public class CatfishEntity extends BucketableFishEntity implements GeoEntity {
         CatfishEntity mate = (CatfishEntity) pOtherAnimal;
         return super.canMate(pOtherAnimal) && this.getVariant() == mate.getVariant();
     }
+
+
 }
