@@ -2,21 +2,21 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
+    "G": {
       "item": "minecraft:lapis_lazuli"
     },
-    "G": {
+    "L": {
       "item": "minecraft:glass"
     }
   },
   "pattern": [
-    " L ",
+    "LLL",
     "LGL",
-    " L "
+    "LLL"
   ],
   "result": {
     "item": "fintastic:aquarium_glass",
-    "count": 2
+    "count": 8
   },
   "show_notification": true
 }

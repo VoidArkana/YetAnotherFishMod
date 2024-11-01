@@ -10,13 +10,13 @@
     }
   },
   "pattern": [
-    " L ",
-    "LGL",
-    " L "
+    "GGG",
+    "GLG",
+    "GGG"
   ],
   "result": {
     "item": "fintastic:radon_aquarium_glass",
-    "count": 2
+    "count": 8
   },
   "show_notification": true
 }

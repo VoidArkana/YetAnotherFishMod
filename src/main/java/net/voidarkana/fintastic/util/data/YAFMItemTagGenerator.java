@@ -50,8 +50,8 @@ public class YAFMItemTagGenerator extends ItemTagsProvider {
         this.tag(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(YAFMItems.SALTY_MUSIC_DISC.get()).add(YAFMItems.AXOLOTL_MUSIC_DISC.get())
                 .add(YAFMItems.DRAGONFISH_MUSIC_DISC.get()).add(YAFMItems.SHUNJI_MUSIC_DISC.get()).add(YAFMItems.FRESH_MUSIC_DISC.get());
 
-        this.tag(YAFMTags.Items.URANIUM).addOptional(new ResourceLocation( "alexscaves:uranium_shard"));
+        this.tag(YAFMTags.Items.URANIUM).addOptional(new ResourceLocation( "alexscaves:radon_bottle"));
 
-        this.tag(YAFMTags.Items.SUGAR_GLASS).addOptional(new ResourceLocation( "alexscaves:sugar_glass"));
+        this.tag(YAFMTags.Items.SUGAR_GLASS).addOptional(new ResourceLocation( "alexscaves:peppermint_powder"));
     }
 }

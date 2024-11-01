@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
+    "G": {
       "tag": "fintastic:sugar_glass"
     },
-    "G": {
+    "L": {
       "item": "minecraft:glass"
     }
   },
   "pattern": [
-    " L ",
+    "LLL",
     "LGL",
-    " L "
+    "LLL"
   ],
   "result": {
     "item": "fintastic:sugar_aquarium_glass",

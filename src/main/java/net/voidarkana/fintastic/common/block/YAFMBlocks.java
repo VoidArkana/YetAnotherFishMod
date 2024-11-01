@@ -40,13 +40,13 @@ public class YAFMBlocks {
             ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.NONE)));
 
     public static final RegistryObject<Block> INFERNAL_AQUARIUM_GLASS = registerBlock("infernal_aquarium_glass",
-            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.ORANGE_STAINED_GLASS).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 8;})));
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.ORANGE_STAINED_GLASS).mapColor(MapColor.FIRE)));
 
     public static final RegistryObject<Block> TINTED_INFERNAL_AQUARIUM_GLASS = registerBlock("tinted_infernal_aquarium_glass",
-            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.FIRE)));
 
     public static final RegistryObject<Block> TINTED_AQUARIUM_GLASS = registerBlock("tinted_aquarium_glass",
-            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.WATER).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.WATER)));
 
 
     public static final RegistryObject<Block> AQUARIUM_GLASS_PANE = registerBlock("aquarium_glass_pane",
@@ -56,18 +56,18 @@ public class YAFMBlocks {
             ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).mapColor(MapColor.NONE)));
 
     public static final RegistryObject<Block> INFERNAL_AQUARIUM_GLASS_PANE = registerBlock("infernal_aquarium_glass_pane",
-            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.ORANGE_STAINED_GLASS_PANE).mapColor(MapColor.FIRE).lightLevel((p_50755_) -> {return 8;})));
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.ORANGE_STAINED_GLASS_PANE).mapColor(MapColor.FIRE)));
 
 
 
     public static final RegistryObject<Block> RADON_AQUARIUM_GLASS = registerBlock("radon_aquarium_glass",
-            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_LIGHT_GREEN).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new AquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_LIGHT_GREEN)));
 
     public static final RegistryObject<Block> RADON_AQUARIUM_GLASS_PANE = registerBlock("radon_aquarium_glass_pane",
-            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.GREEN_STAINED_GLASS_PANE).mapColor(MapColor.COLOR_LIGHT_GREEN).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.GREEN_STAINED_GLASS_PANE).mapColor(MapColor.COLOR_LIGHT_GREEN)));
 
     public static final RegistryObject<Block> TINTED_RADON_AQUARIUM_GLASS = registerBlock("tinted_radon_aquarium_glass",
-            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_GREEN).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_GREEN)));
 
 
 
@@ -78,7 +78,7 @@ public class YAFMBlocks {
             ()-> new AquariumGlassPane(BlockBehaviour.Properties.copy(Blocks.PURPLE_STAINED_GLASS_PANE).mapColor(MapColor.COLOR_PURPLE)));
 
     public static final RegistryObject<Block> TINTED_SUGAR_AQUARIUM_GLASS = registerBlock("tinted_sugar_aquarium_glass",
-            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_PURPLE).lightLevel((p_50755_) -> {return 5;})));
+            ()-> new TintedAquariumGlassBlock(BlockBehaviour.Properties.copy(Blocks.TINTED_GLASS).mapColor(MapColor.COLOR_PURPLE)));
 
 
 

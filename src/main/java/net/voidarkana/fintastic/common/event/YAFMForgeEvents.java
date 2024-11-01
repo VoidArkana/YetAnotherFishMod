@@ -26,10 +26,10 @@ public class YAFMForgeEvents {
         if (name.equals(BuiltInLootTables.FISHING_FISH)) {
             if (pool!=null){
                 addEntry(pool, getInjectEntry(new ResourceLocation(Fintastic.MOD_ID, "gameplay/fishing/junk"),
-                        25, 1));
+                        15, 1));
 
                 addEntry(pool, getInjectEntry(new ResourceLocation(Fintastic.MOD_ID, "gameplay/fishing/treasure"),
-                        20, 1));
+                        10, 2));
             }
         }
     }
@@ -56,7 +56,6 @@ public class YAFMForgeEvents {
             newLootEntries.toArray(newLootEntriesArray);
             entries.set(pool, newLootEntriesArray);
         } catch (IllegalAccessException e) {
-            //Aquaculture.LOG.error("Error occurred when attempting to add a new entry, to the fishing loot table");
             e.printStackTrace();
         }
     }

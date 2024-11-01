@@ -3,20 +3,20 @@
   "category": "building",
   "key": {
     "L": {
-      "item": "minecraft:quartz"
+      "item": "minecraft:glass"
     },
     "G": {
-      "item": "minecraft:glass"
+      "item": "minecraft:blaze_powder"
     }
   },
   "pattern": [
-    " L ",
+    "LLL",
     "LGL",
-    " L "
+    "LLL"
   ],
   "result": {
     "item": "fintastic:infernal_aquarium_glass",
-    "count": 2
+    "count": 8
   },
   "show_notification": true
 }
