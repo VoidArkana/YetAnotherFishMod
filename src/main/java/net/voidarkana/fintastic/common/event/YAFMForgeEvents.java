@@ -1,10 +1,14 @@
 package net.voidarkana.fintastic.common.event;
 
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.FishingHookPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,10 +30,13 @@ public class YAFMForgeEvents {
         if (name.equals(BuiltInLootTables.FISHING_FISH)) {
             if (pool!=null){
                 addEntry(pool, getInjectEntry(new ResourceLocation(Fintastic.MOD_ID, "gameplay/fishing/junk"),
-                        15, 1));
+                        11, -2));
 
-                addEntry(pool, getInjectEntry(new ResourceLocation(Fintastic.MOD_ID, "gameplay/fishing/treasure"),
-                        10, 2));
+                LootTableReference.lootTableReference(new ResourceLocation(Fintastic.MOD_ID, "gameplay/fishing/treasure"))
+                        .setWeight(6).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate
+                                        (FishingHookPredicate.inOpenWater(true)))).build();
+
             }
         }
     }

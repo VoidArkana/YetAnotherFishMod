@@ -2,6 +2,7 @@ package net.voidarkana.fintastic.util.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -51,6 +52,10 @@ public class YAFMBlockTagGenerator extends BlockTagsProvider {
                 .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS.get())
                 .add(YAFMBlocks.SUGAR_AQUARIUM_GLASS_PANE.get())
                 .add(YAFMBlocks.TINTED_SUGAR_AQUARIUM_GLASS.get());
+
+        this.tag(BlockTags.IMPERMEABLE).addTag(YAFMTags.Blocks.AQUARIUM_GLASS);
+
+        this.tag(BlockTags.UNDERWATER_BONEMEALS).add(YAFMBlocks.HORNWORT.get());
 
         this.tag(Tags.Blocks.GLASS).addTags(YAFMTags.Blocks.AQUARIUM_GLASS);
     }
