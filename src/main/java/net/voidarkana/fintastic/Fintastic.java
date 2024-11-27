@@ -1,12 +1,8 @@
 package net.voidarkana.fintastic;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -15,18 +11,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
-import net.voidarkana.fintastic.client.renderers.*;
 import net.voidarkana.fintastic.common.block.YAFMBlocks;
 import net.voidarkana.fintastic.common.entity.YAFMEntities;
 import net.voidarkana.fintastic.common.entity.YAFMEntityPlacements;
 import net.voidarkana.fintastic.common.event.YAFMEvents;
 import net.voidarkana.fintastic.common.item.YAFMItems;
-import net.voidarkana.fintastic.common.item.custom.FishnetItem;
 import net.voidarkana.fintastic.common.loot.YAFMLootModifiers;
 import net.voidarkana.fintastic.common.sound.YAFMSounds;
 import net.voidarkana.fintastic.common.worldgen.YAFMConfiguredFeatures;
 import net.voidarkana.fintastic.server.MessageHurtMultipart;
-import net.voidarkana.fintastic.server.MessageInteractMultipart;
+import net.voidarkana.fintastic.server.MultipartEntityMessage;
 import net.voidarkana.fintastic.util.ClientProxy;
 import net.voidarkana.fintastic.util.CommonProxy;
 import net.voidarkana.fintastic.util.YAFMCreativeTab;
@@ -92,7 +86,7 @@ public class Fintastic
             YAFMEntityPlacements.entityPlacement();
 
             NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageHurtMultipart.class, MessageHurtMultipart::write, MessageHurtMultipart::read, MessageHurtMultipart.Handler::handle);
-            NETWORK_WRAPPER.registerMessage(packetsRegistered++, MessageInteractMultipart.class, MessageInteractMultipart::write, MessageInteractMultipart::read, MessageInteractMultipart.Handler::handle);
+            NETWORK_WRAPPER.registerMessage(packetsRegistered++, MultipartEntityMessage.class, MultipartEntityMessage::write, MultipartEntityMessage::read, MultipartEntityMessage::handle);
 
 
             ComposterBlock.COMPOSTABLES.put(YAFMBlocks.DUCKWEED.get().asItem(), 0.4F);

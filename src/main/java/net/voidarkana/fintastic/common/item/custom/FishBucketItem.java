@@ -45,8 +45,16 @@ public class FishBucketItem extends MobBucketItem {
 
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
-        ChatFormatting[] achatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.DARK_GRAY};
+        ChatFormatting[] achatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
         ChatFormatting[] bchatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.AQUA};
+
+
+        MutableComponent translatable = Component.translatable("fintastic.translatable.shift");
+        translatable.withStyle(bchatformatting);
+
+        if (!Screen.hasShiftDown()){
+            pTooltipComponents.add(translatable);
+        }
 
         if (getFishType() == YAFMEntities.FEATHERBACK.get()) {
             CompoundTag compoundtag = pStack.getTag();
@@ -57,12 +65,12 @@ public class FishBucketItem extends MobBucketItem {
                 String featherback_sci = "yafm.featherback_sci." + i;
                 String common = "yafm.featherback_common." + i;
 
-                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
                     pTooltipComponents.add(mutablecomponent);
                 }
             }
@@ -101,7 +109,6 @@ public class FishBucketItem extends MobBucketItem {
 
                 String sci = "yafm.guppy.sci";
 
-                pTooltipComponents.add(Component.translatable(base).withStyle(achatformatting));
 
 
                 MutableComponent finInfo = Component.translatable(finsColor);
@@ -109,7 +116,7 @@ public class FishBucketItem extends MobBucketItem {
                 finInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_fin"));
 
                 finInfo.withStyle(achatformatting);
-                pTooltipComponents.add(finInfo);
+
 
 
                 MutableComponent tailInfo = Component.translatable(tailColor);
@@ -117,7 +124,7 @@ public class FishBucketItem extends MobBucketItem {
                 tailInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_tail"));
 
                 tailInfo.withStyle(achatformatting);
-                pTooltipComponents.add(tailInfo);
+
 
 
                 MutableComponent mainPatternInfo = Component.translatable(mainPatternColor);
@@ -132,20 +139,23 @@ public class FishBucketItem extends MobBucketItem {
 
                 secondPatternInfo.withStyle(achatformatting);
 
-                if (has_main_pattern){
-                    pTooltipComponents.add(mainPatternInfo);
-                }
 
-                if (has_second_pattern){
-                    pTooltipComponents.add(secondPatternInfo);
-                }
 
                 MutableComponent scientific_name = Component.translatable(sci);
 
                 scientific_name.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
-                pTooltipComponents.add(scientific_name);
+                    pTooltipComponents.add(Component.translatable(base).withStyle(achatformatting));
+                    pTooltipComponents.add(finInfo);
+                    pTooltipComponents.add(tailInfo);
+                    if (has_main_pattern){
+                        pTooltipComponents.add(mainPatternInfo);
+                    }
+                    if (has_second_pattern){
+                        pTooltipComponents.add(secondPatternInfo);
+                    }
+                    pTooltipComponents.add(scientific_name);
                 }
             }
         }
@@ -159,12 +169,12 @@ public class FishBucketItem extends MobBucketItem {
                 String featherback_sci = "yafm.catfish_sci." + i;
                 String common = "yafm.catfish_common." + i;
 
-                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
                     pTooltipComponents.add(mutablecomponent);
                 }
             }
@@ -186,12 +196,13 @@ public class FishBucketItem extends MobBucketItem {
                     commonName.append(Component.translatable(skinVariant));
                 }
 
-                pTooltipComponents.add(commonName.withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(commonName.withStyle(achatformatting));
+
                     pTooltipComponents.add(mutablecomponent);
                 }
             }
@@ -206,12 +217,13 @@ public class FishBucketItem extends MobBucketItem {
                 String featherback_sci = "yafm.minnow_sci." + i + "." + j;
                 String common = "yafm.minnow_common." + i + "." + j;
 
-                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
                     pTooltipComponents.add(mutablecomponent);
                 }
             }
@@ -225,12 +237,13 @@ public class FishBucketItem extends MobBucketItem {
                 String featherback_sci = "yafm.pleco_sci";
                 String common = "yafm.pleco_common";
 
-                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
                     pTooltipComponents.add(mutablecomponent);
                 }
             //}
@@ -244,12 +257,13 @@ public class FishBucketItem extends MobBucketItem {
                 String featherback_sci = "yafm.artemia_sci." + j;
                 String common = "yafm.artemia_common." + j;
 
-                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
                 MutableComponent mutablecomponent = Component.translatable(featherback_sci);
                 mutablecomponent.withStyle(bchatformatting);
 
                 if (Screen.hasShiftDown()){
+                    pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
                     pTooltipComponents.add(mutablecomponent);
                 }
             }
@@ -259,12 +273,13 @@ public class FishBucketItem extends MobBucketItem {
             String featherback_sci = "yafm.daphnia_sci";
             String common = "yafm.daphnia_common";
 
-            pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
 
             MutableComponent mutablecomponent = Component.translatable(featherback_sci);
             mutablecomponent.withStyle(bchatformatting);
 
             if (Screen.hasShiftDown()){
+                pTooltipComponents.add(Component.translatable(common).withStyle(achatformatting));
+
                 pTooltipComponents.add(mutablecomponent);
             }
         }

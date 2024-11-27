@@ -1,6 +1,10 @@
 package net.voidarkana.fintastic.common.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -16,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.voidarkana.fintastic.common.entity.custom.base.BucketableFishEntity;
 import net.voidarkana.fintastic.common.item.YAFMItems;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -33,7 +39,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
+public class ArapaimaEntity extends WaterAnimal implements GeoEntity, Bucketable {
 
     public final ArapaimaPart head;
     public final ArapaimaPart tail;
@@ -199,9 +205,8 @@ public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
     }
 
-
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
-        return !this.hasCustomName();
+        return !this.fromBucket() && !this.hasCustomName();
     }
 
     public boolean requiresCustomPersistence() {
@@ -240,4 +245,50 @@ public class ArapaimaEntity extends WaterAnimal implements GeoEntity {
     public ItemStack getPickedResult(HitResult target) {
         return new ItemStack(YAFMItems.ARAPAIMA_SPAWN_EGG.get());
     }
+
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(ArapaimaEntity.class, EntityDataSerializers.BOOLEAN);
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(FROM_BUCKET, false);
+    }
+
+    public boolean fromBucket() {
+        return this.entityData.get(FROM_BUCKET);
+    }
+
+    public void setFromBucket(boolean pFromBucket) {
+        this.entityData.set(FROM_BUCKET, pFromBucket);
+    }
+
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("FromBucket", this.fromBucket());
+    }
+
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setFromBucket(pCompound.getBoolean("FromBucket"));
+    }
+
+    @Override
+    public void saveToBucketTag(ItemStack pStack) {
+
+    }
+
+    @Override
+    public void loadFromBucketTag(CompoundTag pTag) {
+
+    }
+
+    @Override
+    public ItemStack getBucketItemStack() {
+        return null;
+    }
+
+    @Override
+    public SoundEvent getPickupSound() {
+        return null;
+    }
+
 }

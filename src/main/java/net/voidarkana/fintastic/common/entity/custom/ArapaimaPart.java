@@ -19,7 +19,7 @@ import net.minecraftforge.entity.PartEntity;
 import net.voidarkana.fintastic.Fintastic;
 import net.voidarkana.fintastic.common.item.YAFMItems;
 import net.voidarkana.fintastic.server.MessageHurtMultipart;
-import net.voidarkana.fintastic.server.MessageInteractMultipart;
+import net.voidarkana.fintastic.server.MultipartEntityMessage;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -31,6 +31,9 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
 
     public ArapaimaPart(ArapaimaEntity parent, float pWidth, float pHeight) {
         super(parent);
+
+        this.blocksBuilding = true;
+
         this.size = EntityDimensions.scalable(pWidth, pHeight);
         this.refreshDimensions();
     }
@@ -49,12 +52,31 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
     }
 
     @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
-        if(this.level().isClientSide && this.getParent() != null){
-            Fintastic.sendMSGToServer(new MessageInteractMultipart(this.getParent().getId(), hand == InteractionHand.OFF_HAND));
-        }
-        return this.getParent() == null ? InteractionResult.PASS : this.getParent().interactEntityPartFrom(this, player, hand);
+    public boolean canBeCollidedWith() {
+        Entity parent = this.getParent();
+        return parent != null && parent.canBeCollidedWith();
     }
+
+    @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        Entity parent = this.getParent();
+        if (parent == null) {
+            return InteractionResult.PASS;
+        } else {
+            if (player.level().isClientSide) {
+                Fintastic.sendMSGToServer(new MultipartEntityMessage(parent.getId(), player.getId(), 0, 0));
+            }
+            return parent.interact(player, hand);
+        }
+    }
+
+//    @Override
+//    public InteractionResult interact(Player player, InteractionHand hand) {
+//        if(this.level().isClientSide && this.getParent() != null){
+//            Fintastic.sendMSGToServer(new MultipartEntityMessage(this.getParent().getId(), hand == InteractionHand.OFF_HAND));
+//        }
+//        return this.getParent() == null ? InteractionResult.PASS : this.getParent().interactEntityPartFrom(this, player, hand);
+//    }
 
     protected void collideWithEntity(Entity entityIn) {
         entityIn.push(this);
@@ -80,14 +102,16 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
         return true;
     }
 
+    @Override
     public boolean hurt(DamageSource source, float amount) {
-        if(this.level().isClientSide && this.getParent() != null && !this.getParent().isInvulnerableTo(source)){
-            ResourceLocation key = this.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getKey(source.type());
-            if(key != null){
-                Fintastic.sendMSGToServer(new MessageHurtMultipart(this.getId(), this.getParent().getId(), amount, key.toString()));
+        Entity parent = this.getParent();
+        if (!this.isInvulnerableTo(source) && parent != null) {
+            Entity player = source.getEntity();
+            if (player != null && player.level().isClientSide) {
+                Fintastic.sendMSGToServer(new MultipartEntityMessage(parent.getId(), player.getId(), 1, amount));
             }
         }
-        return !this.isInvulnerableTo(source) && this.getParent().attackEntityPartFrom(this, source, amount);
+        return false;
     }
 
     public boolean fireImmune() {
@@ -117,5 +141,10 @@ public class ArapaimaPart extends PartEntity<ArapaimaEntity> {
     @Override
     public ItemStack getPickedResult(HitResult target) {
         return new ItemStack(YAFMItems.ARAPAIMA_SPAWN_EGG.get());
+    }
+
+    @Override
+    public boolean save(CompoundTag tag) {
+        return false;
     }
 }

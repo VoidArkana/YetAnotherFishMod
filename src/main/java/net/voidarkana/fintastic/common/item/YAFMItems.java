@@ -13,10 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.fintastic.Fintastic;
 import net.voidarkana.fintastic.common.entity.YAFMEntities;
-import net.voidarkana.fintastic.common.item.custom.FishBucketItem;
-import net.voidarkana.fintastic.common.item.custom.FishnetItem;
-import net.voidarkana.fintastic.common.item.custom.FullFishnetItem;
-import net.voidarkana.fintastic.common.item.custom.YAFMFoods;
+import net.voidarkana.fintastic.common.item.custom.*;
 import net.voidarkana.fintastic.common.sound.YAFMSounds;
 
 @Mod.EventBusSubscriber(modid = Fintastic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -93,19 +90,19 @@ public class YAFMItems {
 
 
     public static final RegistryObject<Item> REGULAR_FEED = ITEMS.register("regular_feed",
-            () -> new Item(new Item.Properties()));
+            () -> new FishFeedItem(new Item.Properties(), 1));
 
     public static final RegistryObject<Item> QUALITY_FEED = ITEMS.register("quality_feed",
-            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+            () -> new FishFeedItem(new Item.Properties().rarity(Rarity.UNCOMMON), 2));
 
     public static final RegistryObject<Item> GREAT_FEED = ITEMS.register("great_feed",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+            () -> new FishFeedItem(new Item.Properties().rarity(Rarity.RARE), 3));
 
     public static final RegistryObject<Item> PREMIUM_FEED = ITEMS.register("premium_feed",
-            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+            () -> new FishFeedItem(new Item.Properties().rarity(Rarity.EPIC), 4));
 
     public static final RegistryObject<Item> BAD_FEED = ITEMS.register("bad_feed",
-            () -> new Item(new Item.Properties()));
+            () -> new FishFeedItem(new Item.Properties(), 0));
 
 
     public static final RegistryObject<Item> RAW_FISH = ITEMS.register("raw_fish",

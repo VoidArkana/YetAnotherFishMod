@@ -16,6 +16,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -166,7 +167,6 @@ public class FishnetItem extends Item {
         LivingEntity entity;
 
         if (type == null || (entity = (LivingEntity) type.create(level)) == null) {
-            //AmbientAdditions.LOGGER.error("Something went wrong releasing an animal from a Crate!");
             return InteractionResult.FAIL;
         }
 
@@ -188,9 +188,15 @@ public class FishnetItem extends Item {
             entity.moveTo(pos.getX(), pos.getY() + direction.getStepY() + 1.0, pos.getZ(), player.getYRot(), 0f);
 
             if (stack.hasCustomHoverName()) entity.setCustomName(stack.getHoverName());
+
+            if (entity instanceof Bucketable fish){
+                fish.setFromBucket(true);
+            }
+
             stack.removeTagKey(DATA_CREATURE);
             level.addFreshEntity(entity);
             level.playSound(null, entity.blockPosition(), SoundEvents.FISHING_BOBBER_THROW, SoundSource.AMBIENT, 1, 1);
+
         }
 
         return InteractionResult.SUCCESS;
@@ -228,6 +234,10 @@ public class FishnetItem extends Item {
 
             if (stack.hasCustomHoverName()) entity.setCustomName(stack.getHoverName());
             stack.removeTagKey(DATA_CREATURE);
+
+            if (entity instanceof Bucketable fish){
+                fish.setFromBucket(true);
+            }
 
             if (context.getLevel().addFreshEntity(entity)) {
                 itemstack.shrink(1);
