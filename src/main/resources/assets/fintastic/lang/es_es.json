@@ -276,5 +276,7 @@
   "fintastic.translatable.fishfeed.1" : "Los bebés resultantes tendrán características completamente aleatorias, o hace que los padres sólo produzcan un bebé",
   "fintastic.translatable.fishfeed.2" : "Los bebés resultantes tienen 50% de probabilidad de heredar características de los padres, o incrementa la probabilidad de múltiples bebés",
   "fintastic.translatable.fishfeed.3" : "Los bebés resultantes heredan una combinación de características de los padres, o tiene una aún mayor probabilidad de múltiples bebés",
-  "fintastic.translatable.fishfeed.4" : "Los bebés resultantes serán una copia de cualquiera de los dos padres, o tiene la mayor probabilidad de múltiples bebés"
+  "fintastic.translatable.fishfeed.4" : "Los bebés resultantes serán una copia de cualquiera de los dos padres, o tiene la mayor probabilidad de múltiples bebés",
+
+  "fintastic.translatable.fishnet_description": "Permite que animales acuáticos más grandes sean capturados a pesar de no ser capturables en cubeta"
 }

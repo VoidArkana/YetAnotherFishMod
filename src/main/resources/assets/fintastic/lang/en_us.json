@@ -277,5 +277,7 @@
   "fintastic.translatable.fishfeed.1" : "Completely randomizes baby fish patterns or yields the least amount of babies",
   "fintastic.translatable.fishfeed.2" : "Babies produced have a 50% chance of inheriting parents traits or has a slightly higher change of yielding more babies",
   "fintastic.translatable.fishfeed.3" : "Babies produced inherit a mix of only the parents' traits or has an even higher chance of producing more babies",
-  "fintastic.translatable.fishfeed.4" : "Babies produced will be a copy of either parent or has the highest chance of producing multiple babies "
+  "fintastic.translatable.fishfeed.4" : "Babies produced will be a copy of either parent or has the highest chance of producing multiple babies ",
+
+  "fintastic.translatable.fishnet_description": "Allows bigger water creatures to be caught, even if not bucketable"
 }

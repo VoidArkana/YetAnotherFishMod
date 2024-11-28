@@ -147,6 +147,13 @@ public class FishnetItem extends Item {
 
             name = EntityType.byString(tag.getString("id")).orElse(null).getDescription();
             tooltip.add(name.copy().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+        }else {
+            ChatFormatting[] achatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
+
+            MutableComponent fishnetDesc = Component.translatable("fintastic.translatable.fishnet_description");
+            fishnetDesc.withStyle(achatformatting);
+
+            tooltip.add(fishnetDesc);
         }
     }
 
