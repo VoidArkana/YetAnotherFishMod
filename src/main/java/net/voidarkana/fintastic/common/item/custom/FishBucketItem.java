@@ -110,32 +110,31 @@ public class FishBucketItem extends MobBucketItem {
                 String sci = "yafm.guppy.sci";
 
 
-
-                MutableComponent finInfo = Component.translatable(finsColor);
-                finInfo.append(CommonComponents.SPACE).append(Component.translatable(fins));
-                finInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_fin"));
+                MutableComponent finInfo = Component.translatable("yafm.guppy_fin").append(":");
+                finInfo.append(CommonComponents.SPACE).append(Component.translatable(fins)).append(",");
+                finInfo.append(CommonComponents.SPACE).append(Component.translatable(finsColor));
 
                 finInfo.withStyle(achatformatting);
 
 
-
-                MutableComponent tailInfo = Component.translatable(tailColor);
-                tailInfo.append(CommonComponents.SPACE).append(Component.translatable(tail));
-                tailInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_tail"));
+                MutableComponent tailInfo = Component.translatable("yafm.guppy_tail").append(":");
+                tailInfo.append(CommonComponents.SPACE).append(Component.translatable(tail)).append(",");
+                tailInfo.append(CommonComponents.SPACE).append(Component.translatable(tailColor));
 
                 tailInfo.withStyle(achatformatting);
 
 
-
-                MutableComponent mainPatternInfo = Component.translatable(mainPatternColor);
-                mainPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(mainPattern));
-                mainPatternInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_pattern"));
+                MutableComponent mainPatternInfo = Component.translatable("yafm.guppy_pattern_1").append(":");
+                mainPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(mainPattern)).append(",");
+                mainPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(mainPatternColor));
 
                 mainPatternInfo.withStyle(achatformatting);
 
-                MutableComponent secondPatternInfo = Component.translatable(secondPatternColor);
-                secondPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(secondPattern));
-                secondPatternInfo.append(CommonComponents.SPACE).append(Component.translatable("yafm.guppy_pattern"));
+
+
+                MutableComponent secondPatternInfo = Component.translatable("yafm.guppy_pattern_2").append(":");
+                secondPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(secondPattern)).append(",");
+                secondPatternInfo.append(CommonComponents.SPACE).append(Component.translatable(secondPatternColor));
 
                 secondPatternInfo.withStyle(achatformatting);
 

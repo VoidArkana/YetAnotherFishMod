@@ -4,11 +4,6 @@
     "layer0": "fintastic:item/fishnet"
   },
   "overrides": [
-    {
-      "predicate": {
-        "has_entity": 1
-      },
-      "model": "fintastic:item/fishnet_full"
-    }
+    {"predicate": {"has_entity": 1}, "model": "fintastic:item/fishnet_full"}
   ]
 }

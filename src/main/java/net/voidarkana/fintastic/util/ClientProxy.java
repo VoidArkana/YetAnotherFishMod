@@ -39,7 +39,7 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(YAFMEntities.ARTEMIA.get(), ArtemiaRenderer::new);
 
         ItemProperties.register(YAFMItems.FISHNET.get(), new ResourceLocation("has_entity"),
-                (stack, level, living, i) -> living != null && FishnetItem.containsEntity(stack) ? 1 : 0);
+                (stack, level, living, i) -> FishnetItem.containsEntity(stack) ? 1 : 0);
 
     }
 

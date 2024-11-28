@@ -88,7 +88,8 @@
   "yafm.guppy_tail.topsword" : "Top Sword",
 
 
-  "yafm.guppy_pattern" : "Pattern",
+  "yafm.guppy_pattern_1" : "Main Pattern",
+  "yafm.guppy_pattern_2" : " Secondary Pattern",
 
   "yafm.guppy_pattern.bar" : "Bar",
   "yafm.guppy_pattern.belly" : "Belly",

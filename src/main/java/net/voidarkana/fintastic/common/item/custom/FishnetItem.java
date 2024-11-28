@@ -155,8 +155,9 @@ public class FishnetItem extends Item {
 //        return containsEntity(stack);
 //    }
 
+
     public static boolean containsEntity(ItemStack stack) {
-        return stack.hasTag() && stack.getTag().contains(DATA_CREATURE);
+        return stack.getTag() != null && stack.hasTag() && stack.getTag().contains(DATA_CREATURE);
     }
 
     private static InteractionResult releaseEntity(Level level, Player player, ItemStack stack, BlockPos pos, Direction direction) {
